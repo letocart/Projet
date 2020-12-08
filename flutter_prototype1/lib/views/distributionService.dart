@@ -148,10 +148,6 @@ class OpenPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
-<<<<<<< HEAD:flutter_prototype1/lib/views/distributionService.dart
 }
 
  */
-=======
-}
->>>>>>> 853365e (Fusion Menu + Tuto Flame):flutter_prototype1/lib/distributionService.dart

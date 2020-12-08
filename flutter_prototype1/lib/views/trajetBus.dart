@@ -6,13 +6,6 @@ import 'package:flame/util.dart';
 
 import 'package:flame/game.dart';
 import 'dart:ui';
-<<<<<<< HEAD:flutter_prototype1/lib/views/trajetBus.dart
-=======
-
-import 'package:flame/util.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/gestures.dart';
->>>>>>> 853365e (Fusion Menu + Tuto Flame):flutter_prototype1/lib/trajetBus.dart
 
 import 'package:flame/util.dart';
 import 'package:flutter/services.dart';
@@ -62,16 +55,11 @@ class MenuTrajetBus extends StatelessWidget {
                     TextButton(
                         onPressed: () async {
                           print('Play pressed');
-<<<<<<< HEAD:flutter_prototype1/lib/views/trajetBus.dart
                           //init();
                           await Navigator.push(
-=======
-                          init();
-                          /*Navigator.push(
->>>>>>> 853365e (Fusion Menu + Tuto Flame):flutter_prototype1/lib/trajetBus.dart
                               context,
                               MaterialPageRoute(builder: (context) => TrajetBus())
-                          );*/
+                          );
                         },
                         style : Style.buttonText,
                         child: Text('Jouer')
@@ -210,9 +198,5 @@ class TestJeu2 extends Game {
       else isGreen = true;
     }
   }
-<<<<<<< HEAD:flutter_prototype1/lib/views/trajetBus.dart
 }
  */
-=======
-}
->>>>>>> 853365e (Fusion Menu + Tuto Flame):flutter_prototype1/lib/trajetBus.dart
