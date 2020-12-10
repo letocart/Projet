@@ -42,10 +42,10 @@ class Menu extends StatelessWidget {
                 children : [
                 TextButton(
                     onPressed: () {
-                      print("Jeu n°2 pressed");
+                      print("Jeu n°1 pressed");
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Jeu1())
+                          MaterialPageRoute(builder: (context) => MenuJeu1())
                       );
                     },
                     style : TextButton.styleFrom
@@ -61,7 +61,7 @@ class Menu extends StatelessWidget {
                       print('Jeu 2 pressed');
                       Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Jeu2())
+                          MaterialPageRoute(builder: (context) => MenuJeu2())
                       );
                     },
                     style : TextButton.styleFrom
@@ -82,7 +82,7 @@ class Menu extends StatelessWidget {
   }
 }
 
-class Jeu1 extends StatelessWidget {
+class MenuJeu1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -105,6 +105,22 @@ class Jeu1 extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children : [
                 Text("Jeu n°1"),
+                  TextButton(
+                      onPressed: (){
+                        print('Play pressed');
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Jeu1())
+                        );
+                      },
+                      style : TextButton.styleFrom
+                        (
+                        primary: Colors.white,
+                        backgroundColor: Colors.teal,
+                        onSurface: Colors.grey,
+                      ),
+                      child: Text('Jouer')
+                  ),
                 TextButton(
                     onPressed: (){
                       print('Return pressed');
@@ -126,7 +142,7 @@ class Jeu1 extends StatelessWidget {
   }
 }
 
-class Jeu2 extends StatelessWidget {
+class MenuJeu2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -151,6 +167,22 @@ class Jeu2 extends StatelessWidget {
                     Text("Jeu n°2"),
                     TextButton(
                         onPressed: (){
+                          print('Play pressed');
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Jeu2())
+                          );
+                        },
+                        style : TextButton.styleFrom
+                          (
+                          primary: Colors.white,
+                          backgroundColor: Colors.teal,
+                          onSurface: Colors.grey,
+                        ),
+                        child: Text('Jouer')
+                    ),
+                    TextButton(
+                        onPressed: (){
                           print('Return pressed');
                           Navigator.pop(context);
                         },
@@ -169,3 +201,100 @@ class Jeu2 extends StatelessWidget {
     );
   }
 }
+
+class Jeu1 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    return MaterialApp(
+        title: "Jeu d'ordonnancement à n machine",
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          scaffoldBackgroundColor: Colors.blueGrey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: Scaffold(
+            appBar: AppBar(
+              title: Text("Jeu d'ordonnancement à n machine"),
+            ),
+            body: Center(
+                child :  Stack(
+                        children : [
+                          Positioned(left: 300, top: 150, child: Text("Inserer Jeu 1")),
+                          Positioned(
+                            right: 0,
+                            child:
+                                TextButton(
+                                  onPressed: ()
+                                    {
+                                      print('Return pressed');
+                                      Navigator.pop(context);
+                                      },
+                                  style : TextButton.styleFrom
+                                    (
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.teal,
+                                    onSurface: Colors.grey,
+                                  ),
+                                  child: Text('Retour')
+                                )
+                          )
+                        ]
+                )
+            )
+        )
+    );
+  }
+}
+
+class Jeu2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    return MaterialApp(
+        title: "Jeu du voyageur de commerce",
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          scaffoldBackgroundColor: Colors.amberAccent,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text("Jeu du voyageur de commerce"),
+          ),
+          body: Center(
+              child :  Stack(
+                  children : [
+                    Positioned(left: 300, top: 150, child: Text("Inserer Jeu 2")),
+                    Positioned(
+                        right: 0,
+                        child:
+                        TextButton(
+                            onPressed: ()
+                            {
+                              print('Return pressed');
+                              Navigator.pop(context);
+                            },
+                            style : TextButton.styleFrom
+                              (
+                              primary: Colors.white,
+                              backgroundColor: Colors.teal,
+                              onSurface: Colors.grey,
+                            ),
+                            child: Text('Retour')
+                        )
+                    )
+                  ]
+              )
+          )
+        )
+    );
+  }
+}
+
