@@ -170,7 +170,7 @@ class MenuJeu2 extends StatelessWidget {
                           print('Play pressed');
                           Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (context) => Jeu2())
+                              MaterialPageRoute(builder: (context) => FenetreJeu2())
                           );
                         },
                         style : TextButton.styleFrom
@@ -250,7 +250,7 @@ class Jeu1 extends StatelessWidget {
   }
 }
 
-class Jeu2 extends StatelessWidget {
+class FenetreJeu2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -271,7 +271,29 @@ class Jeu2 extends StatelessWidget {
           body: Center(
               child :  Stack(
                   children : [
-                    Positioned(left: 300, top: 150, child: Text("Inserer Jeu 2")),
+                    Positioned(
+                        left: 0,
+                        top: 0,
+                        child: Container(
+                          child: Draggable(
+                            child : Container(
+                              width: 400,
+                              height: 400,
+                              child: CustomPaint(
+                                painter: OpenPainter(),
+                              ),
+                            ),
+                            feedback : Container(
+                              width: 400,
+                              height: 400,
+                              child: CustomPaint(
+                                painter: OpenPainter(),
+                              ),
+                            ),
+                              childWhenDragging: Container()
+                          )
+                        )
+                    ),
                     Positioned(
                         right: 0,
                         child:
@@ -298,3 +320,16 @@ class Jeu2 extends StatelessWidget {
   }
 }
 
+class OpenPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint1 = Paint()
+      ..color = Color(0xffAC33FF)
+      ..style = PaintingStyle.fill;
+    //a rectangle
+    canvas.drawRect(Offset(100, 100) & Size(200, 100), paint1);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
