@@ -66,29 +66,7 @@ class TrajetBus extends StatelessWidget {
             body: Center(
                 child :  Stack(
                     children : [
-                      Positioned(
-                          left: 0,
-                          top: 0,
-                          child: Container(
-                              child: Draggable(
-                                  child : Container(
-                                    width: 400,
-                                    height: 400,
-                                    child: CustomPaint(
-                                      painter: OpenPainter(),
-                                    ),
-                                  ),
-                                  feedback : Container(
-                                    width: 400,
-                                    height: 400,
-                                    child: CustomPaint(
-                                      painter: OpenPainter(),
-                                    ),
-                                  ),
-                                  childWhenDragging: Container()
-                              )
-                          )
-                      ),
+                      Positioned(left: 300, top: 150, child: Text("Inserer Jeu 2")),
                       Positioned(
                           right: 0,
                           child:
@@ -108,18 +86,4 @@ class TrajetBus extends StatelessWidget {
         )
     );
   }
-}
-
-class OpenPainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var paint1 = Paint()
-      ..color = Color(0xffAC33FF)
-      ..style = PaintingStyle.fill;
-    //a rectangle
-    canvas.drawRect(Offset(100, 100) & Size(200, 100), paint1);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
