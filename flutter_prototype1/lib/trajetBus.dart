@@ -87,3 +87,17 @@ class TrajetBus extends StatelessWidget {
     );
   }
 }
+
+class OpenPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint1 = Paint()
+      ..color = Color(0xffAC33FF)
+      ..style = PaintingStyle.fill;
+    //a rectangle
+    canvas.drawRect(Offset(100, 100) & Size(200, 100), paint1);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
