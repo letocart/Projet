@@ -3,6 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_prototype1/style.dart';
 import 'package:flame/util.dart';
 
+import 'package:flame/game.dart';
+import 'dart:ui';
+
+import 'package:flame/util.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/gestures.dart';
 
 class MenuTrajetBus extends StatelessWidget {
   @override
@@ -26,10 +32,11 @@ class MenuTrajetBus extends StatelessWidget {
                     TextButton(
                         onPressed: (){
                           print('Play pressed');
-                          Navigator.push(
+                          init();
+                          /*Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => TrajetBus())
-                          );
+                          );*/
                         },
                         style : Style.buttonText,
                         child: Text('Jouer')
@@ -50,6 +57,21 @@ class MenuTrajetBus extends StatelessWidget {
   }
 }
 
+void init() async
+{
+  WidgetsFlutterBinding.ensureInitialized();
+  Util flameUtil = Util();
+  await flameUtil.fullScreen();
+  await flameUtil.setOrientation(DeviceOrientation.landscapeLeft);
+
+
+  TestJeu2 jeu = TestJeu2();
+  TapGestureRecognizer tapper = TapGestureRecognizer();
+  tapper.onTapDown = jeu.onTapDown;
+  runApp(jeu.widget);
+  flameUtil.addGestureRecognizer(tapper);
+}
+
 class TrajetBus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -57,6 +79,7 @@ class TrajetBus extends StatelessWidget {
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ]);
+    final test2 = TestJeu2();
     return MaterialApp(
         title: "Jeu du voyageur de commerce",
         theme: Style.themeTrajetBus,
@@ -67,7 +90,7 @@ class TrajetBus extends StatelessWidget {
             body: Center(
                 child :  Stack(
                     children : [
-                      Positioned(left: 300, top: 150, child: Text("Inserer Jeu 2")),
+                      test2.widget,
                       Positioned(
                           right: 0,
                           child:
@@ -101,4 +124,55 @@ class OpenPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
+}
+
+class TestJeu2 extends Game {
+  Size screenSize;
+  bool isGreen = false;
+  @override
+  void render(Canvas canvas) {
+    Rect bgRect = Rect.fromLTWH(0, 0, screenSize.width, screenSize.height);
+    Paint bgPaint = Paint();
+    bgPaint.color = Color(0xffff5733);
+    canvas.drawRect(bgRect, bgPaint);
+
+    double screenCenterX = screenSize.width / 2;
+    double screenCenterY = screenSize.height / 2;
+    Rect boxRect = Rect.fromLTWH(
+        screenCenterX - 75,
+        screenCenterY - 75,
+        150,
+        150
+    );
+    Paint boxPaint = Paint();
+    if (isGreen) {
+      boxPaint.color = Color(0xff00ff00);
+    } else {
+      boxPaint.color = Color(0xffffffff);
+    }
+    canvas.drawRect(boxRect, boxPaint);
+  }
+
+  @override
+  void update(double t) {
+    // TODO: implement update
+  }
+
+  void resize(Size size) {
+    screenSize = size;
+    super.resize(size);
+  }
+
+  void onTapDown(TapDownDetails d) {
+    double screenCenterX = screenSize.width / 2;
+    double screenCenterY = screenSize.height / 2;
+    if (d.globalPosition.dx >= screenCenterX - 75
+        && d.globalPosition.dx <= screenCenterX + 75
+        && d.globalPosition.dy >= screenCenterY - 75
+        && d.globalPosition.dy <= screenCenterY + 75
+    ) {
+      if(isGreen) isGreen = false;
+      else isGreen = true;
+    }
+  }
 }
