@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/style.dart';
 import 'package:flame/util.dart';
 
@@ -10,6 +11,28 @@ import 'package:flame/util.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 
+class TrajetBus {
+  final ROgame game;
+
+  Rect bgRect;
+  Paint bgPaint; //à changer avec un sprite : Sprite bgSprite;
+
+  TrajetBus(this.game){
+    bgRect = Rect.fromLTWH(0, 0, game.screenSize.width, game.screenSize.height);
+    //à changer en : bgSprite = Sprite('lienSprite');
+    bgPaint = Paint();
+    bgPaint.color = Color(0xffffc107);
+  }
+
+  void render(Canvas c){
+    c.drawRect(bgRect, bgPaint); //à changer en : bgSprite.renderRect(c,bgRect);
+  }
+
+  void update(double t) {}
+
+}
+
+/*
 class MenuTrajetBus extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,21 +53,21 @@ class MenuTrajetBus extends StatelessWidget {
                   children : [
                     Text("Jeu n°2"),
                     TextButton(
-                        onPressed: (){
+                        onPressed: () async {
                           print('Play pressed');
-                          init();
-                          /*Navigator.push(
+                          //init();
+                          await Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => TrajetBus())
-                          );*/
+                          );
                         },
                         style : Style.buttonText,
                         child: Text('Jouer')
                     ),
                     TextButton(
-                        onPressed: (){
+                        onPressed: () async {
                           print('Return pressed');
-                          Navigator.pop(context);
+                          await Navigator.pop(context);
                         },
                         style : Style.buttonText,
                         child: Text('Retour')
@@ -176,3 +199,4 @@ class TestJeu2 extends Game {
     }
   }
 }
+ */
