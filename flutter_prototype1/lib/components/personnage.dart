@@ -1,23 +1,22 @@
 import 'dart:ui';
+import 'package:flame/sprite.dart';
 
 import 'package:flutter_prototype1/ROgame.dart';
 
 class Personnage {
   final ROgame game;
   Rect persoRect;
-  Paint persoPaint; //à changer avec un sprite : Sprite persoSprite;
+  Sprite persoSprite;
 
   Personnage(this.game){
     double tileH = game.tileHeightSize;
     double tileW = game.tileWidthSize;
     persoRect = Rect.fromLTWH(tileW, tileH*3, tileW*3, tileH*5);
-    //à changer en persoSprite = Sprite('lienSprite');
-    persoPaint = Paint();
-    persoPaint.color = Color(0xffff5733);
+    persoSprite = Sprite('professeur.png');
   }
 
   void render(Canvas c){
-    c.drawRect(persoRect, persoPaint); //à changer en : persoSprite.renderRect(c,bgRect);
+    persoSprite.renderRect(c,persoRect);
   }
 
   void update(double t){}

@@ -97,7 +97,6 @@ class ROgame extends Game with TapDetector{
   @override
   void resize(Size size) {
     screenSize = size;
-    //divise l'écran par 9 en hauteur et 16 en largeur
     tileHeightSize = screenSize.height/9;
     tileWidthSize = screenSize.width/16;
   }
