@@ -9,6 +9,7 @@ import 'package:flutter_prototype1/components/personnage.dart';
 import 'package:flutter_prototype1/components/playDistriServButton.dart';
 import 'package:flutter_prototype1/components/playTrajetBus.dart';
 import 'package:flutter_prototype1/components/returnButton.dart';
+import 'package:flutter_prototype1/components/returnButtonInGame.dart';
 import 'package:flutter_prototype1/components/trajetBusButton.dart';
 import 'package:flutter_prototype1/view.dart';
 import 'package:flutter_prototype1/views/distributionService.dart';
@@ -32,6 +33,7 @@ class ROgame extends Game with TapDetector{
   TrajetBusButton trajetBusButton;
   PlayTrajetBusButton playTrajetBusButton;
   ReturnButton returnButton;
+  ReturnButtonInGame returnButtonInGame;
 
   ROgame() {
     init();
@@ -41,6 +43,7 @@ class ROgame extends Game with TapDetector{
     resize(await Flame.util.initialDimensions());
 
     returnButton = ReturnButton(this);
+    returnButtonInGame = ReturnButtonInGame(this);
 
     //view : menuPrincipal
     menu = Menu(this);
@@ -74,7 +77,7 @@ class ROgame extends Game with TapDetector{
 
     if(activeView == View.distributionService){
       distributionService.render(canvas);
-      returnButton.render(canvas);
+      returnButtonInGame.render(canvas);
     }
 
     if(activeView == View.menuTrajetBus){
@@ -85,7 +88,7 @@ class ROgame extends Game with TapDetector{
 
     if(activeView == View.trajetBus){
       trajetBus.render(canvas);
-      returnButton.render(canvas);
+      returnButtonInGame.render(canvas);
     }
   }
 
@@ -135,11 +138,15 @@ class ROgame extends Game with TapDetector{
     }
 
     if(!isHandled && returnButton.getButtonRect().contains(details.globalPosition)){
-      if(activeView == View.menuTrajetBus ||
-          activeView == View.trajetBus ||
-          activeView == View.menuDistributionService ||
-          activeView == View.distributionService){
+      if(activeView == View.menuTrajetBus || activeView == View.menuDistributionService){
         returnButton.onTapDown();
+        isHandled = true;
+      }
+    }
+
+    if(!isHandled && returnButtonInGame.getButtonRect().contains(details.globalPosition)){
+      if(activeView == View.trajetBus || activeView == View.distributionService){
+        returnButtonInGame.onTapDown();
         isHandled = true;
       }
     }

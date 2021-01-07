@@ -13,7 +13,11 @@ void main() async {
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.landscapeLeft);
 
-  Flame.images.loadAll(<String>['professeur.png']);
+  Flame.images.loadAll(<String>['professeur.png',
+                                "boutons/boutonBleuDistributionService.png",
+                                "boutons/boutonBleuTrajetBus.png",
+                                "boutons/boutonJouer.png",
+                                "boutons/boutonRetour.png"]);
 
   ROgame game = ROgame();
   runApp(game.widget);

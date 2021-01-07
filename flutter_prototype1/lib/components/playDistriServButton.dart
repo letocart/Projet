@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flame/sprite.dart';
 
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
@@ -6,15 +7,13 @@ import 'package:flutter_prototype1/view.dart';
 class PlayDistriServButton {
   final ROgame game;
   Rect buttonRect;
-  Paint buttonPaint; //à changer avec un sprite : Sprite buttonSprite;
+  Sprite buttonSprite;
 
   PlayDistriServButton(this.game){
     double tileH = game.tileHeightSize;
     double tileW = game.tileWidthSize;
-    buttonRect = Rect.fromLTWH(tileW*7, tileH*3, tileW*3, tileH*2);
-    //à changer en buttonSprite = Sprite('lienSprite')
-    buttonPaint = Paint();
-    buttonPaint.color = Color(0xff009688);
+    buttonRect = Rect.fromLTWH(tileW*6, tileH*3, tileW*5, tileH*2);
+    buttonSprite = Sprite('boutons/boutonJouer.png');
   }
 
   Rect getButtonRect(){
@@ -22,7 +21,7 @@ class PlayDistriServButton {
   }
 
   void render(Canvas c){
-    c.drawRect(buttonRect, buttonPaint); //à changer en : buttonSprite.renderRect(c,buttonRect);
+    buttonSprite.renderRect(c,buttonRect);
   }
 
   void update(double t){}

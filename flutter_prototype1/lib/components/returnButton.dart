@@ -1,4 +1,5 @@
 import 'dart:ui';
+import 'package:flame/sprite.dart';
 
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
@@ -6,14 +7,13 @@ import 'package:flutter_prototype1/view.dart';
 class ReturnButton {
   final ROgame game;
   Rect buttonRect;
-  Paint buttonPaint; //à changer avec un sprite : Sprite buttonSprite;
+  Sprite buttonSprite;
 
   ReturnButton(this.game){
-    double tile = game.tileHeightSize;
-    buttonRect = Rect.fromLTWH(tile*12, tile*1, tile*3, tile*2);
-    //à changer en buttonSprite = Sprite('lienSprite')
-    buttonPaint = Paint();
-    buttonPaint.color = Color(0xff009688);
+    double tileH = game.tileHeightSize;
+    double tileW = game.tileWidthSize;
+    buttonRect = Rect.fromLTWH(tileW*6, tileH*5, tileW*5, tileH*2);
+    buttonSprite = Sprite("boutons/boutonRetour.png");
   }
 
   Rect getButtonRect(){
@@ -21,7 +21,7 @@ class ReturnButton {
   }
 
   void render(Canvas c){
-    c.drawRect(buttonRect, buttonPaint); //à changer en : buttonSprite.renderRect(c,buttonRect);
+    buttonSprite.renderRect(c,buttonRect);
   }
 
   void update(double t){}
