@@ -12,7 +12,7 @@ class ReturnButtonInGame {
   ReturnButtonInGame(this.game){
     double tileH = game.tileHeightSize;
     double tileW = game.tileWidthSize;
-    buttonRect = Rect.fromLTWH(tileW*11, tileH*0, tileW*5, tileH*2);
+    buttonRect = Rect.fromLTWH(tileW*11, tileH*1.25, tileW*5, tileH*2);
     buttonSprite = Sprite("boutons/boutonRetour.png");
   }
 
