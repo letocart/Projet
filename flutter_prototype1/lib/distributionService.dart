@@ -1,33 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/style.dart';
 
-import 'package:flame/game.dart';
-import 'dart:ui';
-
-class DistributionService {
-  final ROgame game;
-
-  Rect bgRect;
-  Paint bgPaint; //à changer avec un sprite : Sprite bgSprite;
-
-  DistributionService(this.game){
-    bgRect = Rect.fromLTWH(0, 0, game.screenSize.width, game.screenSize.height);
-    //à changer en : bgSprite = Sprite('lienSprite');
-    bgPaint = Paint();
-    bgPaint.color = Color(0xff607D8D);
-  }
-
-  void render(Canvas c){
-    c.drawRect(bgRect, bgPaint); //à changer en : bgSprite.renderRect(c,bgRect);
-  }
-
-  void update(double t) {}
-
-}
-
-/*
 class MenuDistributionService extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -48,9 +22,9 @@ class MenuDistributionService extends StatelessWidget {
                   children : [
                     Text("Jeu n°1"),
                     TextButton(
-                        onPressed: () async {
+                        onPressed: (){
                           print('Play pressed');
-                          await Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) => DistributionService())
                           );
@@ -59,9 +33,9 @@ class MenuDistributionService extends StatelessWidget {
                         child: Text('Jouer')
                     ),
                     TextButton(
-                        onPressed: () async {
+                        onPressed: (){
                           print('Return pressed');
-                          await Navigator.pop(context);
+                          Navigator.pop(context);
                         },
                         style : Style.buttonText,
                         child: Text('Retour')
@@ -149,5 +123,3 @@ class OpenPainter extends CustomPainter {
   @override
   bool shouldRepaint(CustomPainter oldDelegate) => true;
 }
-
- */
