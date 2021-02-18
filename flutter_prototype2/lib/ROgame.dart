@@ -7,10 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_prototype1/components/distriServButton.dart';
 import 'package:flutter_prototype1/components/personnage.dart';
 import 'package:flutter_prototype1/components/playDistriServButton.dart';
-import 'package:flutter_prototype1/components/playTrajetBus.dart';
+import 'package:flutter_prototype1/components/playTrajetBusButton.dart';
 import 'package:flutter_prototype1/components/returnButton.dart';
 import 'package:flutter_prototype1/components/returnButtonInGame.dart';
 import 'package:flutter_prototype1/components/trajetBusButton.dart';
+import 'package:flutter_prototype1/components/menuButton.dart';
 import 'package:flutter_prototype1/view.dart';
 import 'package:flutter_prototype1/views/distributionService.dart';
 import 'package:flutter_prototype1/views/menuPrincipal.dart';
@@ -34,6 +35,7 @@ class ROgame extends Game with TapDetector{
   PlayTrajetBusButton playTrajetBusButton;
   ReturnButton returnButton;
   ReturnButtonInGame returnButtonInGame;
+  MenuButton menuButton;
 
   ROgame() {
     init();
@@ -44,6 +46,7 @@ class ROgame extends Game with TapDetector{
 
     returnButton = ReturnButton(this);
     returnButtonInGame = ReturnButtonInGame(this);
+    menuButton = MenuButton(this);
 
     //view : menuPrincipal
     menu = Menu(this);
@@ -77,7 +80,7 @@ class ROgame extends Game with TapDetector{
 
     if(activeView == View.distributionService){
       distributionService.render(canvas);
-      returnButtonInGame.render(canvas);
+      menuButton.render(canvas);
     }
 
     if(activeView == View.menuTrajetBus){
@@ -88,7 +91,7 @@ class ROgame extends Game with TapDetector{
 
     if(activeView == View.trajetBus){
       trajetBus.render(canvas);
-      returnButtonInGame.render(canvas);
+      menuButton.render(canvas);
     }
   }
 
@@ -147,6 +150,14 @@ class ROgame extends Game with TapDetector{
     if(!isHandled && returnButtonInGame.getButtonRect().contains(details.globalPosition)){
       if(activeView == View.trajetBus || activeView == View.distributionService){
         returnButtonInGame.onTapDown();
+        menuButton.reinitiateIsHandle(); 
+        isHandled = true;
+      }
+    }
+
+    if(!isHandled && menuButton.getButtonRect().contains(details.globalPosition)){
+      if(activeView == View.trajetBus || activeView == View.distributionService){
+        menuButton.onTapDown();
         isHandled = true;
       }
     }

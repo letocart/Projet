@@ -17,7 +17,8 @@ void main() async {
                                 "boutons/boutonBleuDistributionService.png",
                                 "boutons/boutonBleuTrajetBus.png",
                                 "boutons/boutonJouer.png",
-                                "boutons/boutonRetour.png"]);
+                                "boutons/boutonRetour.png",
+                                "boutons/menu.png"]);
 
   ROgame game = ROgame();
   runApp(game.widget);
