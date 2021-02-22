@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="883a17ce-99fe-420e-a952-2e02aae0d89c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/lib/ROgame.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/lib/ROgame.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/lib/ROgameUI.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/lib/ROgameUI.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/lib/view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/lib/view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/lib/views/ecranTitre.dart" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/lib/views/ecranTitre.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flutter_prototype3/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/flutter_prototype3/pubspec.yaml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1oORxlHNLrPCEOoBRY0a1J4Lx81" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="flutter.settings" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+  </component>
+  <component name="RunManager" selected="Flutter.main.dart (1)">
+    <configuration name="main.dart" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/flutter_prototype1/lib/main.dart" />
+      <option name="workingDirectory" value="$PROJECT_DIR$/flutter_prototype1" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart (1)" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/flutter_prototype3/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/flutter_prototype1/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.main.dart (1)" />
+        <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Dart Command Line App.main.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="883a17ce-99fe-420e-a952-2e02aae0d89c" name="Default Changelist" comment="" />
+      <created>1613155898582</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1613155898582</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="100" y="100" width="1720" height="840" key="AVDManager" timestamp="1613999567400">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="100" y="100" width="1720" height="840" key="AVDManager/0.0.1920.1040@0.0.1920.1040" timestamp="1613999567400" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1613155932735">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1613155932735" />
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom" timestamp="1614007695988">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1614007695988" />
+    <state width="1877" height="279" key="GridCell.Tab.0.center" timestamp="1614007695988">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1614007695988" />
+    <state width="1877" height="279" key="GridCell.Tab.0.left" timestamp="1614007695987">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1614007695987" />
+    <state width="1877" height="279" key="GridCell.Tab.0.right" timestamp="1614007695988">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="1877" height="279" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1614007695988" />
+    <state x="461" y="165" key="SettingsEditor" timestamp="1613999524667">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="461" y="165" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1613999524667" />
+  </component>
+</project>

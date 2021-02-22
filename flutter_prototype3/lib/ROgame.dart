@@ -6,6 +6,7 @@ import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_prototype1/ROgameUI.dart';
 import 'package:flutter_prototype1/view.dart';
+import 'package:flutter_prototype1/views/ecranTitre.dart';
 
 class ROgame extends Game with TapDetector{
   final ROGameUI roGameUi;
@@ -14,7 +15,9 @@ class ROgame extends Game with TapDetector{
   double tileHeightSize;
   double tileWidthSize;
 
-  View activeView = View.menuPrincipal;
+  View activeView = View.ecranTitre;
+
+  EcranTitre ecranTitre;
 
   /*Menu menu;
   DistributionService distributionService;
@@ -35,6 +38,8 @@ class ROgame extends Game with TapDetector{
 
   void init() async {
     resize(await Flame.util.initialDimensions());
+
+    ecranTitre = EcranTitre(this);
 
     /*returnButton = ReturnButton(this);
     returnButtonInGame = ReturnButtonInGame(this);
@@ -57,6 +62,10 @@ class ROgame extends Game with TapDetector{
 
   @override
   void render(Canvas canvas) {
+    if(activeView == View.ecranTitre){
+      ecranTitre.render(canvas);
+    }
+
     /*if(activeView == View.menuPrincipal) {
       menu.render(canvas);
       personnage.render(canvas);

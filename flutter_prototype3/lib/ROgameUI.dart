@@ -14,7 +14,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
   ROgame game;
   SharedPreferences _storage;
 
-  View currentScreen = View.menuPrincipal;
+  View currentScreen = View.ecranTitre;
 
   int score = 0;
   int highScore = 0;
@@ -27,8 +27,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
       update();
     }
   }
-
-
+/*
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
@@ -38,34 +37,66 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
-
+*/
   void update() {
     setState(() {});
   }
 
+  Widget buildScreenMenuPrincipal() {
+    return Center(
+        child : Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children : [
+            Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children : [Text('Je suis un personnage')]
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children : [
+                TextButton(
+                    onPressed: () {
+                      print("Jeu n°1 pressed");
+                    },
+                    style : Style.buttonText,
+                    child: Text('Jeu n°1')
+                ),
+                TextButton(
+                    onPressed: (){
+                      print('Jeu 2 pressed');
+                    },
+                    style : Style.buttonText,
+                    child: Text('Jeu n°2')
+                ),
+              ],
+            ),
+          ],
+        ),
+      );
+  }
+
   Widget buildScreenHome() {
-    return Scaffold(
-        body: Center(
-          child : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children : [
-              Column(
+    return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children : [
                     Text('Welcome to RO Game'),
                     TextButton(
                         onPressed: () {
                           print("Start pressed");
+                          currentScreen = View.ecranTitre;
+                          game.init();
+                          update();
+                          /*
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => buildScreenMenuPrincipal())
+                          );*/
                         },
                         style : Style.buttonText,
                         child: Text('Start Game')
                     ),
                 ],
-              ),
-            ],
-          ),
-        ),
-    );
+              );
   }
 
   Widget build(BuildContext context) {
@@ -75,7 +106,8 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
           child: IndexedStack(
             sizing: StackFit.expand,
             children: <Widget>[
-              buildScreenHome()
+              buildScreenHome(),
+              buildScreenMenuPrincipal(),
             ],
             index: currentScreen.index,
           ),

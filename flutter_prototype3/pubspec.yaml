@@ -54,6 +54,7 @@ flutter:
      - assets/images/boutons/boutonJouer.png
      - assets/images/boutons/boutonRetour.png
      - assets/images/boutons/menu.png
+     - assets/images/backgrounds/ciel.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
