@@ -4,27 +4,19 @@ import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_prototype1/components/distriServButton.dart';
-import 'package:flutter_prototype1/components/personnage.dart';
-import 'package:flutter_prototype1/components/playDistriServButton.dart';
-import 'package:flutter_prototype1/components/playTrajetBusButton.dart';
-import 'package:flutter_prototype1/components/returnButton.dart';
-import 'package:flutter_prototype1/components/returnButtonInGame.dart';
-import 'package:flutter_prototype1/components/trajetBusButton.dart';
-import 'package:flutter_prototype1/components/menuButton.dart';
+import 'package:flutter_prototype1/ROgameUI.dart';
 import 'package:flutter_prototype1/view.dart';
-import 'package:flutter_prototype1/views/distributionService.dart';
-import 'package:flutter_prototype1/views/menuPrincipal.dart';
-import 'package:flutter_prototype1/views/trajetBus.dart';
 
 class ROgame extends Game with TapDetector{
+  final ROGameUI roGameUi;
+
   Size screenSize;
   double tileHeightSize;
   double tileWidthSize;
 
   View activeView = View.menuPrincipal;
 
-  Menu menu;
+  /*Menu menu;
   DistributionService distributionService;
   TrajetBus trajetBus;
 
@@ -35,16 +27,16 @@ class ROgame extends Game with TapDetector{
   PlayTrajetBusButton playTrajetBusButton;
   ReturnButton returnButton;
   ReturnButtonInGame returnButtonInGame;
-  MenuButton menuButton;
+  MenuButton menuButton;*/
 
-  ROgame() {
+  ROgame(this.roGameUi) {
     init();
   }
 
   void init() async {
     resize(await Flame.util.initialDimensions());
 
-    returnButton = ReturnButton(this);
+    /*returnButton = ReturnButton(this);
     returnButtonInGame = ReturnButtonInGame(this);
     menuButton = MenuButton(this);
 
@@ -60,12 +52,12 @@ class ROgame extends Game with TapDetector{
 
     //view : menu trajetBus
     trajetBus = TrajetBus(this);
-    playTrajetBusButton = PlayTrajetBusButton(this);
+    playTrajetBusButton = PlayTrajetBusButton(this);*/
   }
 
   @override
   void render(Canvas canvas) {
-    if(activeView == View.menuPrincipal) {
+    /*if(activeView == View.menuPrincipal) {
       menu.render(canvas);
       personnage.render(canvas);
       distriServButton.render(canvas);
@@ -92,7 +84,7 @@ class ROgame extends Game with TapDetector{
     if(activeView == View.trajetBus){
       trajetBus.render(canvas);
       menuButton.render(canvas);
-    }
+    }*/
   }
 
   @override
@@ -112,7 +104,7 @@ class ROgame extends Game with TapDetector{
   void onTapDown(TapDownDetails details){
     bool isHandled = false;
 
-    if(!isHandled && distriServButton.getButtonRect().contains(details.globalPosition)){
+    /*if(!isHandled && distriServButton.getButtonRect().contains(details.globalPosition)){
       if(activeView == View.menuPrincipal){
         distriServButton.onTapDown();
         isHandled = true;
@@ -160,7 +152,7 @@ class ROgame extends Game with TapDetector{
         menuButton.onTapDown();
         isHandled = true;
       }
-    }
+    }*/
 
   }
 

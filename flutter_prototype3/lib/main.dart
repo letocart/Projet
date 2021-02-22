@@ -2,6 +2,8 @@ import 'package:flame/util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flame/flame.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_prototype1/ROgameUI.dart';
 
 import 'ROgame.dart';
 
@@ -20,7 +22,7 @@ void main() async {
                                 "boutons/menu.png"]);
 
   SharedPreferences storage = await SharedPreferences.getInstance();
-  ROgameUI gameUI = RogameUI();
+  ROGameUI gameUI = ROGameUI();
   ROgame game = ROgame(gameUI);
   gameUI.state.storage = storage;
   gameUI.state.game = game;

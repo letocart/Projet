@@ -1,20 +1,19 @@
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:shadow_training/widgets/punch-buttons.dart';
-import 'package:shadow_training/shadow-training.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-class RoGameUI extends StatefulWidget {
-  final ROGameUIState state = ROgameUIState();
+import 'package:flutter_prototype1/ROgame.dart';
+import 'package:flutter_prototype1/view.dart';
+
+class ROGameUI extends StatefulWidget {
+  final ROgameUIState state = ROgameUIState();
 
   State<StatefulWidget> createState() => state;
 }
 
-
-class ROgameUIState extends State<ROgameUI> with WidgetsBindingObserver {
+class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
   ROgame game;
   SharedPreferences _storage;
 
-  View currentScreen = View.home;
+  View currentScreen = View.menuPrincipal;
 
   int score = 0;
   int highScore = 0;
@@ -50,19 +49,35 @@ class ROgameUIState extends State<ROgameUI> with WidgetsBindingObserver {
     );
   }
 
-
-  Widget DistriServButton() {
-    return Ink(
-      decoration: ShapeDecoration(
-        shape: CircleBorder(),
-      ),
-      child: IconButton(
-        color: Colors.white,
-        icon: Icon(
-          Icons.help_outline,
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children : [
+        TextButton(
+            onPressed: () {
+              print("Jeu n°1 pressed");
+            },
+            style : TextButton.styleFrom
+              (
+              primary: Colors.white,
+              backgroundColor: Colors.teal,
+              onSurface: Colors.grey,
+              ),
+            child: Text('Jeu n°1')
         ),
-        onPressed: currentScreen == View.distributionService,
-      ),
+        TextButton(
+            onPressed: (){
+              print('Jeu 2 pressed');
+            },
+            style : TextButton.styleFrom
+              (
+              primary: Colors.white,
+              backgroundColor: Colors.teal,
+              onSurface: Colors.grey,
+            ),
+            child: Text('Jeu n°2')
+        ),
+      ],
     );
   }
 }
