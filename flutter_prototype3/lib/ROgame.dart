@@ -17,7 +17,7 @@ class ROgame extends Game with TapDetector{
 
   View activeView = View.ecranTitre;
 
-  EcranTitre ecranTitre;
+  //EcranTitre ecranTitre;
 
   /*Menu menu;
   DistributionService distributionService;
@@ -39,7 +39,7 @@ class ROgame extends Game with TapDetector{
   void init() async {
     resize(await Flame.util.initialDimensions());
 
-    ecranTitre = EcranTitre(this);
+    //ecranTitre = EcranTitre(this);
 
     /*returnButton = ReturnButton(this);
     returnButtonInGame = ReturnButtonInGame(this);
@@ -62,9 +62,10 @@ class ROgame extends Game with TapDetector{
 
   @override
   void render(Canvas canvas) {
+    /*
     if(activeView == View.ecranTitre){
       ecranTitre.render(canvas);
-    }
+    }*/
 
     /*if(activeView == View.menuPrincipal) {
       menu.render(canvas);

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
@@ -42,61 +43,38 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
     setState(() {});
   }
 
-  Widget buildScreenMenuPrincipal() {
-    return Center(
-        child : Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children : [
-            Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children : [Text('Je suis un personnage')]
-            ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children : [
-                TextButton(
-                    onPressed: () {
-                      print("Jeu n°1 pressed");
-                    },
-                    style : Style.buttonText,
-                    child: Text('Jeu n°1')
-                ),
-                TextButton(
-                    onPressed: (){
-                      print('Jeu 2 pressed');
-                    },
-                    style : Style.buttonText,
-                    child: Text('Jeu n°2')
+  Widget buildScreenHome() {
+    return Scaffold(
+      body:Stack(
+        children: <Widget>[
+          Image(
+            image: AssetImage("assets/images/backgrounds/ciel.png"),
+            fit: BoxFit.cover,
+          ),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children : [
+              Text('Welcome to RO Game'),
+              TextButton(
+                onPressed: () {
+                print("Start pressed");
+                currentScreen = View.menuPrincipal;
+                //game.init();
+                update();
+
+                /*Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MenuPrincipalRoute())
+                );*/
+                },
+                style : Style.buttonText,
+                child: Text('Start Game')
                 ),
               ],
-            ),
-          ],
-        ),
+            )
+          ]
+        )
       );
-  }
-
-  Widget buildScreenHome() {
-    return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children : [
-                    Text('Welcome to RO Game'),
-                    TextButton(
-                        onPressed: () {
-                          print("Start pressed");
-                          currentScreen = View.ecranTitre;
-                          game.init();
-                          update();
-                          /*
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => buildScreenMenuPrincipal())
-                          );*/
-                        },
-                        style : Style.buttonText,
-                        child: Text('Start Game')
-                    ),
-                ],
-              );
   }
 
   Widget build(BuildContext context) {
@@ -107,7 +85,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
             sizing: StackFit.expand,
             children: <Widget>[
               buildScreenHome(),
-              buildScreenMenuPrincipal(),
+              ScreenMenuPrincipal(),
             ],
             index: currentScreen.index,
           ),
