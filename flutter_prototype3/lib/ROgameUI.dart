@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
+import 'package:flutter_prototype1/style.dart';
 
 class ROGameUI extends StatefulWidget {
   final ROgameUIState state = ROgameUIState();
@@ -42,40 +43,42 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
     setState(() {});
   }
 
-  Widget spacer({int size}) {
-    return Expanded(
-      flex: size ?? 100,
-      child: Center(),
+  Widget buildScreenHome() {
+    return Scaffold(
+        body: Center(
+          child : Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children : [
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children : [
+                    Text('Welcome to RO Game'),
+                    TextButton(
+                        onPressed: () {
+                          print("Start pressed");
+                        },
+                        style : Style.buttonText,
+                        child: Text('Start Game')
+                    ),
+                ],
+              ),
+            ],
+          ),
+        ),
     );
   }
 
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children : [
-        TextButton(
-            onPressed: () {
-              print("Jeu n°1 pressed");
-            },
-            style : TextButton.styleFrom
-              (
-              primary: Colors.white,
-              backgroundColor: Colors.teal,
-              onSurface: Colors.grey,
-              ),
-            child: Text('Jeu n°1')
-        ),
-        TextButton(
-            onPressed: (){
-              print('Jeu 2 pressed');
-            },
-            style : TextButton.styleFrom
-              (
-              primary: Colors.white,
-              backgroundColor: Colors.teal,
-              onSurface: Colors.grey,
-            ),
-            child: Text('Jeu n°2')
+      children: <Widget>[
+        Expanded(
+          child: IndexedStack(
+            sizing: StackFit.expand,
+            children: <Widget>[
+              buildScreenHome()
+            ],
+            index: currentScreen.index,
+          ),
         ),
       ],
     );
