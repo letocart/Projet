@@ -1,3 +1,4 @@
+// enumeration des differentes vues
 enum View {
   ecranTitre,
   menuPrincipal,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// styles predifinies d'affichage
 class Style{
 
   static final ThemeData themePrincipal = ThemeData(

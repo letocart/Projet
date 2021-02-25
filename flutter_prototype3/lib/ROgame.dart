@@ -9,7 +9,7 @@ import 'package:flutter_prototype1/view.dart';
 import 'package:flutter_prototype1/views/ecranTitre.dart';
 
 class ROgame extends Game with TapDetector{
-  final ROGameUI roGameUi;
+  final ROgameUI roGameUi;
 
   Size screenSize;
   double tileHeightSize;

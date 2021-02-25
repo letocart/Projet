@@ -4,21 +4,23 @@ import '../style.dart';
 import 'package:flutter/services.dart';
 
 
-
+// widget ecran titre
 class ScreenHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
+    return Container( // Container principal
+      decoration: BoxDecoration(  // background
         image: DecorationImage(
-          image: AssetImage("assets/images/backgrounds/city2.jpg"),
-          fit: BoxFit.cover)),
-      alignment: Alignment.center,
+          image: AssetImage("assets/images/backgrounds/city2.jpg"), // image du background
+          fit: BoxFit.cover //couvre tout l'ecran
+        )
+      ),
+      alignment: Alignment.center, // s'alligne au centre
       child : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
         children : [
-          SizedBox(
+          SizedBox( //Sized Box d'ecart
             height : 50,
           ),
           Text('Welcome to RO Game',style : TextStyle(
@@ -29,7 +31,7 @@ class ScreenHome extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () {
-              Navigator.of(context).push(
+              Navigator.of(context).push( //Navigateur vers widget
                 MaterialPageRoute(builder: (context)=>
                     ScreenMenuPrincipal(),
                 ),

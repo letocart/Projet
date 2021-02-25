@@ -1,5 +1,4 @@
-
-
+// imports
 import 'package:flame/util.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +8,7 @@ import 'package:flutter_prototype1/ROgameUI.dart';
 
 import 'ROgame.dart';
 
-
+// main async pour flame
 void main() async {
 
   // initialisation de flame
@@ -20,7 +19,8 @@ void main() async {
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.landscapeLeft);
 
-  // chargement de toutes les images
+  // chargement de toutes les images dans flame
+  /*
   Flame.images.loadAll(<String>['professeur.png',
                                 "boutons/boutonBleuDistributionService.png",
                                 "boutons/boutonBleuTrajetBus.png",
@@ -28,7 +28,7 @@ void main() async {
                                 "boutons/boutonRetour.png",
                                 "boutons/menu.png",
                                 "backgrounds/city2.jpg",
-                                "backgrounds/ciel.png",]);
+                                "backgrounds/ciel.png",]);*/
 
   // creation d'une variable de stockage, encore non utilisee
   SharedPreferences storage = await SharedPreferences.getInstance();
