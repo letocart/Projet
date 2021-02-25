@@ -1,3 +1,5 @@
+
+
 import 'package:flame/util.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
@@ -9,11 +11,16 @@ import 'ROgame.dart';
 
 
 void main() async {
+
+  // initialisation de flame
   WidgetsFlutterBinding.ensureInitialized();
   Util flameUtil = Util();
+
+  // configuration de l'orientation de l'ecran
   await flameUtil.fullScreen();
   await flameUtil.setOrientation(DeviceOrientation.landscapeLeft);
 
+  // chargement de toutes les images
   Flame.images.loadAll(<String>['professeur.png',
                                 "boutons/boutonBleuDistributionService.png",
                                 "boutons/boutonBleuTrajetBus.png",
@@ -23,12 +30,19 @@ void main() async {
                                 "backgrounds/city2.jpg",
                                 "backgrounds/ciel.png",]);
 
+  // creation d'une variable de stockage, encore non utilisee
   SharedPreferences storage = await SharedPreferences.getInstance();
-  ROGameUI gameUI = ROGameUI();
+
+  // creation d'un ROgameUI, gameUI un widget d'interface
+  ROgameUI gameUI = ROgameUI();
+  // creation d'un ROgame, objet flame
   ROgame game = ROgame(gameUI);
+
+  // affectation du storage et du jeu a l'interface
   gameUI.state.storage = storage;
   gameUI.state.game = game;
 
+  // execution du widget MaterialApp contenant l'application
   //runApp(game.widget);
   runApp(
     MaterialApp(
@@ -37,7 +51,7 @@ void main() async {
         primarySwatch: Colors.blue,
         fontFamily: 'HVD',
       ),
-      home: Scaffold(
+      home: Scaffold( //home: ce qui va s'afficher
         body: Stack(
           fit: StackFit.expand,
           children: <Widget>[
