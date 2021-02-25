@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
+import 'package:flutter_prototype1/widgets/ScreenHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
@@ -42,7 +43,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
   void update() {
     setState(() {});
   }
-
+/*
   Widget buildScreenHome() {
     return Scaffold(
       body:Stack(
@@ -76,7 +77,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
         )
       );
   }
-
+*/
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
@@ -84,7 +85,7 @@ class ROgameUIState extends State<ROGameUI> with WidgetsBindingObserver {
           child: IndexedStack(
             sizing: StackFit.expand,
             children: <Widget>[
-              buildScreenHome(),
+              ScreenHome(),
               ScreenMenuPrincipal(),
             ],
             index: currentScreen.index,

@@ -20,7 +20,8 @@ void main() async {
                                 "boutons/boutonJouer.png",
                                 "boutons/boutonRetour.png",
                                 "boutons/menu.png",
-                                "backgrounds/ciel.png"]);
+                                "backgrounds/city2.jpg",
+                                "backgrounds/ciel.png",]);
 
   SharedPreferences storage = await SharedPreferences.getInstance();
   ROGameUI gameUI = ROGameUI();

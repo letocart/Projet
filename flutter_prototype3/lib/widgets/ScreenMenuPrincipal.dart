@@ -5,6 +5,10 @@ class ScreenMenuPrincipal extends StatelessWidget {
   @override
   Widget build(BuildContext context){
     return Container(
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/backgrounds/city2.jpg"),
+              fit: BoxFit.cover)),
       child : Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children : [
@@ -12,19 +16,23 @@ class ScreenMenuPrincipal extends StatelessWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children : [
-              TextButton(
+              RaisedButton(
                   onPressed: () {
-                    print("Jeu n°1 pressed");
+                    print("jeu 1 pressed");
                   },
-                  style : Style.buttonText,
-                  child: Text('Jeu n°1')
+                  color : Colors.orange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  child: Text('Game 1',style: TextStyle(color:Colors.black),)
               ),
-              TextButton(
-                  onPressed: (){
-                    print('Jeu 2 pressed');
+              RaisedButton(
+                  onPressed: () {
+                    print("Jeu 2 pressed");
                   },
-                  style : Style.buttonText,
-                  child: Text('Jeu n°2')
+                  color : Colors.orange,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                  child: Text('Game 2',style: TextStyle(color:Colors.black),)
               ),
             ],
           ),
