@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prototype1/widgets/ScreenDistiServStage.dart';
 import '../style.dart';
 
 class ScreenMenuPrincipal extends StatelessWidget {
@@ -32,6 +33,11 @@ class ScreenMenuPrincipal extends StatelessWidget {
                   RaisedButton(
                       onPressed: () {
                         print("jeu 1 pressed");
+                        Navigator.of(context).push( //Navigateur vers widget
+                          MaterialPageRoute(builder: (context)=>
+                              ScreenDistriServStage(),
+                          ),
+                        );
                       },
                       color : Colors.orange,
                       shape: RoundedRectangleBorder(
