@@ -5,8 +5,8 @@ import 'package:flutter_prototype1/models/DistributionServicesModel.dart';
 
 class DistributionServicesController {
 
-  DistributionServicesModel DSM;
-  DistributionServicesData DSD;
+  DistributionServicesModel _DSM;
+  DistributionServicesData _DSD;
   //DistributionServicesView DSV;
 
   // constructeur
@@ -18,38 +18,19 @@ class DistributionServicesController {
     this.DSD = DSD;
   }
 
-  DistributionServicesController.fromData(DistributionServicesData DSD)
+  DistributionServicesController.fromDSD(DistributionServicesData DSD)
   {
-    this.DSM = createDSMfromDSD(DSD);
+    this.DSM = DistributionServicesModel.fromDSD(DSD);
     this.DSD = DSD;
   }
 
-  // getters
-  DistributionServicesModel get DSC_DSM {return DSM;}
-  DistributionServicesData get DSC_DSD {return DSD;}
-
-  // setters
-  void set DSC_DSM(DistributionServicesModel DSM) {this.DSM = DSM;}
-  void set DSC_DSD(DistributionServicesData DSD) {this.DSD = DSD;}
-
-
-}
-
-
-// methode renvoyant un DistributionServicesModel depuis des donnees DistributionServicesData
-DistributionServicesModel createDSMfromDSD(DistributionServicesData DSD)
-{
-  // assert pour verifier la taille des elements
-  assert(DSD.gains.length==DSD.nbs_etages.length);
-  assert(DSD.prix_etages.length==DSD.hauteur_max);
-
-  List<Client> clients = [];
-  for(int i = 0; i < DSD.gains.length;i++)
-  {
-    clients.add(Client(DSD.gains[i],DSD.nbs_etages[i]));
+  DistributionServicesData get DSD => _DSD;
+  set DSD(DistributionServicesData value) {
+    _DSD = value;
   }
-  assert(clients.length==DSD.gains.length);
-  return DistributionServicesModel(DSD.valeur_solution,
-      Immeubles(DSD.nombre_immeubles,DSD.hauteur_max,DSD.prix_etages),
-      clients);
+
+  DistributionServicesModel get DSM => _DSM;
+  set DSM(DistributionServicesModel value) {
+    _DSM = value;
+  }
 }

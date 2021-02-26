@@ -1,43 +1,71 @@
+//Classe contenant les informations d'une instance et les moyens de les recuperees
+
+import 'package:collection/collection.dart';
 
 class DistributionServicesData
 {
-  double valeur_solution;   // valeur de la solution optimale
-  int nombre_immeubles; //nombre d'immeubles au total
-  int hauteur_max;      // hauteur maximale de l'immeuble
-  List<double> prix_etages; // prix de chaque etage
-  List<double> gains;  //quantite d'argent gagne par le service du client
-  List<int> nbs_etages;// nombre d'etages demande
+  double _valeur_solution;   // valeur de la solution optimale
+  int _nombre_immeubles; //nombre d'immeubles au total
+  int _hauteur_max;      // hauteur maximale de l'immeuble
+  List<double> _prix_etages; // prix de chaque etage
+  List<double> _gains;  //quantite d'argent gagne par le service du client
+  List<int> _nbs_etages;// nombre d'etages demande
 
   // constructeur
   DistributionServicesData(
-    double valeur_solution,
-    int nombre_immeubles, int hauteur_max, List<double> prix_etages,
-    List<double> gains, List<int> nbs_etages)
-  {
-    this.valeur_solution= valeur_solution;   // valeur de la solution optimale
-    this.nombre_immeubles= nombre_immeubles; //nombre d'immeubles au total
-    this.hauteur_max= hauteur_max;      // hauteur maximale de l'immeuble
-    this.prix_etages= prix_etages; // prix de chaque etage
-    this.gains= gains;  //quantite d'argent gagne par le service du client
-    this.nbs_etages= nbs_etages;// nombre d'etages demande
+      this._valeur_solution,
+      this._nombre_immeubles, this._hauteur_max, this._prix_etages,
+      this._gains, this._nbs_etages);
+
+  //overload de l'operateur de comparaison ==
+  @override
+  bool operator ==(other) =>
+      other is DistributionServicesData
+          && (other.valeur_solution == this.valeur_solution)
+          && (other.nombre_immeubles == this.nombre_immeubles)
+          && (other.hauteur_max == this.hauteur_max)
+          && (ListEquality().equals(other.prix_etages,this.prix_etages))
+          && (ListEquality().equals(other.gains,this.gains))
+          && (ListEquality().equals(other.nbs_etages,this.nbs_etages));
+
+  List<int> get nbs_etages => _nbs_etages;
+
+  set nbs_etages(List<int> value) {
+    _nbs_etages = value;
   }
 
-  // getters
-  double get DSD_valeur_solution {return valeur_solution;}
-  int get DSD_nombre_immeubles{return nombre_immeubles;}
-  int get DSD_hauteur{return hauteur_max;}
-  List<double> get DSD_prix_etages{return prix_etages;}
-  List<double> get DSD_gain{return gains;}
-  List<int> get DSD_nb_etages{return nbs_etages;}
+  List<double> get gains => _gains;
 
-  // setters
-  void set DSD_valeur_solution(double valeur_solution) {this.valeur_solution = valeur_solution;}
-  void set DSD_nombre_immeubles(int nombre_immeubles) {this.nombre_immeubles = nombre_immeubles;}
-  void set DSD_hauteur(int hauteur_max) {this.hauteur_max = hauteur_max;}
-  void set DSD_prix_etages(List<double> prix_etages) {this.prix_etages = prix_etages;}
-  void set DSD_gain(List<double> gains) {this.gains = gains;}
-  void set DSD_nb_etages(List<int> nbs_etages) {this.nbs_etages = nbs_etages;}
+  set gains(List<double> value) {
+    _gains = value;
+  }
+
+  List<double> get prix_etages => _prix_etages;
+
+  set prix_etages(List<double> value) {
+    _prix_etages = value;
+  }
+
+  int get hauteur_max => _hauteur_max;
+
+  set hauteur_max(int value) {
+    _hauteur_max = value;
+  }
+
+  int get nombre_immeubles => _nombre_immeubles;
+
+  set nombre_immeubles(int value) {
+    _nombre_immeubles = value;
+  }
+
+  double get valeur_solution => _valeur_solution;
+
+  set valeur_solution(double value) {
+    _valeur_solution = value;
+  }
 }
 
 // a implementer la recuperation de la data depuis la BDD pour creer un DistributionServicesData
+
+
 

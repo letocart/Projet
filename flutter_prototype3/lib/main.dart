@@ -3,7 +3,7 @@ import 'package:flame/util.dart';
 import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prototype1/models/DistributionServicesModel.dart';
+import 'package:flutter_prototype1/test/tests_unitaires.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgameUI.dart';
 
@@ -13,7 +13,8 @@ import 'ROgame.dart';
 void main() async {
 
   // tests unitaires sur les models
-  //assert_DSM();
+  assert_DSM();
+  assert_DSD();
 
 
   // initialisation de flame
