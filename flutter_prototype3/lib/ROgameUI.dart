@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
-import 'package:flutter_prototype1/widgets/ScreenHome.dart';
+import 'package:flutter_prototype1/view/ScreenMenuPrincipal.dart';
+import 'package:flutter_prototype1/view/ScreenHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';

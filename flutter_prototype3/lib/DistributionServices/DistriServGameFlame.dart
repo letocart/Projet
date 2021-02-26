@@ -1,17 +1,11 @@
 import 'dart:ui';
 
 import 'package:flame/game.dart';
+import 'package:flame/gestures.dart';
 import 'package:flame/keyboard.dart';
 import 'package:flutter/services.dart';
 
-class DistriServGameFlame extends Game with KeyboardEvents {
-  // update and render omitted
-
-  @override
-  void onKeyEvent(e) {
-    final bool isKeyDown = e is RawKeyDownEvent;
-    print(" Key: ${e.data.keyLabel} - isKeyDown: $isKeyDown");
-  }
+class DistriServGameFlame extends Game with TapDetector {
 
   @override
   void render(Canvas canvas) {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prototype1/widgets/ScreenDistiServStage.dart';
+import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServStage.dart';
 import '../style.dart';
 
 class ScreenMenuPrincipal extends StatelessWidget {

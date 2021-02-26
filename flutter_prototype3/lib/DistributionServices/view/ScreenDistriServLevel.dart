@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/style.dart';
-import 'package:flutter_prototype1/widgets/ScreenDistiServStage.dart';
-import 'package:flutter_prototype1/widgets/ScreenDistriServGame.dart';
+
+import 'ScreenDistriServGame.dart';
+import 'ScreenDistriServStage.dart';
 
 class ScreenDistriServLevel extends StatelessWidget {
   String difficulty;

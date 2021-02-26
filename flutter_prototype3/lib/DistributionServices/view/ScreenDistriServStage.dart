@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/style.dart';
-import 'package:flutter_prototype1/widgets/ScreenDistriServLevel.dart';
-import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
+import 'package:flutter_prototype1/view/ScreenMenuPrincipal.dart';
+
+import 'ScreenDistriServLevel.dart';
 
 class ScreenDistriServStage extends StatelessWidget {
   final List<String> entries = <String>['Tutorial', 'Easy', 'Normal', 'Hard', 'Insane'];

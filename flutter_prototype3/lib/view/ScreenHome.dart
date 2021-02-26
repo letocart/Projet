@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
+import 'package:flutter_prototype1/view/ScreenMenuPrincipal.dart';
 import '../style.dart';
 import 'package:flutter/services.dart';
 
