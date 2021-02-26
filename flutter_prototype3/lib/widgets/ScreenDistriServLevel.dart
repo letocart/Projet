@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/style.dart';
 import 'package:flutter_prototype1/widgets/ScreenDistiServStage.dart';
+import 'package:flutter_prototype1/widgets/ScreenDistriServGame.dart';
 
 class ScreenDistriServLevel extends StatelessWidget {
   String difficulty;
@@ -60,11 +61,11 @@ class ScreenDistriServLevel extends StatelessWidget {
                             child: Text('${index+1}'),
                             style: Style.buttonText,
                             onPressed: () {
-                              /*Navigator.of(context).push( //Navigateur vers widget
+                              Navigator.of(context).push( //Navigateur vers widget
                               MaterialPageRoute(builder: (context)=>
-                              ScreenMenuPrincipal(),
+                              ScreenDistriServGame(difficulty, index+1),
                               ),
-                              );*/
+                              );
                               print("Start Game ${index+1} pressed");
                             },
                         );
