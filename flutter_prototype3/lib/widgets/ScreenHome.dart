@@ -29,7 +29,9 @@ class ScreenHome extends StatelessWidget {
           SizedBox(
             height : 20,
           ),
-          RaisedButton(
+          ElevatedButton(
+            child: Text('Start Game'),
+            style: Style.buttonText,
             onPressed: () {
               Navigator.of(context).push( //Navigateur vers widget
                 MaterialPageRoute(builder: (context)=>
@@ -38,20 +40,14 @@ class ScreenHome extends StatelessWidget {
               );
               print("Start Game pressed");
               },
-              color : Colors.orange,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
-              child: Text('Start Game',style: TextStyle(color:Colors.white),)
           ),
-          RaisedButton(
+          ElevatedButton(
+              child: Text('Exit',style: TextStyle(color:Colors.black),),
+              style: Style.exitButtonText,
               onPressed: () {
                 SystemNavigator.pop();
                 print("Exit pressed");
               },
-              color : Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(30))),
-              child: Text('Exit',style: TextStyle(color:Colors.black),)
           ),
   ],
     ),

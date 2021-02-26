@@ -9,23 +9,24 @@ class Style{
     visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 
-  static final ThemeData themeTrajetBus = ThemeData(
-    primarySwatch: Colors.teal,
-    scaffoldBackgroundColor: Colors.amberAccent,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
+  static final ButtonStyle buttonText = TextButton.styleFrom(
+    textStyle : TextStyle(color:Colors.white),
+    backgroundColor: Colors.orange,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30.0),
+    ),
   );
 
-  static final ThemeData themeDistributionService = ThemeData(
-    primarySwatch: Colors.teal,
-    scaffoldBackgroundColor: Colors.blueGrey,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
+  static final ButtonStyle returnButtonText = TextButton.styleFrom(
+    textStyle : TextStyle(color:Colors.white),
+    backgroundColor: Colors.blue,
   );
 
-  static final ButtonStyle buttonText = TextButton.styleFrom
-    (
-    primary: Colors.white,
-    backgroundColor: Colors.teal,
-    onSurface: Colors.grey,
+  static final ButtonStyle exitButtonText = TextButton.styleFrom(
+    textStyle : TextStyle(color:Colors.black),
+    backgroundColor: Colors.white,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(30.0),
+    ),
   );
-
 }
