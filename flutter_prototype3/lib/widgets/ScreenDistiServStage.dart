@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_prototype1/style.dart';
+import 'package:flutter_prototype1/widgets/ScreenDistriServLevel.dart';
+import 'package:flutter_prototype1/widgets/ScreenMenuPrincipal.dart';
 
 class ScreenDistriServStage extends StatelessWidget {
-  final List<String> entries = <String>['Tutoriel', 'Easy', 'Normal', 'Hard', 'Insane'];
+  final List<String> entries = <String>['Tutorial', 'Easy', 'Normal', 'Hard', 'Insane'];
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +18,22 @@ class ScreenDistriServStage extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
             children: [
-              SizedBox( //Sized Box d'ecart
-                height : 50,
+            Align(
+                alignment: Alignment.centerRight,
+                child: Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: ElevatedButton(
+                    child: Text('Return'),
+                    style: Style.returnButtonText,
+                    onPressed: () {
+                      Navigator.of(context).push( //Navigateur vers widget
+                        MaterialPageRoute(builder: (context)=>
+                            ScreenMenuPrincipal(),
+                        ),
+                      );
+                    },
+                  )
+                ),
               ),
               Text('Choose a difficulty',style : TextStyle(
                   fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
@@ -26,19 +43,17 @@ class ScreenDistriServStage extends StatelessWidget {
                   padding: const EdgeInsets.all(8),
                   itemCount: entries.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return RaisedButton(
+                    return ElevatedButton(
+                      child: Text('${entries[index]}'),
+                      style: Style.buttonText,
                       onPressed: () {
-                        /*Navigator.of(context).push( //Navigateur vers widget
+                        Navigator.of(context).push( //Navigateur vers widget
                           MaterialPageRoute(builder: (context)=>
-                              ScreenMenuPrincipal(),
+                              ScreenDistriServLevel(entries[index]),
                           ),
-                        );*/
+                        );
                         print("Start Game ${entries[index]} pressed");
                       },
-                      color : Colors.orange,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: Text('${entries[index]}',style: TextStyle(color:Colors.white),)
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) => const Divider(),

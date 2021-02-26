@@ -30,7 +30,9 @@ class ScreenMenuPrincipal extends StatelessWidget {
               child : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children : [
-                  RaisedButton(
+                  ElevatedButton(
+                      child: Text('Game 1'),
+                      style: Style.buttonText,
                       onPressed: () {
                         print("jeu 1 pressed");
                         Navigator.of(context).push( //Navigateur vers widget
@@ -39,19 +41,13 @@ class ScreenMenuPrincipal extends StatelessWidget {
                           ),
                         );
                       },
-                      color : Colors.orange,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: Text('Game 1',style: TextStyle(color:Colors.black),)
                   ),
-                  RaisedButton(
+                  ElevatedButton(
+                      child: Text('Game 2'),
+                      style: Style.buttonText,
                       onPressed: () {
                         print("Jeu 2 pressed");
                       },
-                      color : Colors.orange,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
-                      child: Text('Game 2',style: TextStyle(color:Colors.black),)
                   ),
                 ],
               )
