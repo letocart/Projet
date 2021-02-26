@@ -2,6 +2,7 @@
 
 // classe DistributionServicesModel
 import 'package:collection/collection.dart';
+import 'package:flutter_prototype1/controllers/DistributionServiceController.dart';
 import 'package:flutter_prototype1/data/DistributionServicesData.dart';
 import 'package:flutter_prototype1/models/DistributionServicesModel.dart';
 
@@ -155,3 +156,20 @@ void assert_DSM(){
   print("assert of DSM terminated successfully");
 }
 
+void assert_DSC()
+{
+  DistributionServicesData DSD = new DistributionServicesData(
+      200
+      , 2, 5, [50, 50, 100, 100, 100]
+      , [200, 300], [2, 3]);
+  DistributionServicesModel DSM = new DistributionServicesModel.fromDSD(DSD);
+
+  DistributionServicesController DSC1 = DistributionServicesController(DSM, DSD);
+  assert(DSC1.DSM==DSM);
+  assert(DSC1.DSD==DSD);
+  DistributionServicesController DSC2 = DistributionServicesController.fromDSD(DSD);
+  assert(DSC2.DSM==DistributionServicesModel.fromDSD(DSD));
+  assert(DSC2.DSD==DSD);
+  
+  print("assert of DSC terminated successfully");
+}

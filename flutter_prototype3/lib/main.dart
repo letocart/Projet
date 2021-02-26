@@ -15,7 +15,7 @@ void main() async {
   // tests unitaires sur les models
   assert_DSM();
   assert_DSD();
-
+  assert_DSC();
 
   // initialisation de flame
   WidgetsFlutterBinding.ensureInitialized();
