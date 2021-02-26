@@ -2,9 +2,9 @@
 
 // classe DistributionServicesModel
 import 'package:collection/collection.dart';
-import 'package:flutter_prototype1/controllers/DistributionServiceController.dart';
-import 'package:flutter_prototype1/data/DistributionServicesData.dart';
-import 'package:flutter_prototype1/models/DistributionServicesModel.dart';
+import 'package:flutter_prototype1/DIstributionServices/controller/DistributionServiceController.dart';
+import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DIstributionServices/model/DistributionServicesModel.dart';
 
 // classe DistributionsServicesData
 assert_DSD()
@@ -167,9 +167,10 @@ void assert_DSC()
   DistributionServicesController DSC1 = DistributionServicesController(DSM, DSD);
   assert(DSC1.DSM==DSM);
   assert(DSC1.DSD==DSD);
+
   DistributionServicesController DSC2 = DistributionServicesController.fromDSD(DSD);
   assert(DSC2.DSM==DistributionServicesModel.fromDSD(DSD));
   assert(DSC2.DSD==DSD);
-  
+
   print("assert of DSC terminated successfully");
 }

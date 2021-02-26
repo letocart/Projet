@@ -1,6 +1,6 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_prototype1/data/DistributionServicesData.dart'; // import for list comparison
+import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
 
 // classe gerant le modele d'un niveau du jeu de "DistributionServices"
 class DistributionServicesModel {
@@ -56,6 +56,7 @@ class DistributionServicesModel {
       other is DistributionServicesModel
           && (other.valeur_solution==this.valeur_solution)
           && (other.immeubles==this.immeubles)
+          && (other.score==this.score)
           && (ListEquality().equals(other.clients,this.clients));
 
   // modifie la matrice A pour assigner un client i a l'immeuble j

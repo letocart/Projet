@@ -1,13 +1,14 @@
 
 // import
-import 'package:flutter_prototype1/data/DistributionServicesData.dart';
-import 'package:flutter_prototype1/models/DistributionServicesModel.dart';
+
+import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DIstributionServices/model/DistributionServicesModel.dart';
 
 class DistributionServicesController {
 
   DistributionServicesModel _DSM;
   DistributionServicesData _DSD;
-  //DistributionServicesView DSV;
+  //DistributionServicesView _DSV; a ajouter
 
   // constructeur
   DistributionServicesController(
@@ -23,6 +24,8 @@ class DistributionServicesController {
     this.DSM = DistributionServicesModel.fromDSD(DSD);
     this.DSD = DSD;
   }
+
+
 
   DistributionServicesData get DSD => _DSD;
   set DSD(DistributionServicesData value) {
