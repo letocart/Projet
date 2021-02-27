@@ -1,75 +1,142 @@
-/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/style.dart';
+import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServLevel.dart';
+import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
 
+class ScreenDistriServGame extends StatefulWidget {
+  String difficulty;
+  int level;
+  ScreenDistriServGame(String diff, int lvl) {
+    difficulty = diff;
+    level = lvl;
+  }
 
-import 'ScreenDistriServLevel.dart';*/
+  createState() => ScreenDistriServGameState(difficulty, level);
+}
 
-/*class ScreenDistriServGame extends StatelessWidget {
+class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   String difficulty;
   int level;
 
-  ScreenDistriServGame(String diff, int level) {
+  final DistributionServicesData data = new DistributionServicesData(300
+      , 2, 5, [0, 100, 200, 300, 400]
+      , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
+
+  int score;
+
+  ScreenDistriServGameState(String diff, int lvl) {
     difficulty = diff;
-    print(difficulty);
+    level = lvl;
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-          image: AssetImage("assets/images/backgrounds/city2.jpg"),
-          fit: BoxFit.cover)
-          ),
-        alignment: Alignment.center,
-        child: Column(
+      decoration: BoxDecoration(
+          color: Colors.teal
+      ),
+      child: Column (
           children: [
-          Align(
-          alignment: Alignment.centerRight,
-          child: Padding(
-              padding: EdgeInsets.all(5.0),
-              child: ElevatedButton(
-                child: Text('Return'),
-                style: Style.returnButtonText,
-                onPressed: () {
-                  Navigator.of(context).push( //Navigateur vers widget
-                    MaterialPageRoute(builder: (context)=>
-                        ScreenDistriServLevel(difficulty),
-                    ),
-                  );
-                },
-              )
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: ElevatedButton(
+                    child: Text('Return'),
+                    style: Style.returnButtonText,
+                    onPressed: () {
+                      Navigator.of(context).push( //Navigateur vers widget
+                        MaterialPageRoute(builder: (context)=>
+                            ScreenDistriServLevel(difficulty),
+                        ),
+                      );
+                    },
+                  )
+              ),
             ),
-          )
-        ]
-      )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                    SizedBox(
+                      width : 65,
+                      height : 300,
+                      child : Expanded(
+                        child : ListView.separated(
+                                padding: const EdgeInsets.all(8),
+                                itemCount: data.gains.length,
+                                scrollDirection: Axis.vertical,
+                                shrinkWrap: true,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return SizedBox(
+                                    height : 50,
+                                    width : 50,
+                                    child : Draggable<double>(
+                                      data: data.gains[index],
+                                      child: Client(),
+                                      feedback : Client()
+                                    )
+                                  );
+                                },
+                                separatorBuilder: (BuildContext context, int index) => const Divider()
+                              )
+                      )
+                    )
+                  ]
+                ),
+            Text('Score ${score}',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
+          ]
+      ),
     );
   }
-}*/
 
-import 'package:flutter/material.dart';
-import 'dart:math';
-import 'package:flutter_prototype1/style.dart';
-import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServLevel.dart';
-
-class ScreenDistriServGame extends StatefulWidget {
-  String difficulty;
-  int level;
-  ScreenDistriServGame(String diff, int level) {
-    difficulty = diff;
-    print(difficulty);
+  Widget _buildDragTarget() {
+    return DragTarget<String>(
+      builder: (BuildContext context, List<String> incoming, List rejected) {
+        return Container(
+            decoration: BoxDecoration(
+              color: Colors.white70,
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
+              ),
+            ),
+            height: 50,
+            width: 50
+        );
+      },
+      onWillAccept: (data) => true,
+      onAccept: (data) {
+        setState(() {true;});
+      },
+      onLeave: (data) {},
+    );
   }
-  /*
-  @override
-  Widget build(BuildContext context) {
-    return ColorGame();
-  }
-  */
-
-  createState() => ScreenDistriServGameState(difficulty, level);
 }
 
+class Client extends StatelessWidget {
+  Client({Key key, this.gain}) : super(key: key);
+
+  final int gain;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.red,
+      child: Container(
+        alignment: Alignment.center,
+        height: 50,
+        width : 50,
+        padding: EdgeInsets.all(20),
+        child: Text(
+          '$gain',
+          style: TextStyle(color: Colors.black, fontSize: 10),
+        ),
+      ),
+    );
+  }
+}
+
+/*
 class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   String difficulty;
   int level;
@@ -97,9 +164,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          image: DecorationImage(
-              image: AssetImage("assets/images/backgrounds/city2.jpg"),
-              fit: BoxFit.cover)
+              color: Colors.teal
       ),
       child: Column (
           children: [
@@ -162,7 +227,17 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
             width: 200,
           );
         } else {
-          return Container(color: choices[emoji], height: 50, width: 200);
+          return Container(
+              decoration: BoxDecoration(
+                color: Colors.white70,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                ),
+              ),
+              height: 50,
+              width: 50
+          );
         }
       },
       onWillAccept: (data) => data == emoji,
@@ -197,3 +272,5 @@ class Emoji extends StatelessWidget {
     );
   }
 }
+*/
+
