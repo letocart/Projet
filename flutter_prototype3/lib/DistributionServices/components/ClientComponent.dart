@@ -1,4 +1,4 @@
-import 'package:flame/components/component.dart';
+/*import 'package:flame/components/component.dart';
 import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_prototype1/DistributionServices/DistriServGameFlame.dart';
@@ -26,4 +26,4 @@ class ClientComponent extends PositionComponent with Draggable{
   void render(Canvas c) {
     c.drawRect(rect, rectColor);
   }
-}
+}*/

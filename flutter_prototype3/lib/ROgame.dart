@@ -6,7 +6,6 @@ import 'package:flame/gestures.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_prototype1/ROgameUI.dart';
 import 'package:flutter_prototype1/view.dart';
-import 'package:flutter_prototype1/views/ecranTitre.dart';
 
 class ROgame extends Game with TapDetector{
   final ROgameUI roGameUi;
