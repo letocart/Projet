@@ -22,7 +22,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
       , 2, 5, [0, 100, 200, 300, 400]
       , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
 
-  int score;
+  int score = 0;
 
   ScreenDistriServGameState(String diff, int lvl) {
     difficulty = diff;
@@ -67,13 +67,14 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 itemBuilder: (BuildContext context, int index) {
+                                  print('data $index = ${data.gains[index]}');
                                   return SizedBox(
                                     height : 50,
                                     width : 50,
                                     child : Draggable<double>(
                                       data: data.gains[index],
-                                      child: Client(),
-                                      feedback : Client()
+                                      child: Client(data.gains[index].toInt()),
+                                      feedback : Client(data.gains[index].toInt())
                                     )
                                   );
                                 },
@@ -83,7 +84,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                     )
                   ]
                 ),
-            Text('Score ${score}',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
+            Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
           ]
       ),
     );
@@ -114,7 +115,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
 }
 
 class Client extends StatelessWidget {
-  Client({Key key, this.gain}) : super(key: key);
+  Client(this.gain);
 
   final int gain;
 
@@ -126,7 +127,6 @@ class Client extends StatelessWidget {
         alignment: Alignment.center,
         height: 50,
         width : 50,
-        padding: EdgeInsets.all(20),
         child: Text(
           '$gain',
           style: TextStyle(color: Colors.black, fontSize: 10),
