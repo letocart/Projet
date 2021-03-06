@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_prototype1/view/ScreenMenuPrincipal.dart';
 import 'package:flutter_prototype1/view/ScreenHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prototype1/ROgame.dart';
 import 'package:flutter_prototype1/view.dart';
 import 'package:flutter_prototype1/style.dart';
 
@@ -14,10 +14,8 @@ class ROgameUI extends StatefulWidget {
 
 class ROgameUIState extends State<ROgameUI> with WidgetsBindingObserver {
 
-  ROgame game;  //creation d'un game
   SharedPreferences _storage; //creation d'un storage
 
-  View currentScreen = View.ecranTitre; //creation d'une View, creant la vue d'ecran titre
 
   /* initialisation et recuperation de donnees stockees
   int score = 0;
@@ -50,19 +48,10 @@ class ROgameUIState extends State<ROgameUI> with WidgetsBindingObserver {
     setState(() {});
   }
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: IndexedStack(
-            sizing: StackFit.expand,
-            children: <Widget>[
-              ScreenHome(),
-              ScreenMenuPrincipal(),
-            ],
-            index: currentScreen.index, //affichage de l'ecran selon l'index
-          ),
-        ),
-      ],
-    );
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+    return ScreenHome();
   }
 }
