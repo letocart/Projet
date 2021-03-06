@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_prototype1/view/ScreenMenuPrincipal.dart';
 import 'package:flutter_prototype1/view/ScreenHome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_prototype1/view.dart';
-import 'package:flutter_prototype1/style.dart';
 
 // creation de la classe widget ROgameUI est un StatefulWidget (widget pouvant changer d'etat)
 class ROgameUI extends StatefulWidget {

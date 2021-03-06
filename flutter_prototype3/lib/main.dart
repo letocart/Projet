@@ -1,8 +1,5 @@
 // imports
-import 'package:flame/util.dart';
-import 'package:flame/flame.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgameUI.dart';
 

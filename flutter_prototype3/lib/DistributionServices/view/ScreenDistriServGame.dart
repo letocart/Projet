@@ -29,10 +29,63 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
     difficulty = diff;
     level = lvl;
   }
-
+  int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return /*Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        Draggable<int>(
+          // Data is the value this Draggable stores.
+          data: 10,
+          child: Container(
+            height: 100.0,
+            width: 100.0,
+            color: Colors.lightGreenAccent,
+            child: Center(
+              child: Text("Draggable"),
+            ),
+          ),
+          feedback: Container(
+            color: Colors.deepOrange,
+            height: 100,
+            width: 100,
+            child: Icon(Icons.directions_run),
+          ),
+          childWhenDragging: Container(
+            height: 100.0,
+            width: 100.0,
+            color: Colors.pinkAccent,
+            child: Center(
+              child: Text("Child When Dragging"),
+            ),
+          ),
+        ),
+        DragTarget(
+          builder: (
+              BuildContext context,
+              List<dynamic> accepted,
+              List<dynamic> rejected,
+              ) {
+            return Container(
+              height: 100.0,
+              width: 100.0,
+              color: Colors.cyan,
+              child: Center(
+                child: Text("Value is updated to: $acceptedData"),
+              ),
+            );
+          },
+          onAccept: (int data) {
+            print("J'ai tout casse");
+            setState(() {
+              acceptedData += data;
+            });
+          },
+        ),
+      ],
+    );*/
+    Container(
       decoration: BoxDecoration(
           color: Colors.teal
       ),
@@ -61,7 +114,9 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                 Container(
                   width : MediaQuery.of(context).size.width * 0.70,
                   height: MediaQuery.of(context).size.height * 0.75,
-                  child: _buildDragTarget(),
+                  child: Align(
+                    child : _buildDragTarget()
+                  )
                 ),
                 Container(
                   width : MediaQuery.of(context).size.width * 0.30,
@@ -78,11 +133,12 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                             //margin: EdgeInsets.only(right: (MediaQuery.of(context).size.width*0.3-50)/2, left: (MediaQuery.of(context).size.width*0.3-50)/2),
                             height : 50,
                             width : 50,
-                            child : Draggable<double>(
+                            child : Client_Draggable(data.gains[index].toInt())
+                            /*child : Draggable<double>(
                               data: data.gains[index],
                               child: Client(data.gains[index].toInt()),
                               feedback : Client(data.gains[index].toInt())
-                            )
+                            )*/
                           )
                       );
                     })
@@ -97,17 +153,14 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   }
 
   Widget _buildDragTarget() {
-    return DragTarget<Client>(
-      builder: (BuildContext context, List<Client> incoming, List rejected) {
+    return DragTarget<int>(
+      builder: (BuildContext context, List<int> incoming, List rejected) {
+        print(incoming.length);
         if(successfulDrop == true){
           return Container(
-            alignment: Alignment.center,
-            height: 50,
-            width : 50,
-            child: Text(
-              '$incoming.gain',
-              style: TextStyle(color: Colors.black, fontSize: 10),
-            )
+              color: Colors.red,
+              height: 50,
+              width: 50
           );
         } else {
           return Container(
@@ -123,19 +176,53 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
           );
         }
       },
-      onWillAccept: (data) => true ,
+      onWillAccept: (data){
+        print("OnWillAccept");
+        return true;
+      },
       onAccept: (data) {
+        print("Accept");
         setState(() {
           successfulDrop = true;
         });
       },
-      onLeave: (data) {},
+      onLeave: (data) {
+        print("Not accept");
+      },
     );
   }
 }
 
-class Client extends StatelessWidget {
-  Client(this.gain);
+class Client_Draggable extends StatelessWidget {
+  Client_Draggable(this.gain);
+
+  final int gain;
+
+  @override
+  Widget build(BuildContext context) {
+    return Draggable<int>(
+        data: gain,
+        child: Client_Icon(gain),
+        feedback : Client_Icon(gain),
+        childWhenDragging: Container()
+    );
+    /*Material(
+      color: Colors.red,
+      child: Container(
+        alignment: Alignment.center,
+        height: 50,
+        width : 50,
+        child: Text(
+          '$gain',
+          style: TextStyle(color: Colors.black, fontSize: 10),
+        ),
+      ),
+    );*/
+  }
+}
+
+class Client_Icon extends StatelessWidget {
+  Client_Icon(this.gain);
 
   final int gain;
 
@@ -155,142 +242,4 @@ class Client extends StatelessWidget {
     );
   }
 }
-
-/*
-class ScreenDistriServGameState extends State<ScreenDistriServGame> {
-  String difficulty;
-  int level;
-  ScreenDistriServGameState(String diff, int level) {
-    difficulty = diff;
-    print(difficulty);
-  }
-  /// Map to keep track of score
-  final Map<String, bool> score = {};
-
-  /// Choices for game
-  final Map choices = {
-    '🍏': Colors.green,
-    '🍋': Colors.yellow,
-    '🍅': Colors.red,
-    '🍇': Colors.purple,
-    '🥥': Colors.brown,
-    '🥕': Colors.orange
-  };
-
-  // Random seed to shuffle order of items.
-  int seed = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-              color: Colors.teal
-      ),
-      child: Column (
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: ElevatedButton(
-                    child: Text('Return'),
-                    style: Style.returnButtonText,
-                    onPressed: () {
-                      Navigator.of(context).push( //Navigateur vers widget
-                        MaterialPageRoute(builder: (context)=>
-                            ScreenDistriServLevel(difficulty),
-                        ),
-                      );
-                    },
-                  )
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children:
-                        choices.keys.map((emoji) => _buildDragTarget(emoji)).toList()
-                          ..shuffle(Random(seed)),
-                      ),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: choices.keys.map((emoji) {
-                      return Draggable<String>(
-                        data: emoji,
-                        child: Emoji(emoji: score[emoji] == true ? '✅' : emoji),
-                        feedback: Emoji(emoji: emoji),
-                        childWhenDragging: Emoji(emoji: '🌱'),
-                      );
-                    }).toList()),
-              ],
-            ),
-            Text('Score ${score.length}',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
-
-          ]
-      ),
-    );
-  }
-
-  Widget _buildDragTarget(emoji) {
-    return DragTarget<String>(
-      builder: (BuildContext context, List<String> incoming, List rejected) {
-        if (score[emoji] == true) {
-          return Container(
-            color: Colors.white,
-            child: Text('Correct!',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none)),
-            alignment: Alignment.center,
-            height: 50,
-            width: 200,
-          );
-        } else {
-          return Container(
-              decoration: BoxDecoration(
-                color: Colors.white70,
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1,
-                ),
-              ),
-              height: 50,
-              width: 50
-          );
-        }
-      },
-      onWillAccept: (data) => data == emoji,
-      onAccept: (data) {
-        setState(() {
-          score[emoji] = true;
-        });
-      },
-      onLeave: (data) {},
-    );
-  }
-}
-
-class Emoji extends StatelessWidget {
-  Emoji({Key key, this.emoji}) : super(key: key);
-
-  final String emoji;
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: Container(
-        alignment: Alignment.center,
-        height: 50,
-        padding: EdgeInsets.all(10),
-        child: Text(
-          emoji,
-          style: TextStyle(color: Colors.black, fontSize: 50),
-        ),
-      ),
-    );
-  }
-}
-*/
 
