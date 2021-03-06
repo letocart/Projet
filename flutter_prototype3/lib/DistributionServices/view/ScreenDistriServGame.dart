@@ -17,6 +17,7 @@ class ScreenDistriServGame extends StatefulWidget {
 class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   String difficulty;
   int level;
+  bool successfulDrop = false;
 
   final DistributionServicesData data = new DistributionServicesData(300
       , 2, 5, [0, 100, 200, 300, 400]
@@ -57,33 +58,38 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                    SizedBox(
-                      width : 65,
-                      height : 300,
-                      child : Expanded(
-                        child : ListView.separated(
-                                padding: const EdgeInsets.all(8),
-                                itemCount: data.gains.length,
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                itemBuilder: (BuildContext context, int index) {
-                                  print('data $index = ${data.gains[index]}');
-                                  return SizedBox(
-                                    height : 50,
-                                    width : 50,
-                                    child : Draggable<double>(
-                                      data: data.gains[index],
-                                      child: Client(data.gains[index].toInt()),
-                                      feedback : Client(data.gains[index].toInt())
-                                    )
-                                  );
-                                },
-                                separatorBuilder: (BuildContext context, int index) => const Divider()
-                              )
-                      )
-                    )
-                  ]
+                Container(
+                  width : MediaQuery.of(context).size.width * 0.70,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: _buildDragTarget(),
                 ),
+                Container(
+                  width : MediaQuery.of(context).size.width * 0.30,
+                  height: MediaQuery.of(context).size.height * 0.75,
+                  child: GridView.count(
+                    padding: const EdgeInsets.all(8),
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 20,
+                    crossAxisCount: 3,
+                    children: List.generate(data.gains.length, (index) {
+                      return Align(
+                          alignment: Alignment.topLeft,
+                          child: Container(
+                            //margin: EdgeInsets.only(right: (MediaQuery.of(context).size.width*0.3-50)/2, left: (MediaQuery.of(context).size.width*0.3-50)/2),
+                            height : 50,
+                            width : 50,
+                            child : Draggable<double>(
+                              data: data.gains[index],
+                              child: Client(data.gains[index].toInt()),
+                              feedback : Client(data.gains[index].toInt())
+                            )
+                          )
+                      );
+                    })
+                  ),
+                )
+              ]
+            ),
             Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
           ]
       ),
@@ -91,9 +97,20 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   }
 
   Widget _buildDragTarget() {
-    return DragTarget<String>(
-      builder: (BuildContext context, List<String> incoming, List rejected) {
-        return Container(
+    return DragTarget<Client>(
+      builder: (BuildContext context, List<Client> incoming, List rejected) {
+        if(successfulDrop == true){
+          return Container(
+            alignment: Alignment.center,
+            height: 50,
+            width : 50,
+            child: Text(
+              '$incoming.gain',
+              style: TextStyle(color: Colors.black, fontSize: 10),
+            )
+          );
+        } else {
+          return Container(
             decoration: BoxDecoration(
               color: Colors.white70,
               border: Border.all(
@@ -103,11 +120,14 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
             ),
             height: 50,
             width: 50
-        );
+          );
+        }
       },
-      onWillAccept: (data) => true,
+      onWillAccept: (data) => true ,
       onAccept: (data) {
-        setState(() {true;});
+        setState(() {
+          successfulDrop = true;
+        });
       },
       onLeave: (data) {},
     );

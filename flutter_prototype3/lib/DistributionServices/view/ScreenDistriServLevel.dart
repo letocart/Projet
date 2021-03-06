@@ -59,16 +59,16 @@ class ScreenDistriServLevel extends StatelessWidget {
                       // Generate nombreNiveau widgets that display their index in the List.
                       children: List.generate(nombreNiveau, (index) {
                         return ElevatedButton(
-                            child: Text('${index+1}'),
-                            style: Style.buttonText,
-                            onPressed: () {
-                              Navigator.of(context).push( //Navigateur vers widget
+                          child: Text('${index+1}'),
+                          style: Style.buttonText,
+                          onPressed: () {
+                            Navigator.of(context).push( //Navigateur vers widget
                               MaterialPageRoute(builder: (context)=>
                               ScreenDistriServGame(difficulty, index+1),
                               ),
-                              );
-                              print("Start Game ${index+1} pressed");
-                            },
+                            );
+                            print("Start Game ${index+1} pressed");
+                          },
                         );
                       })
                   )
