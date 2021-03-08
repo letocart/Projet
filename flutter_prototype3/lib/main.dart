@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_prototype1/ROgameUI.dart';
 
-import 'DIstributionServices/test/tests_unitaires.dart';
+import 'DIstributionServices/test/DistributionServicesTestsUnitaires.dart';
 
 // main async pour flame
 void main() async {
