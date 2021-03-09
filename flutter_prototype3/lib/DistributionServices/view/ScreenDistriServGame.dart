@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_prototype1/style.dart';
 import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServLevel.dart';
 import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DistributionServices/model/DistributionServicesModel.dart';
 
 class ScreenDistriServGame extends StatefulWidget {
   String difficulty;
@@ -23,6 +24,10 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
       , 2, 5, [0, 100, 200, 300, 400]
       , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
 
+  ClientList draggableList = new ClientList(new DistributionServicesModel.fromDSD(new DistributionServicesData(300
+      , 2, 5, [0, 100, 200, 300, 400]
+      , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8])));
+
   int score = 0;
 
   ScreenDistriServGameState(String diff, int lvl) {
@@ -32,60 +37,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
-    return /*Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        Draggable<int>(
-          // Data is the value this Draggable stores.
-          data: 10,
-          child: Container(
-            height: 100.0,
-            width: 100.0,
-            color: Colors.lightGreenAccent,
-            child: Center(
-              child: Text("Draggable"),
-            ),
-          ),
-          feedback: Container(
-            color: Colors.deepOrange,
-            height: 100,
-            width: 100,
-            child: Icon(Icons.directions_run),
-          ),
-          childWhenDragging: Container(
-            height: 100.0,
-            width: 100.0,
-            color: Colors.pinkAccent,
-            child: Center(
-              child: Text("Child When Dragging"),
-            ),
-          ),
-        ),
-        DragTarget(
-          builder: (
-              BuildContext context,
-              List<dynamic> accepted,
-              List<dynamic> rejected,
-              ) {
-            return Container(
-              height: 100.0,
-              width: 100.0,
-              color: Colors.cyan,
-              child: Center(
-                child: Text("Value is updated to: $acceptedData"),
-              ),
-            );
-          },
-          onAccept: (int data) {
-            print("J'ai tout casse");
-            setState(() {
-              acceptedData += data;
-            });
-          },
-        ),
-      ],
-    );*/
-    Container(
+    return Container(
       decoration: BoxDecoration(
           color: Colors.teal
       ),
@@ -109,42 +61,36 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
               ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width : MediaQuery.of(context).size.width * 0.70,
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  child: Align(
-                    child : _buildDragTarget()
-                  )
-                ),
-                Container(
-                  width : MediaQuery.of(context).size.width * 0.30,
-                  height: MediaQuery.of(context).size.height * 0.75,
-                  child: GridView.count(
-                    padding: const EdgeInsets.all(8),
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    crossAxisCount: 3,
-                    children: List.generate(data.gains.length, (index) {
-                      return Align(
-                          alignment: Alignment.topLeft,
-                          child: Container(
-                            //margin: EdgeInsets.only(right: (MediaQuery.of(context).size.width*0.3-50)/2, left: (MediaQuery.of(context).size.width*0.3-50)/2),
-                            height : 50,
-                            width : 50,
-                            child : Client_Draggable(data.gains[index].toInt())
-                            /*child : Draggable<double>(
-                              data: data.gains[index],
-                              child: Client(data.gains[index].toInt()),
-                              feedback : Client(data.gains[index].toInt())
-                            )*/
-                          )
-                      );
-                    })
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Container(
+                      width : MediaQuery.of(context).size.width * 0.70,
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      child: Align(
+                          child : _buildDragTarget()
+                      )
                   ),
-                )
-              ]
+                  Container(
+                      width : MediaQuery.of(context).size.width * 0.30,
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      child: GridView.count(
+                          padding: const EdgeInsets.all(8),
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 20,
+                          crossAxisCount: 3,
+                          children: List.generate(draggableList.clients.length, (index) {
+                            return Align(
+                                alignment: Alignment.topLeft,
+                                child: Container(
+                                    height : 50,
+                                    width : 50,
+                                    child : draggableList.clients[index]
+                                )
+                            );
+                          })
+                      )
+                  ),
+                ]
             ),
             Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
           ]
@@ -153,8 +99,8 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
   }
 
   Widget _buildDragTarget() {
-    return DragTarget<int>(
-      builder: (BuildContext context, List<int> incoming, List rejected) {
+    return DragTarget<Client>(
+      builder: (BuildContext context, List<Client> incoming, List rejected) {
         print(incoming.length);
         if(successfulDrop == true){
           return Container(
@@ -164,15 +110,15 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
           );
         } else {
           return Container(
-            decoration: BoxDecoration(
-              color: Colors.white70,
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
+              decoration: BoxDecoration(
+                color: Colors.white70,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                ),
               ),
-            ),
-            height: 50,
-            width: 50
+              height: 50,
+              width: 50
           );
         }
       },
@@ -181,9 +127,12 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
         return true;
       },
       onAccept: (data) {
-        print("Accept");
+        print("Accept $data");
         setState(() {
           successfulDrop = true;
+          //assign_client_to_immeuble(int i, int j)
+          draggableList.model.clients.remove(data);
+          draggableList.actualiserClientDraggable();
         });
       },
       onLeave: (data) {
@@ -194,30 +143,18 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
 }
 
 class Client_Draggable extends StatelessWidget {
-  Client_Draggable(this.gain);
+  Client_Draggable(this.client);
 
-  final int gain;
+  final Client client;
 
   @override
   Widget build(BuildContext context) {
-    return Draggable<int>(
-        data: gain,
-        child: Client_Icon(gain),
-        feedback : Client_Icon(gain),
+    return Draggable<Client>(
+        data: client,
+        child: Client_Icon(client.gain.toInt()),
+        feedback : Client_Icon(client.gain.toInt()),
         childWhenDragging: Container()
     );
-    /*Material(
-      color: Colors.red,
-      child: Container(
-        alignment: Alignment.center,
-        height: 50,
-        width : 50,
-        child: Text(
-          '$gain',
-          style: TextStyle(color: Colors.black, fontSize: 10),
-        ),
-      ),
-    );*/
   }
 }
 
@@ -243,3 +180,19 @@ class Client_Icon extends StatelessWidget {
   }
 }
 
+class ClientList{
+  DistributionServicesModel model;
+  List<Client_Draggable> clients;
+
+  ClientList(this.model)
+  {
+    actualiserClientDraggable();
+  }
+
+  actualiserClientDraggable()
+  {
+    clients = List<Client_Draggable>.generate(model.clients.length, (index) {
+      return Client_Draggable(model.clients[index]);
+    });
+  }
+}

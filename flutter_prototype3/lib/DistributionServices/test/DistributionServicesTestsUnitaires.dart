@@ -2,9 +2,9 @@
 
 // classe DistributionServicesModel
 import 'package:collection/collection.dart';
-import 'package:flutter_prototype1/DIstributionServices/controller/DistributionServiceController.dart';
-import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
-import 'package:flutter_prototype1/DIstributionServices/model/DistributionServicesModel.dart';
+import 'package:flutter_prototype1/DistributionServices/controller/DistributionServiceController.dart';
+import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DistributionServices/model/DistributionServicesModel.dart';
 
 // classe DistributionsServicesData
 assert_DSD()

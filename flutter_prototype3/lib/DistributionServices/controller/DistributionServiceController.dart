@@ -1,8 +1,8 @@
 
 // import
 
-import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
-import 'package:flutter_prototype1/DIstributionServices/model/DistributionServicesModel.dart';
+import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DistributionServices/model/DistributionServicesModel.dart';
 
 class DistributionServicesController {
 

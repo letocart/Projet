@@ -1,6 +1,5 @@
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_prototype1/DIstributionServices/data/DistributionServicesData.dart';
+import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
 
 // classe gerant le modele d'un niveau du jeu de "DistributionServices"
 class DistributionServicesModel {
