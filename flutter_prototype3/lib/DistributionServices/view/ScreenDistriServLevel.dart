@@ -7,7 +7,7 @@ import 'ScreenDistriServStage.dart';
 
 class ScreenDistriServLevel extends StatelessWidget {
   String difficulty;
-  final int nombreNiveau = 5;
+  final int numberOfLevel = 5;
 
   ScreenDistriServLevel(String diff) {
     difficulty = diff;
@@ -57,7 +57,7 @@ class ScreenDistriServLevel extends StatelessWidget {
                       // horizontal, this produces 8 rows.
                       crossAxisCount: 6,
                       // Generate nombreNiveau widgets that display their index in the List.
-                      children: List.generate(nombreNiveau, (index) {
+                      children: List.generate(numberOfLevel, (index) {
                         return ElevatedButton(
                           child: Text('${index+1}'),
                           style: Style.buttonText,
