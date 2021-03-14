@@ -25,7 +25,16 @@ class DistributionServicesController {
     this.DSD = DSD;
   }
 
+  DistributionServicesController.fromIndex(String difficulty, int level)
+  {
+    //create DSD and DSM from DatabaseManager
 
+    //to replace
+    this.DSD = new DistributionServicesData(300
+        , 2, 5, [0, 100, 200, 300, 400]
+        , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
+    this.DSM = DistributionServicesModel.fromDSD(this.DSD);
+  }
 
   DistributionServicesData get DSD => _DSD;
   set DSD(DistributionServicesData value) {
@@ -36,4 +45,7 @@ class DistributionServicesController {
   set DSM(DistributionServicesModel value) {
     _DSM = value;
   }
+
+
+
 }

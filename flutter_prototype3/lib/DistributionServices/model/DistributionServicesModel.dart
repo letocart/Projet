@@ -40,7 +40,7 @@ class DistributionServicesModel {
     List<Client> clients = [];
     for(int i = 0; i < DSD.gains.length;i++)
     {
-      clients.add(Client(DSD.gains[i],DSD.nbs_etages[i]));
+      clients.add(Client(i,DSD.gains[i],DSD.nbs_etages[i]));
     }
     assert(clients.length==DSD.gains.length);
     var result = new DistributionServicesModel(
@@ -75,6 +75,18 @@ class DistributionServicesModel {
   void unassign_client(int i)
   {
     assign_client_to_immeuble(i, 0);
+  }
+
+  List<int> get_clients_indexes_in_immeuble(int immeuble_index)
+  {
+    List<int> result = [];
+    for(int i =0;i<this.clients.length;i++)
+    {
+      if(this.A[i][immeuble_index]==true)
+        result.add(i);
+    }
+    return result;
+
   }
 
   void update_score()
@@ -185,12 +197,14 @@ class Immeubles {
 
 // classe contenant les informations par rapport a un client
 class Client {
+  int _index;
   double _gain;  //quantite d'argent gagne par le service du client
   int _nb_etages;
 
 
-  Client(double gain,int nb_etages)
+  Client(int index,double gain,int nb_etages)
   {
+    this.index = index;
     this.gain = gain;
     this.nb_etages = nb_etages;
   }
@@ -198,8 +212,15 @@ class Client {
   @override
   bool operator ==(other) =>
       other is Client
+          && (other.index==this.index)
           && (other.gain==this.gain)
           && (other.nb_etages==this.nb_etages);
+
+  int get index => _index;
+
+  set index(int value) {
+    _index = value;
+  }
 
   double get gain => _gain;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_prototype1/DistributionServices/controller/DistributionServiceController.dart';
 import 'package:flutter_prototype1/style.dart';
 import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServLevel.dart';
 import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
@@ -7,33 +8,37 @@ import 'package:flutter_prototype1/DistributionServices/model/DistributionServic
 class ScreenDistriServGame extends StatefulWidget {
   String difficulty;
   int level;
+  DistributionServicesController DSC;
   ScreenDistriServGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
+    DSC = new DistributionServicesController.fromIndex(difficulty, level);
   }
-
-  createState() => ScreenDistriServGameState(difficulty, level);
+  createState() => ScreenDistriServGameState(difficulty,level,DSC);
 }
 
 class ScreenDistriServGameState extends State<ScreenDistriServGame> {
+
   String difficulty;
   int level;
+  DistributionServicesController DSC;
   bool successfulDrop = false;
 
+  /*
   final DistributionServicesData data = new DistributionServicesData(300
       , 2, 5, [0, 100, 200, 300, 400]
       , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
-
+*/
+/*
   ClientList draggableList = new ClientList(new DistributionServicesModel.fromDSD(new DistributionServicesData(300
       , 2, 5, [0, 100, 200, 300, 400]
       , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8])));
+*/
 
   int score = 0;
 
-  ScreenDistriServGameState(String diff, int lvl) {
-    difficulty = diff;
-    level = lvl;
-  }
+  ScreenDistriServGameState(this.difficulty,this.level,this.DSC);
+
   int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
@@ -78,13 +83,13 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                           crossAxisSpacing: 20,
                           mainAxisSpacing: 20,
                           crossAxisCount: 3,
-                          children: List.generate(draggableList.clients.length, (index) {
+                          children: List.generate(DSC.DSM.get_clients_indexes_in_immeuble(0).length, (index) {
                             return Align(
                                 alignment: Alignment.topLeft,
                                 child: Container(
                                     height : 50,
                                     width : 50,
-                                    child : draggableList.clients[index]
+                                    child : Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
                                 )
                             );
                           })
@@ -131,8 +136,9 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
         setState(() {
           successfulDrop = true;
           //assign_client_to_immeuble(int i, int j)
-          draggableList.model.clients.remove(data);
-          draggableList.actualiserClientDraggable();
+          DSC.DSM.assign_client_to_immeuble(data.index,1);
+          //draggableList.model.clients.remove(data);
+          //draggableList.actualiserClientDraggable();
         });
       },
       onLeave: (data) {

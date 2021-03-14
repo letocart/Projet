@@ -26,10 +26,12 @@ assert_DSD()
 void assert_DSM(){
 
   //test de creation et modification de clients
-  Client c1 = new Client(150,2);
-  Client c2 = new Client(300,3);
+  Client c1 = new Client(1,150,2);
+  Client c2 = new Client(2,300,3);
+  assert(c1.index==1);
   assert(c1.gain==150);
   assert(c1.nb_etages==2);
+  assert(c2.index==2);
   assert(c2.gain==300);
   assert(c2.nb_etages==3);
   c1.gain = 100;
@@ -95,8 +97,8 @@ void assert_DSM(){
   assert(DSM.valeur_solution==200);
   assert(DSM.immeubles==Immeubles(2, 5, [50, 50, 100, 100, 100]));
   clients = [];
-  clients.add(Client(200,2));
-  clients.add(Client(300,3));
+  clients.add(Client(0,200,2));
+  clients.add(Client(1,300,3));
   assert(ListEquality().equals(DSM.clients,clients));
   assert(DSM.A.length==DSM.clients.length);
   assert(DSM.A[0].length==DSM.immeubles.nombre_immeubles+1);
