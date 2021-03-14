@@ -42,7 +42,7 @@ class ScreenDistriServLevel extends StatelessWidget {
                     )
                 ),
               ),
-              Text('Choose a difficulty', style: TextStyle(
+              Text('Choose a level', style: TextStyle(
                   fontSize: 18,
                   color: Colors.black,
                   fontWeight: FontWeight.bold,

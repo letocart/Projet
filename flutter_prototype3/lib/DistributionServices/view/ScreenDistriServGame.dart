@@ -107,7 +107,25 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
     return DragTarget<Client>(
       builder: (BuildContext context, List<Client> incoming, List rejected) {
         print(incoming.length);
-        if(successfulDrop == true){
+        return Container(
+            decoration: BoxDecoration(
+              color: Colors.white70,
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
+              ),
+            ),
+            height: 300,
+            width: 50,
+            child : ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: DSC.DSM.get_clients_indexes_in_immeuble(0).length,
+              itemBuilder: (BuildContext context, int index) {
+                return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]]);
+              }
+            )
+        );
+        /*if(successfulDrop == true){
           return Container(
               color: Colors.red,
               height: 50,
@@ -125,7 +143,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
               height: 50,
               width: 50
           );
-        }
+        }*/
       },
       onWillAccept: (data){
         print("OnWillAccept");
@@ -135,10 +153,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
         print("Accept $data");
         setState(() {
           successfulDrop = true;
-          //assign_client_to_immeuble(int i, int j)
           DSC.DSM.assign_client_to_immeuble(data.index,1);
-          //draggableList.model.clients.remove(data);
-          //draggableList.actualiserClientDraggable();
         });
       },
       onLeave: (data) {
