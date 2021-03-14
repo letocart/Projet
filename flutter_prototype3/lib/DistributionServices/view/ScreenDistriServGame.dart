@@ -118,10 +118,9 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
             height: 300,
             width: 50,
             child : ListView.builder(
-              padding: const EdgeInsets.all(8),
-              itemCount: DSC.DSM.get_clients_indexes_in_immeuble(0).length,
+              itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
               itemBuilder: (BuildContext context, int index) {
-                return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]]);
+                return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
               }
             )
         );
