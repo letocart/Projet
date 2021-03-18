@@ -132,21 +132,21 @@ void assert_DSM(){
 
   // test update score + %solution
   assert(DSM.score==0);
-  assert(DSM.pourcentage_solution()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
-  DSM.update_score();
+  assert(DSM.solutionPercentage()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
+  DSM.updateScore();
   assert(DSM.score==100);
-  assert(DSM.pourcentage_solution()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
+  assert(DSM.solutionPercentage()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
 
   DSM.assignClientToBuilding(1, 1);
   DSM.assignClientToBuilding(0, 2);
-  DSM.update_score();
+  DSM.updateScore();
   assert(DSM.score==200);
-  assert(DSM.pourcentage_solution()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
-  assert(DSM.pourcentage_solution()==100);
+  assert(DSM.solutionPercentage()==((DSM.score+pire)/(DSM.SolutionValue+pire)*100).floor());
+  assert(DSM.solutionPercentage()==100);
 
-  DSM.unassign_client(0);
-  DSM.unassign_client(1);
-  DSM.update_score();
+  DSM.unassignClient(0);
+  DSM.unassignClient(1);
+  DSM.updateScore();
   //print(DSM.A);
   //print(DSM.score);
   assert(DSM.score==0);

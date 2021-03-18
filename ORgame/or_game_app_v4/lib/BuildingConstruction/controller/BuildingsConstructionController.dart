@@ -45,6 +45,28 @@ class BuildingConstructionController {
     _DSM = value;
   }
 
+  // get the indexes of the clients in a specified building (used in the view)
+  List<int> getClientsIndexesInBuilding(int buildingIndex)
+  {
+    List<int> result = [];
+    for(int i =0;i<this.getClients.length;i++)
+    {
+      if(this.getStateOfGame[i][buildingIndex]==true)
+        result.add(i);
+    }
+    return result;
+  }
 
+  // get the number of clients in a specified building (used in the view)
+  int getNumberOfClientsInBuilding(int buildingIndex)
+  {
+    int nb = 0;
+    for(int i =0;i<this.getClients.length;i++)
+    {
+      if(this.getStateOfGame[i][buildingIndex]==true)
+        nb++;
+    }
+    return nb;
+  }
 
 }

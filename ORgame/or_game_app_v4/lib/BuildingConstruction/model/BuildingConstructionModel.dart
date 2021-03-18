@@ -66,90 +66,73 @@ class BuildingConstructionModel {
   // assign client i to building j in the stateOfGame matrix
   void assignClientToBuilding(int i, int j)
   {
-    // checking
+    // checking coherence
     assert(i>=0 && i<this.getClients.length);
     assert(j>=0 && j<=this.getDescriptionOfBuildings.getNumberOfBuildings);
-    // enleve l'assignement a d'autres immeubles
-    for(int col=0;col<=this.getDescriptionOfBuildings.getNumberOfBuildings;col++) //ATTENTION <= pas < (car on a 1 immeuble en +, l'immeuble 0 qui represente le non assignement)
-        {
+    // unassign the client from any building
+    // WARNING <= for the condition and not < because the building 0 represents the fact of not being assigned to a building
+    for(int col=0;col<=this.getDescriptionOfBuildings.getNumberOfBuildings;col++)
+    {
       this.getStateOfGame[i][col] = false;
     }
+    // assign the client to the building j
     this.getStateOfGame[i][j] = true;
   }
 
-  // de-assigne un client (le remet dans la colonne 0)
-  void unassign_client(int i)
+  // unassign a client - assign him to the building 0
+  void unassignClient(int i)
   {
     assignClientToBuilding(i, 0);
   }
 
-  List<int> get_clients_indexes_in_immeuble(int immeuble_index)
-  {
-    List<int> result = [];
-    for(int i =0;i<this.getClients.length;i++)
-    {
-      if(this.getStateOfGame[i][immeuble_index]==true)
-        result.add(i);
-    }
-    return result;
-  }
-
-  int nb_client_in(int immeuble)
-  {
-    int nb = 0;
-    for(int i =0;i<this.getClients.length;i++)
-    {
-      if(this.getStateOfGame[i][immeuble]==true)
-        nb++;
-    }
-    return nb;
-  }
-
-  void update_score()
+  //update the score according to the clients assignment
+  void updateScore()
   {
     this.score = 0;
-    int hauteur;
-    //pour chaque immeuble
-    for(int j=1; j<this.getDescriptionOfBuildings.getNumberOfBuildings+1;j++)
+    int height;
+    //for each building from 1 to the number of Buildings /!\ careful <= not <
+    for(int j=1; j<=this.getDescriptionOfBuildings.getNumberOfBuildings;j++)
     {
-      hauteur = -1;
-      // pour chaque client
+      height = -1;
+      // for each client
       for(int i=0;i<this.getClients.length;i++)
       {
-        if(this.getStateOfGame[i][j]==true) // si le client est assignee on modifie le score
-            {
+        // if the client is assigned we modify the score
+        if(this.getStateOfGame[i][j]==true)
+        {
           this.score = this.getScore + this.getClients[i].getEarning;
-          hauteur+= this.getClients[i].getRequestOfFloors; // on modifie la hauteur de l'immeuble
+          height+= this.getClients[i].getRequestOfFloors; // we calculate the height of the current building by adding the request
         }
       }
 
-      for(int k=0;k<=hauteur;k++) // selon la hauteur de l'immeuble on modifie le score
+      for(int k=0;k<=height;k++) // according to the height we modify the score
         this.score = this.getScore - this.getDescriptionOfBuildings.getPricesOfFloors[k];
-      assert(hauteur<=this.getDescriptionOfBuildings.getMaxHeight);
+      // assert to check the coherence between the datas
+      assert(height<=this.getDescriptionOfBuildings.getMaxHeight);
     }
   }
 
-  // methode de calcul du pourcentage de reussite par rapport a la valeur solution
-  int pourcentage_solution()
+  // calculate the percentage of the solution
+  int solutionPercentage()
   {
-    // comme on peut avoir des scores negatifs, on fait un changement de valeur de score pour le calcul du pourcentage
-    // on decale le tout du minimum, qui est le prix d'un immeuble entier multiplie par le nombre d'immeuble+1
-    // (+1 pour eviter dans le pire cas d'instance avec une division par 0)
-    double pire =0;
-    for(double prix in this.getDescriptionOfBuildings.getPricesOfFloors)
+    // since we can have negative score we go a change of scale so that we only deal with positive values
+    // we shift the minimum of the score by (the maximum price of a full building without earnings)+1
+    // (+1 to avoid worst case instance scenario and a division by 0)
+    double worst =0;
+    for(double price in this.getDescriptionOfBuildings.getPricesOfFloors)
     {
-      pire += prix;
+      worst += price;
     }
-    pire = (pire*this.getDescriptionOfBuildings.getNumberOfBuildings)+1;
-
-    return ((this.getScore+pire)/(this.getSolutionValue+pire)*100).floor();
+    worst = (worst*this.getDescriptionOfBuildings.getNumberOfBuildings)+1;
+    return ((this.getScore+worst)/(this.getSolutionValue+worst)*100).floor();
   }
 
+
+  //getters and setters
   double get getSolutionValue => _solutionValue;
   set solutionValue(double value) {
     _solutionValue = value;
-  } //score actuel du jeu
-
+  }
 
   DescriptionOfBuildings get getDescriptionOfBuildings => _descriptionOfBuildings;
   set descriptionOfBuildings(DescriptionOfBuildings value) {
@@ -170,7 +153,7 @@ class BuildingConstructionModel {
   set score(double value) {
     _score = value;
   }
-/*
+/* print of test
   void print_clients(int immeuble)
   {
     print("Liste des clients dans l'immeuble $immeuble");
@@ -182,19 +165,16 @@ class BuildingConstructionModel {
 */
 }
 
-// classe contenant les informations par rapport aux emplacement d'immeubles
+// class containing information about the buildings' slot
 class DescriptionOfBuildings {
-  int _numberOfBuildings; //nombre d'immeubles au total
-  int _maxHeight;      // hauteur maximale de l'immeuble
-  List<double> _pricesOfFloors;
+  int _numberOfBuildings; // total number of buildings
+  int _maxHeight;         // max height of the buildings
+  List<double> _pricesOfFloors; // list of the prices of each floor
 
+  // basic constructor
+  DescriptionOfBuildings(this._numberOfBuildings,this._maxHeight,this._pricesOfFloors);
 
-  DescriptionOfBuildings(int nb_imm,int h_max,List<double> pr_et){
-    this.numberOfBuildings = nb_imm;
-    this.maxHeight = h_max;
-    this.pricesOfFloors = pr_et;
-  }
-
+  // overriding == operator
   @override
   bool operator ==(other) =>
       other is DescriptionOfBuildings
@@ -202,6 +182,7 @@ class DescriptionOfBuildings {
           && (other.getMaxHeight==this.getMaxHeight)
           && (ListEquality().equals(other.getPricesOfFloors,this.getPricesOfFloors));
 
+  // getters and setters
   int get getNumberOfBuildings => _numberOfBuildings;
   set numberOfBuildings(int value) {
     _numberOfBuildings = value;
@@ -218,20 +199,15 @@ class DescriptionOfBuildings {
   }
 }
 
-// classe contenant les informations par rapport a un client
+// class containing information about clients' requests
 class Client {
-  int _index;
-  double _earning;  //quantite d'argent gagne par le service du client
-  int _requestOfFloors;
+  int _index;           // each client has an index, from 0 to the number of clients, necessary for the view
+  double _earning;      // amount of money given by the client if the request is granted
+  int _requestOfFloors; // number of floors requested
 
+  Client(this._index,this._earning,this._requestOfFloors);
 
-  Client(int index,double gain,int nb_etages)
-  {
-    this.index = index;
-    this.earning = gain;
-    this.requestOfFloors = nb_etages;
-  }
-  //overload de l'operateur de comparaison ==
+  //overriding == operator
   @override
   bool operator ==(other) =>
       other is Client
@@ -239,6 +215,7 @@ class Client {
           && (other.getEarning==this.getEarning)
           && (other.getRequestOfFloors==this.getRequestOfFloors);
 
+  // getters and setters
   int get getIndex => _index;
   set index(int value) {
     _index = value;

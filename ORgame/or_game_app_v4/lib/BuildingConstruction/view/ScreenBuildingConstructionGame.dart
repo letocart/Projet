@@ -56,11 +56,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                       mainAxisSpacing: 1.0,
                       crossAxisCount: 3,
                       staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].requestOfFloors),
-                      itemCount: DSC.DSM.nb_client_in(0),
+                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(0))[index]].requestOfFloors),
+                      itemCount: DSC.DSM.getNumberOfClientsInBuilding(0),
                       itemBuilder: (BuildContext context, int index) =>
                           Align(
-                              child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
+                              child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(0))[index]])
                           ),
                     )
                 ),
@@ -168,9 +168,9 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
             height: 300,
             width: 50,
             child : ListView.builder(
-                itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
+                itemCount: DSC.DSM.getClientsIndexesInBuilding(1).length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
+                  return Client_Draggable(DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(1))[index]]);
                 }
             )
         );
