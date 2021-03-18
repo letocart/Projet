@@ -2,7 +2,7 @@
 
 import 'package:collection/collection.dart';
 
-class DistributionServicesData
+class BuildingConstructionData
 {
   double _valeur_solution;   // valeur de la solution optimale
   int _nombre_immeubles; //nombre d'immeubles au total
@@ -12,7 +12,7 @@ class DistributionServicesData
   List<int> _nbs_etages;// nombre d'etages demande
 
   // constructeur
-  DistributionServicesData(
+  BuildingConstructionData(
       this._valeur_solution,
       this._nombre_immeubles, this._hauteur_max, this._prix_etages,
       this._gains, this._nbs_etages);
@@ -20,7 +20,7 @@ class DistributionServicesData
   //overload de l'operateur de comparaison ==
   @override
   bool operator ==(other) =>
-      other is DistributionServicesData
+      other is BuildingConstructionData
           && (other.valeur_solution == this.valeur_solution)
           && (other.nombre_immeubles == this.nombre_immeubles)
           && (other.hauteur_max == this.hauteur_max)

@@ -2,9 +2,7 @@
 
 // classe DistributionServicesModel
 import 'package:collection/collection.dart';
-import 'package:or_game_app_v4/DistributionServices/controller/DistributionServiceController.dart';
-import 'package:or_game_app_v4/DistributionServices/data/DistributionServicesData.dart';
-import 'package:or_game_app_v4/DistributionServices/model/DistributionServicesModel.dart';
+
 
 // classe DistributionsServicesData
 assert_DSD()

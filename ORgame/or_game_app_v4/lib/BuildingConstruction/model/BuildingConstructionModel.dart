@@ -1,20 +1,20 @@
 import 'package:collection/collection.dart';
-import 'package:or_game_app_v4/DistributionServices/data/DistributionServicesData.dart';
+import 'package:or_game_app_v4/DistributionServices/data/BuildingConstructionData.dart';
 
 // classe gerant le modele d'un niveau du jeu de "DistributionServices"
-class DistributionServicesModel {
+class BuildingConstructionModel {
   double _valeur_solution; // valeur de la solution optimale
   Immeubles _immeubles;    // contient les informations par rapport aux emplacement d'immeubles
   List<Client> _clients;   // contient les informations par rapport aux clients
   List<List<bool>> _A ; // matrice contenant l'attribution des clients
-                      // A[i][j] = true si le client i est attribue a l'immeuble j, false sinon
-                      // j = 0 designe que le client n'est attribue a aucun immeuble
-                      // !! Faire ATTENTION au niveau des indices
+  // A[i][j] = true si le client i est attribue a l'immeuble j, false sinon
+  // j = 0 designe que le client n'est attribue a aucun immeuble
+  // !! Faire ATTENTION au niveau des indices
   double _score = 0;
 
 
   // constructeur
-  DistributionServicesModel(this._valeur_solution,this._immeubles,this._clients) {
+  BuildingConstructionModel(this._valeur_solution,this._immeubles,this._clients) {
     // creation de la matrice A initiale de taille (nbclients,nbimmeubles+1),
     // la premiere colonne a true, le reste a false
     this.A = new List<List<bool>>();
@@ -32,7 +32,7 @@ class DistributionServicesModel {
   }
 
   // constructeur depuis la data, factory pour appeler un autre constructeur
-  factory DistributionServicesModel.fromDSD(DistributionServicesData DSD) {
+  factory BuildingConstructionModel.fromDSD(DistributionServicesData DSD) {
     // assert pour verifier la taille des elements
     assert(DSD.gains.length==DSD.nbs_etages.length);
     assert(DSD.prix_etages.length==DSD.hauteur_max);
@@ -43,7 +43,7 @@ class DistributionServicesModel {
       clients.add(Client(i,DSD.gains[i],DSD.nbs_etages[i]));
     }
     assert(clients.length==DSD.gains.length);
-    var result = new DistributionServicesModel(
+    var result = new BuildingConstructionModel(
         DSD.valeur_solution
         ,Immeubles(DSD.nombre_immeubles, DSD.hauteur_max, DSD.prix_etages)
         ,clients);
@@ -52,7 +52,7 @@ class DistributionServicesModel {
 
   @override
   bool operator ==(other) =>
-      other is DistributionServicesModel
+      other is BuildingConstructionModel
           && (other.valeur_solution==this.valeur_solution)
           && (other.immeubles==this.immeubles)
           && (other.score==this.score)
@@ -65,8 +65,8 @@ class DistributionServicesModel {
     assert(j>=0 && j<=this.immeubles.nombre_immeubles);
     // enleve l'assignement a d'autres immeubles
     for(int col=0;col<=this.immeubles.nombre_immeubles;col++) //ATTENTION <= pas < (car on a 1 immeuble en +, l'immeuble 0 qui represente le non assignement)
-    {
-        this.A[i][col] = false;
+        {
+      this.A[i][col] = false;
     }
     this.A[i][j] = true;
   }
@@ -86,7 +86,17 @@ class DistributionServicesModel {
         result.add(i);
     }
     return result;
+  }
 
+  int nb_client_in(int immeuble)
+  {
+    int nb = 0;
+    for(int i =0;i<this.clients.length;i++)
+    {
+      if(this.A[i][immeuble]==true)
+        nb++;
+    }
+    return nb;
   }
 
   void update_score()
@@ -101,7 +111,7 @@ class DistributionServicesModel {
       for(int i=0;i<this.clients.length;i++)
       {
         if(this.A[i][j]==true) // si le client est assignee on modifie le score
-        {
+            {
           this.score+= this.clients[i].gain;
           hauteur+= this.clients[i].nb_etages; // on modifie la hauteur de l'immeuble
         }
@@ -153,6 +163,15 @@ class DistributionServicesModel {
   double get score => _score;
   set score(double value) {
     _score = value;
+  }
+
+  void print_clients(int immeuble)
+  {
+    print("Liste des clients dans l'immeuble $immeuble");
+    for(int i in get_clients_indexes_in_immeuble(immeuble)) {
+      Client c = clients[i];
+      print("Client $i : (gain = ${c.gain}, etages = ${c.nb_etages})");
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:or_game_app_v4/view/ScreenMenuPrincipal.dart';
+import 'package:or_game_app_v4/view/ScreenMainMenu.dart';
 
 import '../../style.dart';
 import 'ScreenDistriServLevel.dart';
