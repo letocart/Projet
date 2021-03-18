@@ -56,7 +56,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                       mainAxisSpacing: 1.0,
                       crossAxisCount: 3,
                       staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].nb_etages),
+                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].requestOfFloors),
                       itemCount: DSC.DSM.nb_client_in(0),
                       itemBuilder: (BuildContext context, int index) =>
                           Align(
@@ -183,7 +183,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
         print("Accept $data");
         setState(() {
           successfulDrop = true;
-          DSC.DSM.assign_client_to_immeuble(data.index,1);
+          DSC.DSM.assignClientToBuilding(data.index,1);
           DSC.DSM.print_clients(0);
         });
       },
@@ -220,10 +220,10 @@ class Client_Icon extends StatelessWidget {
     return Material(
       child: Container(
           alignment: Alignment.center,
-          height: 50.0*client.nb_etages,
+          height: 50.0*client.requestOfFloors,
           width : 50,
           child: Column(
-            children: new List.generate(client.nb_etages,
+            children: new List.generate(client.requestOfFloors,
                   (index) => Container(
                   alignment: Alignment.center,
                   height: 50,
@@ -236,7 +236,7 @@ class Client_Icon extends StatelessWidget {
                       )
                   ),
                   child: Text(
-                    '${client.gain.toInt()}',
+                    '${client.earning.toInt()}',
                     style: TextStyle(color: Colors.black, fontSize: 10),
                   )
               ),

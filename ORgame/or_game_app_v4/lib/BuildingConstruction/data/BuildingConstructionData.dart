@@ -1,71 +1,67 @@
-//Classe contenant les informations d'une instance et les moyens de les recuperees
-
 import 'package:collection/collection.dart';
 
+/*Class serving as an "interface" to contain raw data collected from a source
+to describe an initial problem of BuildingConstruction*/
 class BuildingConstructionData
 {
-  double _valeur_solution;   // valeur de la solution optimale
-  int _nombre_immeubles; //nombre d'immeubles au total
-  int _hauteur_max;      // hauteur maximale de l'immeuble
-  List<double> _prix_etages; // prix de chaque etage
-  List<double> _gains;  //quantite d'argent gagne par le service du client
-  List<int> _nbs_etages;// nombre d'etages demande
+  double _solutionValue;    // value of the optimal solution
+  int _numberOfBuildings;   // number of buildings' slot available
+  int _maxHeight;           // maximum Height of the buildings
+  List<double> _pricesOfFloors;          // list of prices of each floor
+  List<double> _earningsFromClients;     // list of earnings from clients' requests
+  List<int> _requestsOfFloorsFromClients;// list of the number of floors requested by the clients
 
-  // constructeur
+  // basic constructor
   BuildingConstructionData(
-      this._valeur_solution,
-      this._nombre_immeubles, this._hauteur_max, this._prix_etages,
-      this._gains, this._nbs_etages);
+      this._solutionValue,
+      this._numberOfBuildings, this._maxHeight, this._pricesOfFloors,
+      this._earningsFromClients, this._requestsOfFloorsFromClients);
 
-  //overload de l'operateur de comparaison ==
+  //overriding the == operator
   @override
   bool operator ==(other) =>
       other is BuildingConstructionData
-          && (other.valeur_solution == this.valeur_solution)
-          && (other.nombre_immeubles == this.nombre_immeubles)
-          && (other.hauteur_max == this.hauteur_max)
-          && (ListEquality().equals(other.prix_etages,this.prix_etages))
-          && (ListEquality().equals(other.gains,this.gains))
-          && (ListEquality().equals(other.nbs_etages,this.nbs_etages));
+          && (other.getSolutionValue == this.getSolutionValue)
+          && (other.getNumberOfBuildings == this.getNumberOfBuildings)
+          && (other.getMaxHeight == this.getMaxHeight)
+          && (ListEquality().equals(other.getPricesOfFloors,this.getPricesOfFloors))
+          && (ListEquality().equals(other.getEarningsFromClients,this.getEarningsFromClients))
+          && (ListEquality().equals(other.getRequestsOfFloorsFromClients,this.getRequestsOfFloorsFromClients));
 
-  List<int> get nbs_etages => _nbs_etages;
+  //getters and setters
 
-  set nbs_etages(List<int> value) {
-    _nbs_etages = value;
+  List<int> get getRequestsOfFloorsFromClients => _requestsOfFloorsFromClients;
+  set requestsOfFloorsFromClients(List<int> value) {
+    _requestsOfFloorsFromClients = value;
   }
 
-  List<double> get gains => _gains;
-
-  set gains(List<double> value) {
-    _gains = value;
+  List<double> get getEarningsFromClients => _earningsFromClients;
+  set earningsFromClients(List<double> value) {
+    _earningsFromClients = value;
   }
 
-  List<double> get prix_etages => _prix_etages;
-
-  set prix_etages(List<double> value) {
-    _prix_etages = value;
+  List<double> get getPricesOfFloors => _pricesOfFloors;
+  set pricesOfFloors(List<double> value) {
+    _pricesOfFloors = value;
   }
 
-  int get hauteur_max => _hauteur_max;
-
-  set hauteur_max(int value) {
-    _hauteur_max = value;
+  int get getMaxHeight => _maxHeight;
+  set maxHeight(int value) {
+    _maxHeight = value;
   }
 
-  int get nombre_immeubles => _nombre_immeubles;
-
-  set nombre_immeubles(int value) {
-    _nombre_immeubles = value;
+  int get getNumberOfBuildings => _numberOfBuildings;
+  set numberOfBuildings(int value) {
+    _numberOfBuildings = value;
   }
 
-  double get valeur_solution => _valeur_solution;
-
-  set valeur_solution(double value) {
-    _valeur_solution = value;
+  double get getSolutionValue => _solutionValue;
+  set solutionValue(double value) {
+    _solutionValue = value;
   }
+
 }
 
-// a implementer la recuperation de la data depuis la BDD pour creer un DistributionServicesData
 
 
 

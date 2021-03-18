@@ -1,88 +1,94 @@
+//imports
 import 'package:collection/collection.dart';
-import 'package:or_game_app_v4/DistributionServices/data/BuildingConstructionData.dart';
+import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 
-// classe gerant le modele d'un niveau du jeu de "DistributionServices"
+// class managing the model of the game BuildingConstruction
 class BuildingConstructionModel {
-  double _valeur_solution; // valeur de la solution optimale
-  Immeubles _immeubles;    // contient les informations par rapport aux emplacement d'immeubles
-  List<Client> _clients;   // contient les informations par rapport aux clients
-  List<List<bool>> _A ; // matrice contenant l'attribution des clients
-  // A[i][j] = true si le client i est attribue a l'immeuble j, false sinon
-  // j = 0 designe que le client n'est attribue a aucun immeuble
-  // !! Faire ATTENTION au niveau des indices
-  double _score = 0;
+  double _solutionValue;    // value of the optimal solution
+  DescriptionOfBuildings _descriptionOfBuildings;   // contains different information describing the buildings' slots
+  List<Client> _clients;    // list of information about the clients (earning, request)
+  List<List<bool>> _stateOfGame ; // matrix of booleans containing the current state of the game
+  // stateOfGame[i][j] == true if the client i is assigned to the building j, false otherwise
+  // j = 0 represents the fact that the client is not assigned to any building
+  // /!\ BE CAREFUL OF THE INDEXES /!\
+  double _score = 0; // represents the current score
 
-
-  // constructeur
-  BuildingConstructionModel(this._valeur_solution,this._immeubles,this._clients) {
-    // creation de la matrice A initiale de taille (nbclients,nbimmeubles+1),
-    // la premiere colonne a true, le reste a false
-    this.A = new List<List<bool>>();
-    for (int i = 0; i < clients.length; i++) {
+  // basic constructor
+  BuildingConstructionModel(this._solutionValue,this._descriptionOfBuildings,this._clients) {
+    // creation and initialization of the matrix stateOfGame of size (numberOfClients,numberOfBuildings+1)
+    // first column is true, the rest is false
+    this.stateOfGame = new List<List<bool>>();
+    for (int i = 0; i < this.getClients.length; i++) {
       List<bool> list = new List<bool>();
-      for (int j = 0; j < immeubles.nombre_immeubles + 1; j++) {
+      for (int j = 0; j < this.getDescriptionOfBuildings.getNumberOfBuildings + 1; j++) {
         if (j == 0) {
           list.add(true);
         } else {
           list.add(false);
         }
       }
-      this.A.add(list);
+      this.getStateOfGame.add(list);
     }
   }
 
-  // constructeur depuis la data, factory pour appeler un autre constructeur
-  factory BuildingConstructionModel.fromDSD(DistributionServicesData DSD) {
-    // assert pour verifier la taille des elements
-    assert(DSD.gains.length==DSD.nbs_etages.length);
-    assert(DSD.prix_etages.length==DSD.hauteur_max);
+  // constructor from BuildingConstructionData
+  factory BuildingConstructionModel.fromBCD(BuildingConstructionData BCD) {
+    // assert to check coherence between data sizes
+    assert(BCD.getEarningsFromClients.length==BCD.getRequestsOfFloorsFromClients.length);
+    assert(BCD.getPricesOfFloors.length==BCD.getMaxHeight);
 
     List<Client> clients = [];
-    for(int i = 0; i < DSD.gains.length;i++)
+    for(int i = 0; i < BCD.getEarningsFromClients.length;i++)
     {
-      clients.add(Client(i,DSD.gains[i],DSD.nbs_etages[i]));
+      clients.add(Client(i,BCD.getEarningsFromClients[i],BCD.getRequestsOfFloorsFromClients[i]));
     }
-    assert(clients.length==DSD.gains.length);
+    // another assert to check coherence of data sizes
+    assert(clients.length==BCD.getEarningsFromClients.length);
+
+    // factory syntax to call basic constructor to avoid code duplication
     var result = new BuildingConstructionModel(
-        DSD.valeur_solution
-        ,Immeubles(DSD.nombre_immeubles, DSD.hauteur_max, DSD.prix_etages)
+        BCD.getSolutionValue
+        ,DescriptionOfBuildings(BCD.getNumberOfBuildings, BCD.getMaxHeight, BCD.getPricesOfFloors)
         ,clients);
     return result;
+    // factory
   }
 
+  // overriding == operator
   @override
   bool operator ==(other) =>
       other is BuildingConstructionModel
-          && (other.valeur_solution==this.valeur_solution)
-          && (other.immeubles==this.immeubles)
-          && (other.score==this.score)
-          && (ListEquality().equals(other.clients,this.clients));
+          && (other.getSolutionValue==this.getSolutionValue)
+          && (other.getDescriptionOfBuildings==this.getDescriptionOfBuildings)
+          && (other.getScore==this.getScore)
+          && (ListEquality().equals(other.getClients,this.getClients));
 
-  // modifie la matrice A pour assigner un client i a l'immeuble j
-  void assign_client_to_immeuble(int i, int j)
+  // assign client i to building j in the stateOfGame matrix
+  void assignClientToBuilding(int i, int j)
   {
-    assert(i>=0 && i<this.clients.length);
-    assert(j>=0 && j<=this.immeubles.nombre_immeubles);
+    // checking
+    assert(i>=0 && i<this.getClients.length);
+    assert(j>=0 && j<=this.getDescriptionOfBuildings.getNumberOfBuildings);
     // enleve l'assignement a d'autres immeubles
-    for(int col=0;col<=this.immeubles.nombre_immeubles;col++) //ATTENTION <= pas < (car on a 1 immeuble en +, l'immeuble 0 qui represente le non assignement)
+    for(int col=0;col<=this.getDescriptionOfBuildings.getNumberOfBuildings;col++) //ATTENTION <= pas < (car on a 1 immeuble en +, l'immeuble 0 qui represente le non assignement)
         {
-      this.A[i][col] = false;
+      this.getStateOfGame[i][col] = false;
     }
-    this.A[i][j] = true;
+    this.getStateOfGame[i][j] = true;
   }
 
   // de-assigne un client (le remet dans la colonne 0)
   void unassign_client(int i)
   {
-    assign_client_to_immeuble(i, 0);
+    assignClientToBuilding(i, 0);
   }
 
   List<int> get_clients_indexes_in_immeuble(int immeuble_index)
   {
     List<int> result = [];
-    for(int i =0;i<this.clients.length;i++)
+    for(int i =0;i<this.getClients.length;i++)
     {
-      if(this.A[i][immeuble_index]==true)
+      if(this.getStateOfGame[i][immeuble_index]==true)
         result.add(i);
     }
     return result;
@@ -91,9 +97,9 @@ class BuildingConstructionModel {
   int nb_client_in(int immeuble)
   {
     int nb = 0;
-    for(int i =0;i<this.clients.length;i++)
+    for(int i =0;i<this.getClients.length;i++)
     {
-      if(this.A[i][immeuble]==true)
+      if(this.getStateOfGame[i][immeuble]==true)
         nb++;
     }
     return nb;
@@ -104,22 +110,22 @@ class BuildingConstructionModel {
     this.score = 0;
     int hauteur;
     //pour chaque immeuble
-    for(int j=1; j<this.immeubles.nombre_immeubles+1;j++)
+    for(int j=1; j<this.getDescriptionOfBuildings.getNumberOfBuildings+1;j++)
     {
       hauteur = -1;
       // pour chaque client
-      for(int i=0;i<this.clients.length;i++)
+      for(int i=0;i<this.getClients.length;i++)
       {
-        if(this.A[i][j]==true) // si le client est assignee on modifie le score
+        if(this.getStateOfGame[i][j]==true) // si le client est assignee on modifie le score
             {
-          this.score+= this.clients[i].gain;
-          hauteur+= this.clients[i].nb_etages; // on modifie la hauteur de l'immeuble
+          this.score = this.getScore + this.getClients[i].getEarning;
+          hauteur+= this.getClients[i].getRequestOfFloors; // on modifie la hauteur de l'immeuble
         }
       }
 
       for(int k=0;k<=hauteur;k++) // selon la hauteur de l'immeuble on modifie le score
-        this.score -= this.immeubles.prix_etages[k];
-      assert(hauteur<=this.immeubles.hauteur_max);
+        this.score = this.getScore - this.getDescriptionOfBuildings.getPricesOfFloors[k];
+      assert(hauteur<=this.getDescriptionOfBuildings.getMaxHeight);
     }
   }
 
@@ -130,128 +136,122 @@ class BuildingConstructionModel {
     // on decale le tout du minimum, qui est le prix d'un immeuble entier multiplie par le nombre d'immeuble+1
     // (+1 pour eviter dans le pire cas d'instance avec une division par 0)
     double pire =0;
-    for(double prix in this.immeubles.prix_etages)
+    for(double prix in this.getDescriptionOfBuildings.getPricesOfFloors)
     {
       pire += prix;
     }
-    pire = (pire*this.immeubles.nombre_immeubles)+1;
+    pire = (pire*this.getDescriptionOfBuildings.getNumberOfBuildings)+1;
 
-    return ((this.score+pire)/(this.valeur_solution+pire)*100).floor();
+    return ((this.getScore+pire)/(this.getSolutionValue+pire)*100).floor();
   }
 
-  double get valeur_solution => _valeur_solution;
-  set valeur_solution(double value) {
-    _valeur_solution = value;
+  double get getSolutionValue => _solutionValue;
+  set solutionValue(double value) {
+    _solutionValue = value;
   } //score actuel du jeu
 
 
-  Immeubles get immeubles => _immeubles;
-  set immeubles(Immeubles value) {
-    _immeubles = value;
+  DescriptionOfBuildings get getDescriptionOfBuildings => _descriptionOfBuildings;
+  set descriptionOfBuildings(DescriptionOfBuildings value) {
+    _descriptionOfBuildings = value;
   }
 
-  List<Client> get clients => _clients;
+  List<Client> get getClients => _clients;
   set clients(List<Client> value) {
     _clients = value;
   }
 
-  List<List<bool>> get A => _A;
-  set A(List<List<bool>> value) {
-    _A = value;
+  List<List<bool>> get getStateOfGame => _stateOfGame;
+  set stateOfGame(List<List<bool>> value) {
+    _stateOfGame = value;
   }
 
-  double get score => _score;
+  double get getScore => _score;
   set score(double value) {
     _score = value;
   }
-
+/*
   void print_clients(int immeuble)
   {
     print("Liste des clients dans l'immeuble $immeuble");
     for(int i in get_clients_indexes_in_immeuble(immeuble)) {
-      Client c = clients[i];
-      print("Client $i : (gain = ${c.gain}, etages = ${c.nb_etages})");
+      Client c = getClients[i];
+      print("Client $i : (gain = ${c.getEarning}, etages = ${c.getRequestOfFloors})");
     }
   }
+*/
 }
 
 // classe contenant les informations par rapport aux emplacement d'immeubles
-class Immeubles {
-  int _nombre_immeubles; //nombre d'immeubles au total
-  int _hauteur_max;      // hauteur maximale de l'immeuble
-  List<double> _prix_etages;
+class DescriptionOfBuildings {
+  int _numberOfBuildings; //nombre d'immeubles au total
+  int _maxHeight;      // hauteur maximale de l'immeuble
+  List<double> _pricesOfFloors;
 
 
-  Immeubles(int nb_imm,int h_max,List<double> pr_et){
-    this.nombre_immeubles = nb_imm;
-    this.hauteur_max = h_max;
-    this.prix_etages = pr_et;
+  DescriptionOfBuildings(int nb_imm,int h_max,List<double> pr_et){
+    this.numberOfBuildings = nb_imm;
+    this.maxHeight = h_max;
+    this.pricesOfFloors = pr_et;
   }
 
   @override
   bool operator ==(other) =>
-      other is Immeubles
-          && (other.nombre_immeubles==this.nombre_immeubles)
-          && (other.hauteur_max==this.hauteur_max)
-          && (ListEquality().equals(other.prix_etages,this.prix_etages));
+      other is DescriptionOfBuildings
+          && (other.getNumberOfBuildings==this.getNumberOfBuildings)
+          && (other.getMaxHeight==this.getMaxHeight)
+          && (ListEquality().equals(other.getPricesOfFloors,this.getPricesOfFloors));
 
-  int get nombre_immeubles => _nombre_immeubles;
-
-  set nombre_immeubles(int value) {
-    _nombre_immeubles = value;
-  } // prix de chaque etage
-
-  int get hauteur_max => _hauteur_max;
-
-  set hauteur_max(int value) {
-    _hauteur_max = value;
+  int get getNumberOfBuildings => _numberOfBuildings;
+  set numberOfBuildings(int value) {
+    _numberOfBuildings = value;
   }
 
-  List<double> get prix_etages => _prix_etages;
+  int get getMaxHeight => _maxHeight;
+  set maxHeight(int value) {
+    _maxHeight = value;
+  }
 
-  set prix_etages(List<double> value) {
-    _prix_etages = value;
+  List<double> get getPricesOfFloors => _pricesOfFloors;
+  set pricesOfFloors(List<double> value) {
+    _pricesOfFloors = value;
   }
 }
 
 // classe contenant les informations par rapport a un client
 class Client {
   int _index;
-  double _gain;  //quantite d'argent gagne par le service du client
-  int _nb_etages;
+  double _earning;  //quantite d'argent gagne par le service du client
+  int _requestOfFloors;
 
 
   Client(int index,double gain,int nb_etages)
   {
     this.index = index;
-    this.gain = gain;
-    this.nb_etages = nb_etages;
+    this.earning = gain;
+    this.requestOfFloors = nb_etages;
   }
   //overload de l'operateur de comparaison ==
   @override
   bool operator ==(other) =>
       other is Client
-          && (other.index==this.index)
-          && (other.gain==this.gain)
-          && (other.nb_etages==this.nb_etages);
+          && (other.getIndex==this.getIndex)
+          && (other.getEarning==this.getEarning)
+          && (other.getRequestOfFloors==this.getRequestOfFloors);
 
-  int get index => _index;
-
+  int get getIndex => _index;
   set index(int value) {
     _index = value;
   }
 
-  double get gain => _gain;
+  double get getEarning => _earning;
+  set earning(double value) {
+    _earning = value;
+  }
 
-  set gain(double value) {
-    _gain = value;
-  } // nombre d'etages demande
-
-
-  int get nb_etages => _nb_etages;
-
-  set nb_etages(int value) {
-    _nb_etages = value;
+  int get getRequestOfFloors => _requestOfFloors;
+  set requestOfFloors(int value) {
+    _requestOfFloors = value;
   }
 }
 
