@@ -1,57 +1,54 @@
-// import
-
+// imports
 import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
 
+// class controller, managing links and interactions between the view, the model and the data
 class BuildingConstructionController {
+  BuildingConstructionModel _BCM;
+  BuildingConstructionData _BCD;
+  //BuildingConstructionView _BCV; to add
 
-  BuildingConstructionModel _DSM;
-  BuildingConstructionData _DSD;
-  //DistributionServicesView _DSV; a ajouter
+  // basic constructor
+  BuildingConstructionController(this._BCM, this._BCD);
 
-  // constructeur
-  BuildingConstructionController(
-      BuildingConstructionModel DSM,
-      BuildingConstructionData DSD)
+  // constructor from BuildingConstructionData
+  BuildingConstructionController.fromBCD(BuildingConstructionData BCD)
   {
-    this.DSM = DSM;
-    this.DSD = DSD;
+    this.BCM = BuildingConstructionModel.fromBCD(BCD);
+    this.BCD = BCD;
   }
 
-  BuildingConstructionController.fromDSD(BuildingConstructionData DSD)
-  {
-    this.DSM = BuildingConstructionModel.fromDSD(DSD);
-    this.DSD = DSD;
-  }
-
+  // constructor from 2 indexes/keys given by the difficulty and the level
+  // must be better defined/is for testing purpose as of now
   BuildingConstructionController.fromIndex(String difficulty, int level)
   {
     //create DSD and DSM from DatabaseManager
 
-    //to replace
-    this.DSD = new BuildingConstructionData(300
+    //has to be replaced
+    this.BCD = new BuildingConstructionData(300
         , 2, 5, [0, 100, 200, 300, 400]
         , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
-    this.DSM = BuildingConstructionModel.fromDSD(this.DSD);
+    this.BCM = BuildingConstructionModel.fromBCD(this.getBCD);
   }
 
-  BuildingConstructionData get DSD => _DSD;
-  set DSD(BuildingConstructionData value) {
-    _DSD = value;
+  // getters and setters
+  BuildingConstructionData get getBCD => _BCD;
+  set BCD(BuildingConstructionData value) {
+    _BCD = value;
   }
 
-  DistributionServicesModel get DSM => _DSM;
-  set DSM(DistributionServicesModel value) {
-    _DSM = value;
+  BuildingConstructionModel get getBCM => _BCM;
+  set BCM(BuildingConstructionModel value) {
+    _BCM = value;
   }
 
   // get the indexes of the clients in a specified building (used in the view)
   List<int> getClientsIndexesInBuilding(int buildingIndex)
   {
     List<int> result = [];
-    for(int i =0;i<this.getClients.length;i++)
+    for(int i =0;i<this.getBCM.getClients.length;i++)
     {
-      if(this.getStateOfGame[i][buildingIndex]==true)
+      if(this.getBCM.getStateOfGame[i][buildingIndex]==true)
         result.add(i);
     }
     return result;
@@ -61,9 +58,9 @@ class BuildingConstructionController {
   int getNumberOfClientsInBuilding(int buildingIndex)
   {
     int nb = 0;
-    for(int i =0;i<this.getClients.length;i++)
+    for(int i =0;i<this.getBCM.getClients.length;i++)
     {
-      if(this.getStateOfGame[i][buildingIndex]==true)
+      if(this.getBCM.getStateOfGame[i][buildingIndex]==true)
         nb++;
     }
     return nb;
