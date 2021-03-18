@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../style.dart';
-import 'ScreenDistriServGame.dart';
-import 'ScreenDistriServStage.dart';
+import 'ScreenBuildingConstructionGame.dart';
+import 'ScreenBuildingConstructionStage.dart';
 
-class ScreenDistriServLevel extends StatelessWidget {
+class ScreenBuildingConstructionLevel extends StatelessWidget {
   String difficulty;
   final int numberOfLevel = 5;
 
-  ScreenDistriServLevel(String diff) {
+  ScreenBuildingConstructionLevel(String diff) {
     difficulty = diff;
     print(difficulty);
   }
@@ -35,7 +35,7 @@ class ScreenDistriServLevel extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push( //Navigateur vers widget
                           MaterialPageRoute(builder: (context)=>
-                              ScreenDistriServStage(),
+                              ScreenBuildingConstructionStage(),
                           ),
                         );
                       },
@@ -64,7 +64,7 @@ class ScreenDistriServLevel extends StatelessWidget {
                           onPressed: () {
                             Navigator.of(context).push( //Navigateur vers widget
                               MaterialPageRoute(builder: (context)=>
-                              ScreenDistriServGame(difficulty, index+1),
+                              ScreenBuildingConstructionGame(difficulty, index+1),
                               ),
                             );
                             print("Start Game ${index+1} pressed");

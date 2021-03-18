@@ -1,32 +1,34 @@
+
+import 'package:flutter/cupertino.dart';
+import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
+import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
+import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionLevel.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:or_game_app_v4/DistributionServices/controller/BuildingsConstructionController.dart';
-import 'package:or_game_app_v4/DistributionServices/model/BuildingConstructionModel.dart';
-import '../../style.dart';
-import 'ScreenDistriServLevel.dart';
 
-class ScreenDistriServGame extends StatefulWidget {
+import '../../style.dart';
+
+class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
-  DistributionServicesController DSC;
-  ScreenDistriServGame(String diff, int lvl) {
+  BuildingConstructionController DSC;
+  ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
-    DSC = new DistributionServicesController.fromIndex(difficulty, level);
+    DSC = new BuildingConstructionController.fromIndex(difficulty, level);
   }
-  createState() => ScreenDistriServGameState(difficulty,level,DSC);
+  createState() => BuildingConstructionGameState(difficulty,level,DSC);
 }
 
-class ScreenDistriServGameState extends State<ScreenDistriServGame> {
+class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
 
   String difficulty;
   int level;
-  DistributionServicesController DSC;
+  BuildingConstructionController DSC;
   bool successfulDrop = false;
   int score = 0;
 
-  ScreenDistriServGameState(this.difficulty,this.level,this.DSC);
+  BuildingConstructionGameState(this.difficulty,this.level,this.DSC);
 
   int acceptedData = 0;
   @override
@@ -82,7 +84,7 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                       onPressed: () {
                         Navigator.of(context).push( //Navigateur vers widget
                           MaterialPageRoute(builder: (context)=>
-                              ScreenDistriServLevel(difficulty),
+                              ScreenBuildingConstructionLevel(difficulty),
                           ),
                         );
                       },

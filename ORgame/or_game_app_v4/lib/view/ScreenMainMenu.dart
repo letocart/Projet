@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:or_game_app_v4/DistributionServices/view/ScreenDistriServStage.dart';
+import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionStage.dart';
 import '../style.dart';
 
 class ScreenMenuPrincipal extends StatelessWidget {
@@ -37,7 +37,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
                         print("jeu 1 pressed");
                         Navigator.of(context).push( //Navigateur vers widget
                           MaterialPageRoute(builder: (context)=>
-                              ScreenDistriServStage(),
+                              ScreenBuildingConstructionStage(),
                           ),
                         );
                       },

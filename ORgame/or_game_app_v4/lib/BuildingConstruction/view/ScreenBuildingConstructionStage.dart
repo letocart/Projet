@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:or_game_app_v4/view/ScreenMainMenu.dart';
 
 import '../../style.dart';
-import 'ScreenDistriServLevel.dart';
+import 'ScreenBuildingConstructionLevel.dart';
 
-class ScreenDistriServStage extends StatelessWidget {
+class ScreenBuildingConstructionStage extends StatelessWidget {
   final List<String> entries = <String>['Tutorial', 'Easy', 'Normal', 'Hard', 'Insane'];
 
   @override
@@ -50,7 +50,7 @@ class ScreenDistriServStage extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).push( //Navigateur vers widget
                           MaterialPageRoute(builder: (context)=>
-                              ScreenDistriServLevel(entries[index]),
+                              ScreenBuildingConstructionLevel(entries[index]),
                           ),
                         );
                         print("Start Game ${entries[index]} pressed");
