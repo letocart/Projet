@@ -86,7 +86,17 @@ class DistributionServicesModel {
         result.add(i);
     }
     return result;
+  }
 
+  int nb_client_in(int immeuble)
+  {
+    int nb = 0;
+    for(int i =0;i<this.clients.length;i++)
+    {
+      if(this.A[i][immeuble]==true)
+        nb++;
+    }
+    return nb;
   }
 
   void update_score()
@@ -153,6 +163,15 @@ class DistributionServicesModel {
   double get score => _score;
   set score(double value) {
     _score = value;
+  }
+
+  void print_clients(int immeuble)
+  {
+    print("Liste des clients dans l'immeuble $immeuble");
+    for(int i in get_clients_indexes_in_immeuble(immeuble)) {
+      Client c = clients[i];
+      print("Client $i : (gain = ${c.gain}, etages = ${c.nb_etages})");
+    }
   }
 }
 
