@@ -4,6 +4,7 @@ import 'package:flutter_prototype1/style.dart';
 import 'package:flutter_prototype1/DistributionServices/view/ScreenDistriServLevel.dart';
 import 'package:flutter_prototype1/DistributionServices/data/DistributionServicesData.dart';
 import 'package:flutter_prototype1/DistributionServices/model/DistributionServicesModel.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class ScreenDistriServGame extends StatefulWidget {
   String difficulty;
@@ -69,31 +70,31 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Container(
-                      width : MediaQuery.of(context).size.width * 0.70,
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      child: Align(
-                          child : _buildDragTarget()
-                      )
+                    width : MediaQuery.of(context).size.width * 0.70,
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: Align(
+                        child : _buildDragTarget()
+                    )
                   ),
                   Container(
-                      width : MediaQuery.of(context).size.width * 0.30,
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      child: GridView.count(
-                          padding: const EdgeInsets.all(8),
-                          crossAxisSpacing: 20,
-                          mainAxisSpacing: 20,
-                          crossAxisCount: 3,
-                          children: List.generate(DSC.DSM.get_clients_indexes_in_immeuble(0).length, (index) {
-                            return Align(
-                                alignment: Alignment.topLeft,
-                                child: Container(
-                                    height : 50,
-                                    width : 50,
-                                    child : Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
-                                )
-                            );
-                          })
-                      )
+                    width : MediaQuery.of(context).size.width * 0.30,
+                    height: MediaQuery.of(context).size.height * 0.75,
+                    child: StaggeredGridView.countBuilder(
+                      padding: const EdgeInsets.all(8),
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 1,
+                      crossAxisCount: 3,
+                      staggeredTileBuilder: (int index) =>
+                        new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].nb_etages),
+                      itemCount: DSC.DSM.clients.length,
+                      itemBuilder: (BuildContext context, int index) =>
+                          Align(
+                              child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
+                          ),
+                      /*children: List.generate(DSC.DSM.get_clients_indexes_in_immeuble(0).length, (index) {
+                        return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]]);
+                      })*/
+                    )
                   ),
                 ]
             ),
@@ -118,10 +119,10 @@ class ScreenDistriServGameState extends State<ScreenDistriServGame> {
             height: 300,
             width: 50,
             child : ListView.builder(
-              itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
-              itemBuilder: (BuildContext context, int index) {
-                return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
-              }
+                itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
+                }
             )
         );
         /*if(successfulDrop == true){
@@ -171,31 +172,96 @@ class Client_Draggable extends StatelessWidget {
   Widget build(BuildContext context) {
     return Draggable<Client>(
         data: client,
-        child: Client_Icon(client.gain.toInt()),
-        feedback : Client_Icon(client.gain.toInt()),
+        child: Client_Icon(client),
+        feedback : Client_Icon(client),
         childWhenDragging: Container()
     );
   }
 }
 
-class Client_Icon extends StatelessWidget {
-  Client_Icon(this.gain);
+/*class Client_Icon extends StatelessWidget {
+  Client_Icon(this.client);
 
-  final int gain;
+  final Client client;
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: Colors.red,
       child: Container(
-        alignment: Alignment.center,
-        height: 50,
-        width : 50,
-        child: Text(
-          '$gain',
-          style: TextStyle(color: Colors.black, fontSize: 10),
-        ),
+          alignment: Alignment.center,
+          height: 50*client.nb_etages.toDouble(),
+          width : 50,
+          decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                width: 1,
+              )
+          ),
+          child: ListView.builder(
+              itemCount: client.nb_etages,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                    alignment: Alignment.center,
+                    height: 48,
+                    width : 48,
+                    decoration: BoxDecoration(
+                        color: Colors.red,
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 1,
+                        )
+                    ),
+                    child: Text(
+                      '${client.gain.toInt()}',
+                      style: TextStyle(color: Colors.black, fontSize: 10),
+                    )
+                );
+              }
+          )
       ),
+    );
+  }
+}*/
+
+class Client_Icon extends StatelessWidget {
+  Client_Icon(this.client);
+
+  final Client client;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+        child: Container(
+          alignment: Alignment.center,
+          height: 50*client.nb_etages.toDouble(),
+          width : 50,
+          /*decoration: BoxDecoration(
+            border: Border.all(
+            color: Colors.black,
+            width: 1,
+            )
+          ),*/
+          child: Column(
+            children: new List.generate(client.nb_etages,
+              (index) => Container(
+                  alignment: Alignment.center,
+                  height: 50,
+                  width : 50,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                      border: Border.all(
+                      color: Colors.black,
+                      width: 1,
+                    )
+                  ),
+                  child: Text(
+                    '${client.gain.toInt()}',
+                    style: TextStyle(color: Colors.black, fontSize: 10),
+                  )
+                ),
+            ),
+          )
+        ),
     );
   }
 }
