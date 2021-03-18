@@ -11,24 +11,24 @@ import '../../style.dart';
 class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
-  BuildingConstructionController DSC;
+  BuildingConstructionController BCC;
   ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
-    DSC = new BuildingConstructionController.fromIndex(difficulty, level);
+    BCC = new BuildingConstructionController.fromIndex(difficulty, level);
   }
-  createState() => BuildingConstructionGameState(difficulty,level,DSC);
+  createState() => BuildingConstructionGameState(difficulty,level,BCC);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
 
   String difficulty;
   int level;
-  BuildingConstructionController DSC;
+  BuildingConstructionController BCC;
   bool successfulDrop = false;
   int score = 0;
 
-  BuildingConstructionGameState(this.difficulty,this.level,this.DSC);
+  BuildingConstructionGameState(this.difficulty,this.level,this.BCC);
 
   int acceptedData = 0;
   @override
@@ -56,11 +56,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                       mainAxisSpacing: 1.0,
                       crossAxisCount: 3,
                       staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(0))[index]].requestOfFloors),
-                      itemCount: DSC.DSM.getNumberOfClientsInBuilding(0),
+                      new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
+                      itemCount: BCC.getNumberOfClientsInBuilding(0),
                       itemBuilder: (BuildContext context, int index) =>
                           Align(
-                              child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(0))[index]])
+                              child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
                           ),
                     )
                 ),
@@ -168,9 +168,9 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
             height: 300,
             width: 50,
             child : ListView.builder(
-                itemCount: DSC.DSM.getClientsIndexesInBuilding(1).length,
+                itemCount: BCC.getClientsIndexesInBuilding(1).length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(DSC.DSM.clients[(DSC.DSM.getClientsIndexesInBuilding(1))[index]]);
+                  return Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(1))[index]]);
                 }
             )
         );
@@ -183,8 +183,8 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
         print("Accept $data");
         setState(() {
           successfulDrop = true;
-          DSC.DSM.assignClientToBuilding(data.index,1);
-          DSC.DSM.print_clients(0);
+          BCC.getBCM.assignClientToBuilding(data.getIndex,1);
+          //BCC.getBCM.print_clients(0);
         });
       },
       onLeave: (data) {
@@ -220,10 +220,10 @@ class Client_Icon extends StatelessWidget {
     return Material(
       child: Container(
           alignment: Alignment.center,
-          height: 50.0*client.requestOfFloors,
+          height: 50.0*client.getRequestOfFloors,
           width : 50,
           child: Column(
-            children: new List.generate(client.requestOfFloors,
+            children: new List.generate(client.getRequestOfFloors,
                   (index) => Container(
                   alignment: Alignment.center,
                   height: 50,
@@ -236,7 +236,7 @@ class Client_Icon extends StatelessWidget {
                       )
                   ),
                   child: Text(
-                    '${client.earning.toInt()}',
+                    '${client.getEarning.toInt()}',
                     style: TextStyle(color: Colors.black, fontSize: 10),
                   )
               ),
