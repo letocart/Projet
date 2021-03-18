@@ -36,61 +36,61 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
     return Stack(
         children : [
           Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                    width : MediaQuery.of(context).size.width * 0.70,
-                    height: MediaQuery.of(context).size.height,
-                    color : Colors.brown,
-                    child: Align(
-                        child : _buildDragTarget()
-                    )
-                ),
-                Container(
-                    width : MediaQuery.of(context).size.width * 0.30,
-                    height: MediaQuery.of(context).size.height,
-                    color : Colors.pinkAccent,
-                    child: StaggeredGridView.countBuilder(
-                      padding: const EdgeInsets.all(8),
-                      crossAxisSpacing: 5.0,
-                      mainAxisSpacing: 1.0,
-                      crossAxisCount: 3,
-                      staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].nb_etages),
-                      itemCount: DSC.DSM.nb_client_in(0),
-                      itemBuilder: (BuildContext context, int index) =>
-                          Align(
-                              child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
-                          ),
-                    )
-                ),
-              ]
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width : MediaQuery.of(context).size.width * 0.70,
+                height: MediaQuery.of(context).size.height,
+                color : Colors.brown,
+                child: Align(
+                  child : _buildDragTarget()
+                )
+              ),
+              Container(
+                width : MediaQuery.of(context).size.width * 0.30,
+                height: MediaQuery.of(context).size.height,
+                color : Colors.pinkAccent,
+                child: StaggeredGridView.countBuilder(
+                  padding: const EdgeInsets.all(8),
+                  crossAxisSpacing: 5.0,
+                  mainAxisSpacing: 1.0,
+                  crossAxisCount: 3,
+                  staggeredTileBuilder: (int index) =>
+                  new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].nb_etages),
+                  itemCount: DSC.DSM.nb_client_in(0),
+                  itemBuilder: (BuildContext context, int index) =>
+                    Align(
+                      child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
+                    ),
+                )
+              ),
+            ]
           ),
           Positioned(
-              bottom : 0,
-              left : 0,
-              child : Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
+            bottom : 0,
+            left : 0,
+            child : Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
           ),
           Positioned(
-              top : 0,
-              right : 0,
-              child : Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                      child: Text('Return'),
-                      style: Style.returnButtonText,
-                      onPressed: () {
-                        Navigator.of(context).push( //Navigateur vers widget
-                          MaterialPageRoute(builder: (context)=>
-                              ScreenBuildingConstructionLevel(difficulty),
-                          ),
-                        );
-                      },
-                    )
-                ),
-              )
+            top : 0,
+            right : 0,
+            child : Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ElevatedButton(
+                  child: Text('Return'),
+                  style: Style.returnButtonText,
+                  onPressed: () {
+                    Navigator.of(context).push( //Navigateur vers widget
+                      MaterialPageRoute(builder: (context)=>
+                          ScreenBuildingConstructionLevel(difficulty),
+                      ),
+                    );
+                  },
+                )
+              ),
+            )
           ),
         ]
     );
@@ -154,25 +154,26 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
     );*/
   }
 
+  // BuildDragTarget template
   Widget _buildDragTarget() {
     return DragTarget<Client>(
       builder: (BuildContext context, List<Client> incoming, List rejected) {
         return Container(
-            decoration: BoxDecoration(
-              color: Colors.white70,
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
-              ),
+          decoration: BoxDecoration(
+            color: Colors.white70,
+            border: Border.all(
+              color: Colors.black,
+              width: 1,
             ),
-            height: 300,
-            width: 50,
-            child : ListView.builder(
-                itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
-                }
-            )
+          ),
+          height: 300,
+          width: 50,
+          child : ListView.builder(
+            itemCount: DSC.DSM.get_clients_indexes_in_immeuble(1).length,
+            itemBuilder: (BuildContext context, int index) {
+              return Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(1))[index]]);
+            }
+          )
         );
       },
       onWillAccept: (data){
@@ -194,6 +195,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   }
 }
 
+// Client_Draggable template
 class Client_Draggable extends StatelessWidget {
   Client_Draggable(this.client);
 
@@ -202,14 +204,15 @@ class Client_Draggable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Draggable<Client>(
-        data: client,
-        child: Client_Icon(client),
-        feedback : Client_Icon(client),
-        childWhenDragging: Container()
+      data: client,
+      child: Client_Icon(client),
+      feedback : Client_Icon(client),
+      childWhenDragging: Container()
     );
   }
 }
 
+// Icon template for each Client_Dragrabble
 class Client_Icon extends StatelessWidget {
   Client_Icon(this.client);
 
@@ -219,29 +222,30 @@ class Client_Icon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       child: Container(
-          alignment: Alignment.center,
-          height: 50.0*client.nb_etages,
-          width : 50,
-          child: Column(
-            children: new List.generate(client.nb_etages,
-                  (index) => Container(
-                  alignment: Alignment.center,
-                  height: 50,
-                  width : 50,
-                  decoration: BoxDecoration(
-                      color: Colors.red,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      )
-                  ),
-                  child: Text(
-                    '${client.gain.toInt()}',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
-                  )
+        alignment: Alignment.center,
+        height: 50.0*client.nb_etages,
+        width : 50,
+        child: Column(
+          children: new List.generate(
+            client.nb_etages,
+            (index) => Container(
+              alignment: Alignment.center,
+              height: 50,
+              width : 50,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                )
               ),
+              child: Text(
+                '${client.gain.toInt()}',
+                style: TextStyle(color: Colors.black, fontSize: 10),
+              )
             ),
-          )
+          ),
+        )
       ),
     );
   }

@@ -17,64 +17,71 @@ class ScreenBuildingConstructionLevel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/backgrounds/city2.jpg"),
-                fit: BoxFit.cover)
-        ),
-        alignment: Alignment.center,
-        child: Column(
-            children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child: ElevatedButton(
-                      child: Text('Return',style: TextStyle(color:Colors.white)),
-                      style: Style.returnButtonText,
-                      onPressed: () {
-                        Navigator.of(context).push( //Navigateur vers widget
-                          MaterialPageRoute(builder: (context)=>
-                              ScreenBuildingConstructionStage(),
-                          ),
-                        );
-                      },
-                    )
-                ),
-              ),
-              Text('Choose a level', style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.none),
-              ),
-              Expanded(
-                  child: GridView.count(
-                      padding: const EdgeInsets.all(30),
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 20,
-                      // Create a grid with 8 columns. If you change the scrollDirection to
-                      // horizontal, this produces 8 rows.
-                      crossAxisCount: 6,
-                      // Generate nombreNiveau widgets that display their index in the List.
-                      children: List.generate(numberOfLevel, (index) {
-                        return ElevatedButton(
-                          child: Text('${index+1}'),
-                          style: Style.buttonText,
-                          onPressed: () {
-                            Navigator.of(context).push( //Navigateur vers widget
-                              MaterialPageRoute(builder: (context)=>
-                              ScreenBuildingConstructionGame(difficulty, index+1),
-                              ),
-                            );
-                            print("Start Game ${index+1} pressed");
-                          },
-                        );
-                      })
-                  )
-              )
-            ]
-        )
+      // Background
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage("assets/images/backgrounds/city2.jpg"),
+              fit: BoxFit.cover)
+      ),
+      alignment: Alignment.center,
+      // Column to have each items on top of each others
+      child: Column(
+        children: [
+          // First child : return button
+          Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+                padding: EdgeInsets.all(5.0),
+                child: ElevatedButton(
+                  child: Text('Return',style: TextStyle(color:Colors.white)),
+                  style: Style.returnButtonText,
+                  onPressed: () {
+                    // Return to difficulty selection screen
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context)=>
+                          ScreenBuildingConstructionStage(),
+                      ),
+                    );
+                  },
+                )
+            ),
+          ),
+          // Second child : title text
+          Text('Choose a level', style: TextStyle(
+              fontSize: 18,
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none),
+          ),
+          // Third child : grid of button to choose a level
+          Expanded(
+            // Scrollable grid of item
+            child: GridView.count(
+              padding: const EdgeInsets.all(30),
+              crossAxisSpacing: 20,
+              mainAxisSpacing: 20,
+              // Create a grid with 6 columns
+              crossAxisCount: 6,
+              // Generate numberOfLevel buttons that display their index in the List.
+              children: List.generate(numberOfLevel, (index) {
+                return ElevatedButton(
+                  child: Text('${index+1}'),
+                  style: Style.buttonText,
+                  onPressed: () {
+                    // Go to the selected level
+                    Navigator.of(context).push(
+                      MaterialPageRoute(builder: (context)=>
+                      ScreenBuildingConstructionGame(difficulty, index+1),
+                      ),
+                    );
+                    print("Start Game ${index+1} pressed");
+                  },
+                );
+              })
+            )
+          )
+        ]
+      )
     );
   }
 }
