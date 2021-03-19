@@ -4,7 +4,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class DistributionServiceHelper{
+class BuildingConstructionDatabaseHelper{
 
   static final _dbName = 'bdd/JeuImmeubleRO.db';
   static final _dbVersion = 1;
@@ -34,8 +34,8 @@ class DistributionServiceHelper{
   static final columnDifficulte  = 'difficulte';
 
   // make the class a singleton class : we need to have one instance of the database
-  DistributionServiceHelper._privateConstructor();
-  static final DistributionServiceHelper instance = DistributionServiceHelper._privateConstructor();
+  BuildingConstructionDatabaseHelper._privateConstructor();
+  static final BuildingConstructionDatabaseHelper instance = BuildingConstructionDatabaseHelper._privateConstructor();
 
 
   // Initialize the database
@@ -120,5 +120,18 @@ class DistributionServiceHelper{
   }
 
 
+
+
+  Future<List<Map<String, dynamic>>> queryAllRows() async {
+    Database db = await instance.database;
+    return await db.query(_tableJeuImmeuble);
+  }
+
+  // All of the methods (insert, query, update, delete) can also be done using
+  // raw SQL commands. This method uses a raw query to give the row count.
+  Future<int> queryRowCount() async {
+    Database db = await instance.database;
+    return Sqflite.firstIntValue(await db.rawQuery('SELECT COUNT(*) FROM $_tableJeuImmeuble'));
+  }
 
 }
