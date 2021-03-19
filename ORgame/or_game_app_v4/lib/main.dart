@@ -1,17 +1,16 @@
 // imports
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'BuildingConstruction/test/BuildingConstructionUnitTests.dart';
 import 'ORgameUI.dart';
-
-//import 'DistributionServices/test/BuildingConstructionUnitTests.dart';
 
 // main async pour flame
 void main() async {
 
-  // tests unitaires sur les models
-  /*assert_DSM();
-  assert_DSD();
-  assert_DSC();*/
+  // Unit tests on model, controller and data
+  assertBCM();
+  assertBCD();
+  assertBCC();
 
   WidgetsFlutterBinding.ensureInitialized();
 

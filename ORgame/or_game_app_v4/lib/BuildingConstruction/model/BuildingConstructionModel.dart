@@ -38,6 +38,7 @@ class BuildingConstructionModel {
     assert(BCD.getPricesOfFloors.length==BCD.getMaxHeight);
 
     List<Client> clients = [];
+    //adding clients, each clients has an index starting from 0 to the total number of clients
     for(int i = 0; i < BCD.getEarningsFromClients.length;i++)
     {
       clients.add(Client(i,BCD.getEarningsFromClients[i],BCD.getRequestsOfFloorsFromClients[i]));
