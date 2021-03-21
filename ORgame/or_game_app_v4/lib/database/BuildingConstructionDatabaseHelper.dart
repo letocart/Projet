@@ -6,7 +6,7 @@ import 'package:path/path.dart';
 
 class BuildingConstructionDatabaseHelper{
 
-  static final _dbName = 'bdd/JeuImmeubleRO.db';
+  static final _dbName = 'bdd/BuildingConstructionDatabase.db';
   static final _dbVersion = 1;
 
   // Table client
@@ -51,18 +51,18 @@ class BuildingConstructionDatabaseHelper{
 
   }
 
-  _initiateDatabase() async{
+  Future<Database> _initiateDatabase() async{
     Directory directory = await getApplicationDocumentsDirectory();
     String path = join(directory.path, _dbName);
-    print('avant');
-    await openDatabase(path,version: _dbVersion,
+    print('init ${path}');
+    return await openDatabase(path,version: _dbVersion,
         onCreate: _onCreate
     );
-    print('après');
   }
 
    Future _onCreate(Database db, int version){
     // Création de la table Client
+   print('create_avant');
     db.query(
       '''
       CREATE TABLE $_tableClient( 
@@ -111,11 +111,14 @@ class BuildingConstructionDatabaseHelper{
       )  
       '''
     );
+   print('create_apres');
   }
 
   // Insertion
   Future<int> insert(Map<String, dynamic> row, final _table) async {
+    print('insert_avant');
     Database db = await instance.database;
+    print('insert_apres');
     return await db.insert(_table, row);
   }
 

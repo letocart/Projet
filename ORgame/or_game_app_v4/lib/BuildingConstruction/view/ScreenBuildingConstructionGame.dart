@@ -38,30 +38,35 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                  Container(
                     width : MediaQuery.of(context).size.width * 0.70,
                     height: MediaQuery.of(context).size.height,
                     color : Colors.brown,
-                    child: Align(
-                        child : _buildDragTarget()
-                    )
-                ),
+                    child: SingleChildScrollView(
+                    child : Align(
+                            child: _buildDragTarget(),
+                        )
+                    ),
+                  ),
                 Container(
                     width : MediaQuery.of(context).size.width * 0.30,
                     height: MediaQuery.of(context).size.height,
                     color : Colors.pinkAccent,
-                    child: StaggeredGridView.countBuilder(
-                      padding: const EdgeInsets.all(8),
-                      crossAxisSpacing: 5.0,
-                      mainAxisSpacing: 1.0,
-                      crossAxisCount: 3,
-                      staggeredTileBuilder: (int index) =>
-                      new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
-                      itemCount: BCC.getNumberOfClientsInBuilding(0),
-                      itemBuilder: (BuildContext context, int index) =>
-                          Align(
-                              child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
-                          ),
+                    child: Padding(
+                        padding: const EdgeInsets.only(top : 40),
+                        child : StaggeredGridView.countBuilder(
+                          padding: const EdgeInsets.all(8),
+                          crossAxisSpacing: 13.0,
+                          mainAxisSpacing: 1.0,
+                          crossAxisCount: 3,
+                          staggeredTileBuilder: (int index) =>
+                          new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
+                          itemCount: BCC.getNumberOfClientsInBuilding(0),
+                          itemBuilder: (BuildContext context, int index) =>
+                              Align(
+                                  child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
+                              ),
+                        )
                     )
                 ),
               ]
@@ -165,9 +170,10 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                 width: 1,
               ),
             ),
-            height: 300,
+            height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble()*10,
             width: 50,
             child : ListView.builder(
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: BCC.getClientsIndexesInBuilding(1).length,
                 itemBuilder: (BuildContext context, int index) {
                   return Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(1))[index]]);

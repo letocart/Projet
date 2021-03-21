@@ -5,7 +5,6 @@ import 'package:or_game_app_v4/view/ScreenMainMenu.dart';
 
 import '../../style.dart';
 import 'ScreenBuildingConstructionLevel.dart';
-/*
 class ScreenBuildingConstructionStage extends StatelessWidget {
   final List<String> entries = <String>['Tutorial', 'Easy', 'Normal', 'Hard', 'Insane'];
 
@@ -65,9 +64,8 @@ class ScreenBuildingConstructionStage extends StatelessWidget {
     );
   }
 }
-*/
 
-class ScreenBuildingConstructionStage extends StatelessWidget {
+/*class ScreenBuildingConstructionStage extends StatelessWidget {
   final List<String> entries = <String>['Tutorial', 'Easy', 'Normal', 'Hard', 'Insane'];
 
   @override
@@ -110,14 +108,16 @@ class ScreenBuildingConstructionStage extends StatelessWidget {
                           padding: const EdgeInsets.all(8),
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
+                            print('${snapshot.data[index]['columnDifficulte']}');
                             return Text(
-                              '${snapshot.data[index]}'
+                              '${snapshot.data[index]['columnDifficulte']}'
                             );
                           },
                           separatorBuilder: (BuildContext context, int index) => const Divider(),
                         )
                     );
                   } else {
+                    print('Pas de data');
                     return Container();
                   }
                 }
@@ -125,4 +125,4 @@ class ScreenBuildingConstructionStage extends StatelessWidget {
             ])
     );
   }
-}
+}*/
