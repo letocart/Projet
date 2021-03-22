@@ -11,7 +11,7 @@ class ScreenHome extends StatelessWidget {
     return Container( // Container principal
       decoration: BoxDecoration(  // background
         image: DecorationImage(
-          image: AssetImage("assets/images/backgrounds/city2.jpg"), // image du background
+          image: AssetImage("assets/images/backgrounds/city3.png"), // image du background
           fit: BoxFit.cover //couvre tout l'ecran
         )
       ),

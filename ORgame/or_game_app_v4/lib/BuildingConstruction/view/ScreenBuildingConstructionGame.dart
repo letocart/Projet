@@ -24,7 +24,6 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   String difficulty;
   int level;
   BuildingConstructionController BCC;
-  bool successfulDrop = false;
   int score = 0;
 
   BuildingConstructionGameState(this.difficulty,this.level,this.BCC);
@@ -40,10 +39,18 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           Container(
             width : MediaQuery.of(context).size.width * 0.65,
             height: MediaQuery.of(context).size.height,
-            color : Colors.brown,
+            //color : Colors.brown,
             child: ListView(
+                reverse: true,
               scrollDirection: Axis.vertical,
                 children : [Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
+                          fit: BoxFit.cover,
+                          alignment: Alignment.bottomCenter,
+                        )
+                    ),
                     height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
                     alignment: Alignment.center,
                     child: ListView.builder(
@@ -63,7 +70,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           Container(
               width : MediaQuery.of(context).size.width * 0.35,
               height: MediaQuery.of(context).size.height,
-              color : Colors.pinkAccent,
+              color : Colors.white70,
               child : DragTarget<Client>(
                 builder: (BuildContext context, List<Client> incoming, List rejected) {
                   return StaggeredGridView.countBuilder(
@@ -123,64 +130,6 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           ),
         ]
     );
-    /*return Container(
-      decoration: BoxDecoration(
-          color: Colors.teal
-      ),
-      child: Column (
-          children: [
-            Align(
-              alignment: Alignment.centerRight,
-              child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: ElevatedButton(
-                    child: Text('Return'),
-                    style: Style.returnButtonText,
-                    onPressed: () {
-                      Navigator.of(context).push( //Navigateur vers widget
-                        MaterialPageRoute(builder: (context)=>
-                            ScreenDistriServLevel(difficulty),
-                        ),
-                      );
-                    },
-                  )
-              ),
-            ),
-            Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Container(
-                      width : MediaQuery.of(context).size.width * 0.70,
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      color : Colors.brown,
-                      child: Align(
-                          child : _buildDragTarget()
-                      )
-                  ),
-                  Container(
-                      width : MediaQuery.of(context).size.width * 0.30,
-                      height: MediaQuery.of(context).size.height * 0.75,
-                      color : Colors.pinkAccent,
-                      child: StaggeredGridView.countBuilder(
-                        padding: const EdgeInsets.all(8),
-                        crossAxisSpacing: 5.0,
-                        mainAxisSpacing: 1.0,
-                        crossAxisCount: 3,
-                        staggeredTileBuilder: (int index) =>
-                        new StaggeredTile.count(1, DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]].nb_etages),
-                        itemCount: DSC.DSM.nb_client_in(0),
-                        itemBuilder: (BuildContext context, int index) =>
-                            Align(
-                                child: Client_Draggable(DSC.DSM.clients[(DSC.DSM.get_clients_indexes_in_immeuble(0))[index]])
-                            ),
-                      )
-                  ),
-                ]
-            ),
-            Text('Score $score',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
-          ]
-      ),
-    );*/
   }
 
   Widget _buildDragTarget(int index_building) {
@@ -213,7 +162,6 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
       onAccept: (data) {
         print("Accept $data");
         setState(() {
-          //successfulDrop = true;
           BCC.getBCM.assignClientToBuilding(data.getIndex,index_building);
         });
       },
@@ -259,7 +207,7 @@ class Client_Icon extends StatelessWidget {
                   height: 50,
                   width : 50,
                   decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.deepOrangeAccent,
                       border: Border.all(
                         color: Colors.black,
                         width: 1,

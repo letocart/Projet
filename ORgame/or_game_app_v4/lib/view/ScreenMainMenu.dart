@@ -8,7 +8,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/images/backgrounds/city2.jpg"),
+              image: AssetImage("assets/images/backgrounds/city3.png"),
               fit: BoxFit.cover)),
       child : Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -19,8 +19,8 @@ class ScreenMenuPrincipal extends StatelessWidget {
                 child : Align(
                     alignment : Alignment.bottomLeft,
                     child : Padding (
-                        padding: EdgeInsets.all(16.0),
-                        child : Image.asset('assets/images/professeur.png', scale : 10.0)
+                        padding: EdgeInsets.only(left: 16.0),
+                        child : Image.asset('assets/images/John.png', scale : 10.0)
                     )
                 )
             )
