@@ -1,4 +1,3 @@
-
 import 'package:flutter/cupertino.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
@@ -35,40 +34,65 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   Widget build(BuildContext context) {
     return Stack(
         children : [
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                  Container(
-                    width : MediaQuery.of(context).size.width * 0.70,
-                    height: MediaQuery.of(context).size.height,
-                    color : Colors.brown,
-                    child: SingleChildScrollView(
-                    child : Align(
-                            child: _buildDragTarget(),
-                        )
-                    ),
-                  ),
-                Container(
-                    width : MediaQuery.of(context).size.width * 0.30,
-                    height: MediaQuery.of(context).size.height,
-                    color : Colors.pinkAccent,
-                    child: Padding(
-                        padding: const EdgeInsets.only(top : 40),
-                        child : StaggeredGridView.countBuilder(
-                          padding: const EdgeInsets.all(8),
-                          crossAxisSpacing: 13.0,
-                          mainAxisSpacing: 1.0,
-                          crossAxisCount: 3,
-                          staggeredTileBuilder: (int index) =>
-                          new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
-                          itemCount: BCC.getNumberOfClientsInBuilding(0),
-                          itemBuilder: (BuildContext context, int index) =>
-                              Align(
-                                  child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
-                              ),
-                        )
+        Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Container(
+            width : MediaQuery.of(context).size.width * 0.65,
+            height: MediaQuery.of(context).size.height,
+            color : Colors.brown,
+            child: ListView(
+              scrollDirection: Axis.vertical,
+                children : [Container(
+                    height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                    alignment: Alignment.center,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: BCC.getBCM.getDescriptionOfBuildings.getNumberOfBuildings,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            padding: const EdgeInsets.only(left: 20),
+                            child: _buildDragTarget(index+1),
+                          );
+                        },
                     )
-                ),
+                )]
+            ),
+          ),
+          Container(
+              width : MediaQuery.of(context).size.width * 0.35,
+              height: MediaQuery.of(context).size.height,
+              color : Colors.pinkAccent,
+              child : DragTarget<Client>(
+                builder: (BuildContext context, List<Client> incoming, List rejected) {
+                  return StaggeredGridView.countBuilder(
+                    crossAxisCount: 3,
+                    staggeredTileBuilder: (int index) =>
+                    new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
+                    itemCount: BCC.getNumberOfClientsInBuilding(0),
+                    itemBuilder: (BuildContext context, int index) =>
+                        Align(
+                            child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
+                        ),
+                  );
+                },
+                onWillAccept: (data){
+                  print("OnWillAccept");
+                  return true;
+                },
+                onAccept: (data) {
+                  print("Accept $data");
+                  setState(() {
+                    //successfulDrop = true;
+                    BCC.getBCM.assignClientToBuilding(data.getIndex,0);
+                  });
+                },
+                onLeave: (data) {
+                  print("Not accept");
+                },
+              )
+          )
               ]
           ),
           Positioned(
@@ -159,7 +183,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
     );*/
   }
 
-  Widget _buildDragTarget() {
+  Widget _buildDragTarget(int index_building) {
     return DragTarget<Client>(
       builder: (BuildContext context, List<Client> incoming, List rejected) {
         return Container(
@@ -170,13 +194,14 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                 width: 1,
               ),
             ),
-            height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble()*10,
+            height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
             width: 50,
             child : ListView.builder(
+              reverse: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: BCC.getClientsIndexesInBuilding(1).length,
+                itemCount: BCC.getClientsIndexesInBuilding(index_building).length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(1))[index]]);
+                  return Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(index_building))[index]]);
                 }
             )
         );
@@ -188,9 +213,8 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
       onAccept: (data) {
         print("Accept $data");
         setState(() {
-          successfulDrop = true;
-          BCC.getBCM.assignClientToBuilding(data.getIndex,1);
-          //BCC.getBCM.print_clients(0);
+          //successfulDrop = true;
+          BCC.getBCM.assignClientToBuilding(data.getIndex,index_building);
         });
       },
       onLeave: (data) {

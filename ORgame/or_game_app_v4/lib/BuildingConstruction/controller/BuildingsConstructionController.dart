@@ -26,7 +26,7 @@ class BuildingConstructionController {
 
     //has to be replaced
     this.BCD = new BuildingConstructionData(300
-        , 2, 5, [0, 100, 200, 300, 400]
+        , 2, 35, [0, 100, 200, 300, 400, 0, 100, 200, 300, 400, 0, 100, 200, 300, 400, 0, 100, 200, 300, 400, 0, 100, 200, 300, 400, 0, 100, 200, 300, 400, 0, 100, 200, 300, 400]
         , [200, 300, 400, 500, 600, 700, 800], [2, 3, 4, 5, 6, 7, 8]);
     this.BCM = BuildingConstructionModel.fromBCD(this.getBCD);
   }
