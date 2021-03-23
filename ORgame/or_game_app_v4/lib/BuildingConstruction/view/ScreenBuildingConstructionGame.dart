@@ -234,7 +234,7 @@ class Client_Icon extends StatelessWidget {
           alignment: Alignment.center,
           height: 50.0*client.getRequestOfFloors,
           width : 50,
-          decoration: BoxDecoration(
+          /*decoration: BoxDecoration(
               color: Colors.deepOrangeAccent,
               border: Border.all(
                 color: Colors.black,
@@ -244,8 +244,8 @@ class Client_Icon extends StatelessWidget {
           child: Text(
             '${client.getEarning.toInt()}',
             style: TextStyle(color: Colors.black, fontSize: 10)
-          ),
-          /*child: Column(
+          ),*/
+          child: Column(
             children: new List.generate(client.getRequestOfFloors,
                   (index) => Container(
                   alignment: Alignment.center,
@@ -260,11 +260,11 @@ class Client_Icon extends StatelessWidget {
                   ),
                   child: Text(
                     '${client.getEarning.toInt()}',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
+                    style: TextStyle(color: Colors.black, fontSize: 20),
                   )
               ),
             ),
-          )*/
+          )
       ),
     );
   }
