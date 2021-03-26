@@ -52,12 +52,12 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   alignment: Alignment.bottomCenter,
                                 )
                             ),
-                            height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                            height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
                             alignment: Alignment.center,
                             child: Row(
                                 children : [
                                   Container(
-                                      height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                                      height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
                                       width : MediaQuery.of(context).size.width * 0.15,
                                       child : ListView.builder(
                                           reverse: true,
@@ -66,11 +66,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                           itemCount: BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
                                           itemBuilder: (BuildContext context, int index){
                                             return Container(
-                                                height: 50,
+                                                height: 15,
                                                 width: 50,
                                                 alignment: Alignment.centerRight,
                                                 child: Text('${BCC.getBCM.getDescriptionOfBuildings.getPricesOfFloors[index].toInt()}', style: TextStyle(
-                                                    fontSize: 18,
+                                                    fontSize: 10,
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
                                                     decoration: TextDecoration.none)
@@ -80,7 +80,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                       )
                                   ),
                                   Container(
-                                      height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                                      height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
                                       width : MediaQuery.of(context).size.width * 0.5,
                                       child : ListView.builder(
                                         shrinkWrap: true,
@@ -176,7 +176,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                 width: 1,
               ),
             ),
-            height: 50*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+            height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
             width: 50,
             child : ListView.builder(
                 reverse: true,
@@ -232,7 +232,7 @@ class Client_Icon extends StatelessWidget {
     return Material(
       child: Container(
           alignment: Alignment.center,
-          height: 50.0*client.getRequestOfFloors,
+          height: 15.0*client.getRequestOfFloors,
           width : 50,
           /*decoration: BoxDecoration(
               color: Colors.deepOrangeAccent,
@@ -249,7 +249,7 @@ class Client_Icon extends StatelessWidget {
             children: new List.generate(client.getRequestOfFloors,
                   (index) => Container(
                   alignment: Alignment.center,
-                  height: 50,
+                  height: 15,
                   width : 50,
                   decoration: BoxDecoration(
                       color: Colors.deepOrangeAccent,
@@ -259,8 +259,8 @@ class Client_Icon extends StatelessWidget {
                       )
                   ),
                   child: Text(
-                    '${client.getEarning.toInt()}',
-                    style: TextStyle(color: Colors.black, fontSize: 20),
+                    '${index==0?client.getEarning.toInt():''}',
+                    style: TextStyle(color: Colors.black, fontSize: 10),
                   )
               ),
             ),
