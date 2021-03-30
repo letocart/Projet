@@ -7,7 +7,7 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="or_game_app_v4"
+        android:label="Playing OR"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

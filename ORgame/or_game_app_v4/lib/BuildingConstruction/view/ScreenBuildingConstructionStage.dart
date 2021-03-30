@@ -73,7 +73,7 @@ class ScreenBuildingConstructionStage extends StatelessWidget {
     return Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/backgrounds/city2.jpg"),
+                image: AssetImage("assets/images/backgrounds/city3.jpg"),
                 fit: BoxFit.cover)
         ),
         alignment: Alignment.center,
