@@ -161,7 +161,52 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                       )
                   )
               )
-          )]
+          ),
+          Positioned(
+              top: 0.0,
+              left: 0.0,
+              child: Row(
+                children: [
+                  Material(
+                    color : Colors.transparent,
+                    child: Ink(
+                        decoration: const ShapeDecoration(
+                            color: Colors.transparent,
+                            shape: CircleBorder()),
+                        child : IconButton(
+                          icon: Image.asset('assets/images/icon/uk.png'),
+                          onPressed: () {},
+                        )
+                    ),
+                  ),
+                  Material(
+                    color : Colors.transparent,
+                    child: Ink(
+                        decoration: const ShapeDecoration(
+                            color: Colors.transparent,
+                            shape: CircleBorder()),
+                        child : IconButton(
+                          icon: Image.asset('assets/images/icon/fr.png'),
+                          onPressed: () {},
+                        )
+                    ),
+                  ),
+                  Material(
+                    color : Colors.transparent,
+                    child: Ink(
+                        decoration: const ShapeDecoration(
+                            color: Colors.transparent,
+                            shape: CircleBorder()),
+                        child : IconButton(
+                          icon: Image.asset('assets/images/icon/manual.png'),
+                          onPressed: () {},
+                        )
+                    ),
+                  )
+                ],
+              )
+          )
+        ]
     );
   }
 

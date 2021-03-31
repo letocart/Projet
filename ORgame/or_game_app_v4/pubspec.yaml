@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: "0.5.12+4"
+  flutter_svg: ^0.17.1
   collection: ^1.14.13
   flutter_staggered_grid_view:
   sqflite:
@@ -56,6 +57,9 @@ flutter:
     - assets/images/backgrounds/ajoutBgDistributionService.png
     - assets/images/backgrounds/bgDistributionService.png
     - assets/images/backgrounds/city3.png
+    - assets/images/icon/fr.png
+    - assets/images/icon/uk.png
+    - assets/images/icon/manual.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

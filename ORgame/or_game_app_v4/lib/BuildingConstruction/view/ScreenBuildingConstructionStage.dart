@@ -10,57 +10,106 @@ class ScreenBuildingConstructionStage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("assets/images/backgrounds/city3.png"),
-                fit: BoxFit.cover)
-        ),
-        alignment: Alignment.center,
-        child: Column(
-            children: [
-            Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.all(5.0),
-                  child: ElevatedButton(
-                    child: Text('Return'),
-                    style: Style.returnButtonText,
-                    onPressed: () {
-                      Navigator.of(context).push( //Navigateur vers widget
-                        MaterialPageRoute(builder: (context)=>
-                            ScreenMenuPrincipal(),
-                        ),
-                      );
-                    },
+    return Stack (
+      children : [
+        Container(
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/backgrounds/city3.png"),
+                    fit: BoxFit.cover)
+            ),
+            alignment: Alignment.center,
+            child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Padding(
+                        padding: EdgeInsets.all(5.0),
+                        child: ElevatedButton(
+                          child: Text('Return'),
+                          style: Style.returnButtonText,
+                          onPressed: () {
+                            Navigator.of(context).push( //Navigateur vers widget
+                              MaterialPageRoute(builder: (context)=>
+                                  ScreenMenuPrincipal(),
+                              ),
+                            );
+                          },
+                        )
+                    ),
+                  ),
+                  Text('Choose a difficulty',style : TextStyle(
+                      fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                  ),
+                  Expanded(
+                      child: ListView.separated(
+                        padding: const EdgeInsets.all(8),
+                        itemCount: entries.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return ElevatedButton(
+                            child: Text('${entries[index]}'),
+                            style: Style.buttonText,
+                            onPressed: () {
+                              Navigator.of(context).push( //Navigateur vers widget
+                                MaterialPageRoute(builder: (context)=>
+                                    ScreenBuildingConstructionLevel(entries[index]),
+                                ),
+                              );
+                              print("Start Game ${entries[index]} pressed");
+                            },
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) => const Divider(),
+                      )
                   )
+                ])
+        ),
+        Positioned(
+            top: 0.0,
+            left: 0.0,
+            child: Row(
+              children: [
+                Material(
+                  color : Colors.transparent,
+                  child: Ink(
+                      decoration: const ShapeDecoration(
+                          color: Colors.transparent,
+                          shape: CircleBorder()),
+                      child : IconButton(
+                        icon: Image.asset('assets/images/icon/uk.png'),
+                        onPressed: () {},
+                      )
+                  ),
                 ),
-              ),
-              Text('Choose a difficulty',style : TextStyle(
-                  fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  padding: const EdgeInsets.all(8),
-                  itemCount: entries.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ElevatedButton(
-                      child: Text('${entries[index]}'),
-                      style: Style.buttonText,
-                      onPressed: () {
-                        Navigator.of(context).push( //Navigateur vers widget
-                          MaterialPageRoute(builder: (context)=>
-                              ScreenBuildingConstructionLevel(entries[index]),
-                          ),
-                        );
-                        print("Start Game ${entries[index]} pressed");
-                      },
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
+                Material(
+                  color : Colors.transparent,
+                  child: Ink(
+                      decoration: const ShapeDecoration(
+                          color: Colors.transparent,
+                          shape: CircleBorder()),
+                      child : IconButton(
+                        icon: Image.asset('assets/images/icon/fr.png'),
+                        onPressed: () {},
+                      )
+                  ),
+                ),
+                Material(
+                  color : Colors.transparent,
+                  child: Ink(
+                      decoration: const ShapeDecoration(
+                          color: Colors.transparent,
+                          shape: CircleBorder()),
+                      child : IconButton(
+                        icon: Image.asset('assets/images/icon/manual.png'),
+                        onPressed: () {},
+                      )
+                  ),
                 )
-              )
-          ])
+              ],
+            )
+        )
+      ]
+
     );
   }
 }
