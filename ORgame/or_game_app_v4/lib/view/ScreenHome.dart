@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import '../style.dart';
 import 'package:flutter/services.dart';
+import 'IconWidget.dart';
 import 'ScreenMainMenu.dart';
 
 
@@ -32,7 +33,7 @@ class ScreenHome extends StatelessWidget {
                         height : 50,
                       ),
                       Text('Welcome to OR Game',style : TextStyle(
-                          fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold),
+                          fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold, decoration: TextDecoration.none),
                       ),
                       SizedBox(
                         height : 20,
@@ -62,50 +63,7 @@ class ScreenHome extends StatelessWidget {
                 ]
             )
         ),
-        Positioned(
-            top: 0.0,
-            left: 0.0,
-            child: Row(
-              children: [
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/uk.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                ),
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/fr.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                ),
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/manual.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                )
-              ],
-            )
-        ),
+        IconWidget(Axis.horizontal)
       ]
     );
   }

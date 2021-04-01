@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionStage.dart';
 import '../style.dart';
-import 'ScreenHome.dart';
-import 'ScreenHome.dart';
+import 'IconWidget.dart';
 import 'ScreenHome.dart';
 
 class ScreenMenuPrincipal extends StatelessWidget {
@@ -78,50 +77,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
             ],
           ),
         ),
-        Positioned(
-            top: 0.0,
-            left: 0.0,
-            child: Row(
-              children: [
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/uk.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                ),
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/fr.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                ),
-                Material(
-                  color : Colors.transparent,
-                  child: Ink(
-                      decoration: const ShapeDecoration(
-                          color: Colors.transparent,
-                          shape: CircleBorder()),
-                      child : IconButton(
-                        icon: Image.asset('assets/images/icon/manual.png'),
-                        onPressed: () {},
-                      )
-                  ),
-                )
-              ],
-            )
-        ),
+        IconWidget(Axis.horizontal)
       ]
     );
   }

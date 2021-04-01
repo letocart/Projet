@@ -4,6 +4,7 @@ import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionMo
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionLevel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:or_game_app_v4/view/IconWidget.dart';
 
 import '../../style.dart';
 
@@ -102,6 +103,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                 Container(
                     width : MediaQuery.of(context).size.width * 0.35,
                     height: MediaQuery.of(context).size.height,
+                    padding: EdgeInsets.only(top: 50),
                     color : Colors.white70,
                     child : DragTarget<Client>(
                       builder: (BuildContext context, List<Client> incoming, List rejected) {
@@ -111,9 +113,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                           new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
                           itemCount: BCC.getNumberOfClientsInBuilding(0),
                           itemBuilder: (BuildContext context, int index) =>
-                              Align(
-                                  child: Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]])
-                              ),
+                              Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]]),
                         );
                       },
                       onWillAccept: (data){
@@ -162,49 +162,25 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                   )
               )
           ),
+          IconWidget(Axis.vertical),
           Positioned(
-              top: 0.0,
-              left: 0.0,
-              child: Row(
-                children: [
-                  Material(
-                    color : Colors.transparent,
-                    child: Ink(
-                        decoration: const ShapeDecoration(
-                            color: Colors.transparent,
-                            shape: CircleBorder()),
-                        child : IconButton(
-                          icon: Image.asset('assets/images/icon/uk.png'),
-                          onPressed: () {},
-                        )
-                    ),
-                  ),
-                  Material(
-                    color : Colors.transparent,
-                    child: Ink(
-                        decoration: const ShapeDecoration(
-                            color: Colors.transparent,
-                            shape: CircleBorder()),
-                        child : IconButton(
-                          icon: Image.asset('assets/images/icon/fr.png'),
-                          onPressed: () {},
-                        )
-                    ),
-                  ),
-                  Material(
-                    color : Colors.transparent,
-                    child: Ink(
-                        decoration: const ShapeDecoration(
-                            color: Colors.transparent,
-                            shape: CircleBorder()),
-                        child : IconButton(
-                          icon: Image.asset('assets/images/icon/manual.png'),
-                          onPressed: () {},
-                        )
-                    ),
+            top : 0,
+            left : MediaQuery.of(context).size.width * 0.65 - 24,
+            child : Material(
+              color : Colors.transparent,
+              child: Ink(
+                  decoration: const ShapeDecoration(
+                      shape: CircleBorder()),
+                  child : IconButton(
+                    padding: EdgeInsets.only(top : 10),
+                    constraints: BoxConstraints(),
+                    icon: Image.asset('assets/images/icon/ampoule.png'),
+                    onPressed: () {
+                      print("Ampoule pressed");
+                    },
                   )
-                ],
-              )
+              ),
+            )
           )
         ]
     );
@@ -274,43 +250,46 @@ class Client_Icon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Container(
-          alignment: Alignment.center,
-          height: 15.0*client.getRequestOfFloors,
-          width : 50,
-          /*decoration: BoxDecoration(
-              color: Colors.deepOrangeAccent,
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
-              )
-          ),
-          child: Text(
-            '${client.getEarning.toInt()}',
-            style: TextStyle(color: Colors.black, fontSize: 10)
-          ),*/
-          child: Column(
-            children: new List.generate(client.getRequestOfFloors,
-                  (index) => Container(
-                  alignment: Alignment.center,
-                  height: 15,
-                  width : 50,
-                  decoration: BoxDecoration(
-                      color: Colors.deepOrangeAccent,
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      )
-                  ),
-                  child: Text(
-                    '${index==0?client.getEarning.toInt():''}',
-                    style: TextStyle(color: Colors.black, fontSize: 10),
+    return Align(
+        alignment: Alignment.topCenter,
+        child : Material(
+          child: Container(
+              alignment: Alignment.center,
+              height: 15.0*client.getRequestOfFloors,
+              width : 50,
+              /*decoration: BoxDecoration(
+                  color: Colors.deepOrangeAccent,
+                  border: Border.all(
+                    color: Colors.black,
+                    width: 1,
                   )
               ),
-            ),
-          )
-      ),
+              child: Text(
+                '${client.getEarning.toInt()}',
+                style: TextStyle(color: Colors.black, fontSize: 10)
+              ),*/
+              child: Column(
+                children: new List.generate(client.getRequestOfFloors,
+                      (index) => Container(
+                      alignment: Alignment.center,
+                      height: 15,
+                      width : 50,
+                      decoration: BoxDecoration(
+                          color: Colors.deepOrangeAccent,
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1,
+                          )
+                      ),
+                      child: Text(
+                        '${index==0?client.getEarning.toInt():''}',
+                        style: TextStyle(color: Colors.black, fontSize: 10),
+                      )
+                  ),
+                ),
+              )
+          ),
+        )
     );
   }
 }
