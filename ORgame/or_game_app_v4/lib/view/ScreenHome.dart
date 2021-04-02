@@ -28,7 +28,6 @@ class ScreenHome extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children :  [
-
                       SizedBox( //Sized Box d'ecart
                         height : 50,
                       ),
