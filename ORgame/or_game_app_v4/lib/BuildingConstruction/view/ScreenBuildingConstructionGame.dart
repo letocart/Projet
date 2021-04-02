@@ -164,23 +164,77 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           ),
           IconWidget(Axis.vertical),
           Positioned(
-            top : 0,
-            left : MediaQuery.of(context).size.width * 0.65 - 24,
-            child : Material(
-              color : Colors.transparent,
-              child: Ink(
-                  decoration: const ShapeDecoration(
-                      shape: CircleBorder()),
-                  child : IconButton(
-                    padding: EdgeInsets.only(top : 10),
-                    constraints: BoxConstraints(),
-                    icon: Image.asset('assets/images/icon/ampoule.png'),
-                    onPressed: () {
-                      print("Ampoule pressed");
-                    },
-                  )
-              ),
-            )
+              top : 0,
+              left : MediaQuery.of(context).size.width * 0.65 - 24,
+              child : Material(
+                color : Colors.transparent,
+                child: Ink(
+                    decoration: const ShapeDecoration(
+                        shape: CircleBorder()),
+                    child : IconButton(
+                      padding: EdgeInsets.only(top : 10),
+                      constraints: BoxConstraints(),
+                      icon: Image.asset('assets/images/icon/ampoule.png'),
+                      onPressed: () {
+                        print("Ampoule pressed");
+                      },
+                    )
+                ),
+              )
+          ),
+          Positioned(
+              bottom : 0,
+              left : MediaQuery.of(context).size.width * 0.65 - 48,
+              child : Material(
+                color : Colors.transparent,
+                child: Ink(
+                    decoration: const ShapeDecoration(
+                        shape: CircleBorder(),
+                        color : Colors.blueGrey
+                    ),
+                    child : IconButton(
+                      constraints: BoxConstraints(),
+                      icon: Image.asset('assets/images/icon/check.png'),
+                      onPressed: () {
+                        print("Check pressed");
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              AlertDialog(
+                                content: new Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/YouWin.png') : Text("You lose"),
+                                    Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
+                                  ],
+                                ),
+                                actions: <Widget>[
+                                  new FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    textColor: Theme.of(context).primaryColor,
+                                    child: const Text('Keep trying'),
+                                  ),
+                                  new FlatButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push( //Navigateur vers widget
+                                        MaterialPageRoute(builder: (context)=>
+                                            ScreenBuildingConstructionLevel(difficulty),
+                                        ),
+                                      );
+                                    },
+                                    textColor: Theme.of(context).primaryColor,
+                                    child: const Text('return'),
+                                  ),
+                                ],
+                              ),
+                        );
+                      },
+                    )
+                ),
+              )
           )
         ]
     );
@@ -197,26 +251,31 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                 width: 1,
               ),
             ),
-            height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+            height: 15 *
+                BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
             width: 50,
-            child : ListView.builder(
+            child: ListView.builder(
                 reverse: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: BCC.getClientsIndexesInBuilding(index_building).length,
+                itemCount: BCC
+                    .getClientsIndexesInBuilding(index_building)
+                    .length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(index_building))[index]]);
+                  return Client_Draggable(
+                      BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(
+                          index_building))[index]]);
                 }
             )
         );
       },
-      onWillAccept: (data){
+      onWillAccept: (data) {
         print("OnWillAccept");
         return true;
       },
       onAccept: (data) {
         print("Accept $data");
         setState(() {
-          BCC.getBCM.assignClientToBuilding(data.getIndex,index_building);
+          BCC.getBCM.assignClientToBuilding(data.getIndex, index_building);
           BCC.getBCM.updateScore();
         });
       },
