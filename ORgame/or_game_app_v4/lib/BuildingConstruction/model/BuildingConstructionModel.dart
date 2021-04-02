@@ -125,7 +125,7 @@ class BuildingConstructionModel {
       worst += price;
     }
     worst = (worst*this.getDescriptionOfBuildings.getNumberOfBuildings)+1;
-    return ((this.getScore+worst)/(this.getSolutionValue+worst)*100).ceil();
+    return ((this.getScore+worst)/(this.getSolutionValue+worst)*100).floor();
   }
 
 
