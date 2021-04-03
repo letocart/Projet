@@ -24,7 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   shared_preferences: "0.5.12+4"
-  bubble: ^1.2.1
+  bubble:
   flutter_svg: ^0.17.1
   collection: ^1.14.13
   flutter_staggered_grid_view:

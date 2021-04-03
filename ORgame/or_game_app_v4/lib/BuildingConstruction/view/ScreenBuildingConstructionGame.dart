@@ -244,27 +244,42 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
     return DragTarget<Client>(
       builder: (BuildContext context, List<Client> incoming, List rejected) {
         return Container(
-            decoration: BoxDecoration(
-              color: Colors.white70,
-              border: Border.all(
-                color: Colors.black,
-                width: 1,
-              ),
-            ),
             height: 15 *
                 BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
             width: 50,
-            child: ListView.builder(
-                reverse: true,
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: BCC
-                    .getClientsIndexesInBuilding(index_building)
-                    .length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Client_Draggable(
-                      BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(
-                          index_building))[index]]);
-                }
+            child:
+            Stack(
+                children : [
+                  ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount : BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
+                      itemBuilder : (BuildContext context, int index) {
+                        return Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white70,
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1,
+                              ),
+                            ),
+                            height: 15,
+                            width: 50
+                        );
+                      }
+                  ),
+                  ListView.builder(
+                      reverse: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: BCC
+                          .getClientsIndexesInBuilding(index_building)
+                          .length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Client_Draggable(
+                            BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(
+                                index_building))[index]]);
+                      }
+                  )
+                ]
             )
         );
       },
@@ -334,7 +349,7 @@ class Client_Icon extends StatelessWidget {
                       height: 15,
                       width : 50,
                       decoration: BoxDecoration(
-                          color: Colors.deepOrangeAccent,
+                          color: colorRatio(), //Color.fromARGB(255, ((client.getEarning~/client.getRequestOfFloors)>255) ? 0 : (255-(client.getEarning~/client.getRequestOfFloors)) , (client.getEarning~/client.getRequestOfFloors>255) ? 255 : (0+(client.getEarning~/client.getRequestOfFloors)), 0),
                           border: Border.all(
                             color: Colors.black,
                             width: 1,
@@ -351,4 +366,28 @@ class Client_Icon extends StatelessWidget {
         )
     );
   }
+
+
+  Color colorRatio()
+  {
+    var ratio = client.getEarning~/client.getRequestOfFloors;
+    int green;
+    int red;
+
+    if(ratio<=255) {
+      red = 255;
+      green = ratio;
+    }
+    else if(ratio<=510) {
+      red = 510 - ratio;
+      green = 255;
+    }
+    else {
+      green = 255;
+      red = 0;
+    }
+
+    return Color.fromARGB(255, red, green, 0);
+  }
+
 }
