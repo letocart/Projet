@@ -15,6 +15,7 @@ class BuildingConstructionModel {
 
   // basic constructor
   BuildingConstructionModel(this._solutionValue,this._descriptionOfBuildings,this._clients) {
+    assert(this._solutionValue>0); // solution value is positive
     // creation and initialization of the matrix stateOfGame of size (numberOfClients,numberOfBuildings+1)
     // first column is true, the rest is false
     this.stateOfGame = new List<List<bool>>();
@@ -116,16 +117,23 @@ class BuildingConstructionModel {
   // calculate the percentage of the solution
   int solutionPercentage()
   {
-    // since we can have negative score we go a change of scale so that we only deal with positive values
-    // we shift the minimum of the score by (the maximum price of a full building without earnings)+1
-    // (+1 to avoid worst case instance scenario and a division by 0)
-    double worst =0;
-    for(double price in this.getDescriptionOfBuildings.getPricesOfFloors)
-    {
-      worst += price;
+
+    print("score is: "+this.getScore.toString());
+    print("solution value is: "+this.getSolutionValue.toString());
+    print("score is: "+this.getSolutionValue.toString());
+    if(this.getSolutionValue<=0) {
+      //special case the solution value is equal to 0
+      // (it cannot be negative but just in case we test <=)
+      if (this.getScore==0) //if score is 0 we return 100%
+        return 100;
+      else      //else we return 0%
+        return 0;
+    } else {  //else for normal solutions
+      if(this.getScore<0) //if score is negative
+        return 0;         //it returns 0%
+      else
+        return (((this.getScore)/this.getSolutionValue*100).floor()); //it returns the calculated %
     }
-    worst = (worst*this.getDescriptionOfBuildings.getNumberOfBuildings)+1;
-    return ((this.getScore+worst)/(this.getSolutionValue+worst)*100).floor();
   }
 
 

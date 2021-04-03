@@ -126,26 +126,18 @@ void assertBCM(){
   assert(BCM.getStateOfGame[0][0]==false);
   assert(BCM.getStateOfGame[0][2]==true);
 
-  double worst =0;
-  for(double price in BCM.getDescriptionOfBuildings.getPricesOfFloors)
-  {
-    worst += price;
-  }
-  worst = (worst*BCM.getDescriptionOfBuildings.getNumberOfBuildings)+1;
-
-
   // test update score + %solution
   assert(BCM.getScore==0);
-  assert(BCM.solutionPercentage()==((BCM.getScore+worst)/(BCM.getSolutionValue+worst)*100).floor());
+  assert(BCM.solutionPercentage()==0);
   BCM.updateScore();
   assert(BCM.getScore==100);
-  assert(BCM.solutionPercentage()==((BCM.getScore+worst)/(BCM.getSolutionValue+worst)*100).floor());
+  assert(BCM.solutionPercentage()==((BCM.getScore)/(BCM.getSolutionValue)*100).floor());
 
   BCM.assignClientToBuilding(1, 1);
   BCM.assignClientToBuilding(0, 2);
   BCM.updateScore();
   assert(BCM.getScore==200);
-  assert(BCM.solutionPercentage()==((BCM.getScore+worst)/(BCM.getSolutionValue+worst)*100).floor());
+  assert(BCM.solutionPercentage()==((BCM.getScore)/(BCM.getSolutionValue)*100).floor());
   assert(BCM.solutionPercentage()==100);
 
   BCM.unassignClient(0);
