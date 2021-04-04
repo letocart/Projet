@@ -29,6 +29,7 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
 //the state
 class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstructionLevel> {
   List data;
+  //List dataInstances;
   int numberOfLevels=0;
   String difficulty;
   ScreenBuildingConstructionLevelState(String diff) {
@@ -40,6 +41,14 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
     var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
             'BuildingConstruction_'+difficulty+'_Levels.json');
     setState(() => data = json.decode(jsonText));
+    /*
+    for(int i=0;i<numberOfLevels;i++) {
+
+    }
+    var jsonText2 = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
+        'BuildingConstruction_'+difficulty+'_Levels.json');
+    setState(() => data = json.decode(jsonText2));
+*/
     return 'success';
   }
 

@@ -6,7 +6,13 @@ import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionMo
 class BuildingConstructionController {
   BuildingConstructionModel _BCM;
   BuildingConstructionData _BCD;
-  //BuildingConstructionView _BCV; to add
+  bool _isInitialized = false;
+
+  bool get isInitialized => _isInitialized;
+
+  set isInitialized(bool value) {
+    _isInitialized = value;
+  }
 
   // basic constructor
   BuildingConstructionController(this._BCM, this._BCD);

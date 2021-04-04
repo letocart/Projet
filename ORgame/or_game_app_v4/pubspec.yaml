@@ -74,7 +74,7 @@ flutter:
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_3.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_4.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_5.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_5.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_6.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

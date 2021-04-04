@@ -15,7 +15,7 @@ class BuildingConstructionModel {
 
   // basic constructor
   BuildingConstructionModel(this._solutionValue,this._descriptionOfBuildings,this._clients) {
-    assert(this._solutionValue>0); // solution value is positive
+    assert(this._solutionValue>=0); // solution value is positive or equal to 0
     // creation and initialization of the matrix stateOfGame of size (numberOfClients,numberOfBuildings+1)
     // first column is true, the rest is false
     this.stateOfGame = new List<List<bool>>();

@@ -17,8 +17,6 @@ class ScreenBuildingConstructionStage extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ScreenBuildingConstructionStageState();
 
-
-
 }
 
 //the state

@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
+import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionLevel.dart';
 import 'package:flutter/material.dart';
@@ -11,27 +15,64 @@ import '../../style.dart';
 class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
-  BuildingConstructionController BCC;
   ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
-    BCC = new BuildingConstructionController.fromIndex(difficulty, level);
   }
-  createState() => BuildingConstructionGameState(difficulty,level,BCC);
+  createState() => BuildingConstructionGameState(difficulty,level);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
 
+  List data;
   String difficulty;
   int level;
+  bool isInitialized = false;
   BuildingConstructionController BCC;
   int score = 0;
 
-  BuildingConstructionGameState(this.difficulty,this.level,this.BCC);
+  BuildingConstructionGameState(this.difficulty,this.level);
+
+  Future<String> loadJsonData() async {
+    var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
+        'BuildingConstruction_'+difficulty+'_'+level.toString()+'.json');
+    setState(() => data = json.decode(jsonText));
+    return 'success';
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    this.loadJsonData();
+  }
 
   int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
+    if(!isInitialized) {
+      isInitialized = true;
+      double solutionValue = data==null ? 0 : data[0]['solutionValue'];
+      int numberOfBuildings = data==null ? 0 : data[0]['numberOfBuildings'];
+      int maxHeight = data==null ? 0 : data[0]['maxHeight'];
+      List<double> pricesOfFloors = [];
+      List<double> earningsFromClients = [];
+      List<int> requestsOfFloorsFromClients = [];
+      if(data!=null) {
+        for(int i=0;i<data[0]['pricesOfFloors'].length;i++)
+          pricesOfFloors.add(data[0]['pricesOfFloors'][i].toDouble());
+
+        for(int i=0;i<data[0]['earningsFromClients'].length;i++)
+          earningsFromClients.add(data[0]['earningsFromClients'][i].toDouble());
+
+        for(int i=0;i<data[0]['requestsOfFloorsFromClients'].length;i++)
+          requestsOfFloorsFromClients.add(data[0]['requestsOfFloorsFromClients'][i]);
+      }
+      BCC=BuildingConstructionController.fromBCD(
+          BuildingConstructionData(solutionValue,
+              numberOfBuildings,maxHeight,pricesOfFloors,
+              earningsFromClients,requestsOfFloorsFromClients));
+
+    }
     return Stack(
         children : [
           Row(
