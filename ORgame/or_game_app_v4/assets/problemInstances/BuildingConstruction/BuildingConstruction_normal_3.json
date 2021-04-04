@@ -1,7 +1,7 @@
 {
   "difficulty": "normal",
   "level":3,
-  "solutionValue":150.0,
+  "solutionValue":350.0,
   "numberOfBuildings":2,
   "maxHeight":9,
   "pricesOfFloors":[50,100,100,150,150,200,200,250,250],

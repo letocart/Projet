@@ -252,7 +252,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/YouWin.png') : Text("You lose"),
+                                    (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png') : Text("You lose"),
                                     Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
                                   ],
                                 ),

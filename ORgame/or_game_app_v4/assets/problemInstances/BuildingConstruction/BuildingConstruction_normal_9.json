@@ -4,7 +4,7 @@
   "solutionValue":410.0,
   "numberOfBuildings":2,
   "maxHeight":16,
-  "pricesOfFloors":[100,100,100,120,120,120,140,140,140,160,160,160,160,180,180,180,200],
+  "pricesOfFloors":[100,100,100,120,120,120,140,140,140,160,160,160,160,180,180,180],
   "earningsFromClients":[425,275,290,270,600,415],
   "requestsOfFloorsFromClients":[3,2,2,2,4,3]
 }
