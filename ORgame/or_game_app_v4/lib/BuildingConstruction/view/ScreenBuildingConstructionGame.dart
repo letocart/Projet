@@ -10,23 +10,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 
+import '../../language.dart';
 import '../../style.dart';
 
 class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
   BuildingConstructionController BCC;
+  Language lang;
   /*ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
   }*/
-  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC);
+  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC, this.lang);
   //createState() => BuildingConstructionGameState(difficulty,level);
-  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
+  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC, this.lang);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
-
+  Language lang;
   List data;
   String difficulty;
   int level;
@@ -35,7 +37,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   int score = 0;
 
   //BuildingConstructionGameState(this.difficulty,this.level);
-  BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
+  BuildingConstructionGameState(this.difficulty, this.level, this.BCC, this.lang);
 /*
   Future<String> loadJsonData() async {
     var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
@@ -199,7 +201,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                         onPressed: () {
                           Navigator.of(context).push( //Navigateur vers widget
                             MaterialPageRoute(builder: (context)=>
-                                ScreenBuildingConstructionLevel(difficulty),
+                                ScreenBuildingConstructionLevel(difficulty, this.lang),
                             ),
                           );
                         },
@@ -207,7 +209,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                   )
               )
           ),
-          IconWidget(Axis.vertical),
+          IconWidget(Axis.vertical, this.lang),
           Positioned(
               top : 0,
               left : MediaQuery.of(context).size.width * 0.65 - 24,
@@ -266,7 +268,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                     onPressed: () {
                                       Navigator.of(context).push( //Navigateur vers widget
                                         MaterialPageRoute(builder: (context)=>
-                                            ScreenBuildingConstructionLevel(difficulty),
+                                            ScreenBuildingConstructionLevel(difficulty, this.lang),
                                         ),
                                       );
                                     },

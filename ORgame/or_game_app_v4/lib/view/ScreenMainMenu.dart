@@ -1,11 +1,15 @@
+//import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionStage.dart';
+import '../language.dart';
 import '../style.dart';
 import 'package:bubble/bubble.dart';
 import 'IconWidget.dart';
 import 'ScreenHome.dart';
 
 class ScreenMenuPrincipal extends StatelessWidget {
+  Language lang;
+  ScreenMenuPrincipal(this.lang);
   @override
   Widget build(BuildContext context){
     return Stack (
@@ -66,7 +70,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
                           print("jeu 1 pressed");
                           Navigator.of(context).push( //Navigateur vers widget
                             MaterialPageRoute(builder: (context)=>
-                                ScreenBuildingConstructionStage(),
+                                ScreenBuildingConstructionStage(this.lang),
                             ),
                           );
                         },
@@ -101,7 +105,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
             ],
           ),
         ),
-        IconWidget(Axis.horizontal)
+        IconWidget(Axis.horizontal, this.lang)
       ]
     );
   }

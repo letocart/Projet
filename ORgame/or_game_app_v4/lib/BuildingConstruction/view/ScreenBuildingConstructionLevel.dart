@@ -9,6 +9,7 @@ import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstruc
 import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 
+import '../../language.dart';
 import '../../style.dart';
 import 'ScreenBuildingConstructionGame.dart';
 import 'ScreenBuildingConstructionStage.dart';
@@ -16,15 +17,17 @@ import 'ScreenBuildingConstructionStage.dart';
 //stateful widget
 class ScreenBuildingConstructionLevel extends StatefulWidget {
   String difficulty;
+  Language lang;
 
-  ScreenBuildingConstructionLevel(String diff) {
+  ScreenBuildingConstructionLevel(String diff, Language lang) {
+    this.lang = lang;
     difficulty = diff;
     print(difficulty);
   }
 
   // overriding the createState method
   @override
-  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty);
+  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty, this.lang);
 
 
 
@@ -36,7 +39,9 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   List dataInstances;
   int numberOfLevels=0;
   String difficulty;
-  ScreenBuildingConstructionLevelState(String diff) {
+  Language lang;
+  ScreenBuildingConstructionLevelState(String diff, Language lang) {
+    this.lang = lang;
     difficulty = diff;
     print(difficulty);
   }
@@ -97,7 +102,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionStage(),
+                                    ScreenBuildingConstructionStage(this.lang),
                                 ),
                               );
                             },
@@ -156,7 +161,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                       ScreenBuildingConstructionGame(difficulty, index+1,
                                           BuildingConstructionController.fromBCD(
                                             BuildingConstructionData(solutionValue, numberOfBuildings, maxHeight, pricesOfFloors, earningsFromClients, requestsOfFloorsFromClients)
-                                          )
+                                          ),
+                                        this.lang
                                       )
                                     ),
                                   );
@@ -169,7 +175,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                   ]
               )
           ),
-          IconWidget(Axis.horizontal)
+          IconWidget(Axis.horizontal, this.lang)
         ]
 
     );
