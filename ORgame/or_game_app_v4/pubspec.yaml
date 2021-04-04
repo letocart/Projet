@@ -54,7 +54,10 @@ flutter:
   assets:
     - assets/images/John.png
     - assets/images/Marie.png
-    - assets/images/YouWin.png
+    - assets/images/GagnePerdu/YouWin.png
+    - assets/images/GagnePerdu/YouLose.png
+    - assets/images/GagnePerdu/Gagne.png
+    - assets/images/GagnePerdu/Perdu.png
     - assets/images/backgrounds/ciel.png
     - assets/images/backgrounds/ajoutBgDistributionService.png
     - assets/images/backgrounds/bgDistributionService.png
