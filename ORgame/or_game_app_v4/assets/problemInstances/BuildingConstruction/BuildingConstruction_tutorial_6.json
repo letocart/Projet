@@ -1,4 +1,4 @@
-[
+
   {
     "difficulty": "tutorial",
     "level":6,
@@ -9,4 +9,4 @@
     "earningsFromClients":[300, 300, 650],
     "requestsOfFloorsFromClients":[1, 2, 3]
   }
-]
+

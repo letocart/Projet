@@ -15,11 +15,14 @@ import '../../style.dart';
 class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
-  ScreenBuildingConstructionGame(String diff, int lvl) {
+  BuildingConstructionController BCC;
+  /*ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
-  }
-  createState() => BuildingConstructionGameState(difficulty,level);
+  }*/
+  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC);
+  //createState() => BuildingConstructionGameState(difficulty,level);
+  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
@@ -27,12 +30,13 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   List data;
   String difficulty;
   int level;
-  bool isInitialized = false;
+  //bool isInitialized = false;
   BuildingConstructionController BCC;
   int score = 0;
 
-  BuildingConstructionGameState(this.difficulty,this.level);
-
+  //BuildingConstructionGameState(this.difficulty,this.level);
+  BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
+/*
   Future<String> loadJsonData() async {
     var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
         'BuildingConstruction_'+difficulty+'_'+level.toString()+'.json');
@@ -45,11 +49,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
     super.initState();
     this.loadJsonData();
   }
-
+*/
   int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
-    if(!isInitialized) {
+    /*if(!isInitialized) {
       isInitialized = true;
       double solutionValue = data==null ? 0 : data[0]['solutionValue'];
       int numberOfBuildings = data==null ? 0 : data[0]['numberOfBuildings'];
@@ -72,7 +76,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
               numberOfBuildings,maxHeight,pricesOfFloors,
               earningsFromClients,requestsOfFloorsFromClients));
 
-    }
+    }*/
     return Stack(
         children : [
           Row(

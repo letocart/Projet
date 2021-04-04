@@ -67,7 +67,7 @@ flutter:
     - assets/images/icon/manual.png
     - assets/images/icon/ampoule.png
     - assets/images/icon/check.png
-    #- assets/problemInstances/BuildingConstructionInstances.json
+    - assets/problemInstances/BuildingConstructionInstances.json
     - assets/problemInstances/BuildingConstruction/BuildingConstructionDifficulties.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_Levels.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_Levels.json
