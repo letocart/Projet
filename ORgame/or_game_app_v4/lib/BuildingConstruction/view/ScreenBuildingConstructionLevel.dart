@@ -74,6 +74,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
 
   @override
   Widget build(BuildContext context) {
+    loadJsonData2();
     numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
     return Stack (
         children : [
