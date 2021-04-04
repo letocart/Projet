@@ -69,15 +69,32 @@ flutter:
     - assets/images/icon/check.png
     - assets/problemInstances/BuildingConstructionInstances.json
     - assets/problemInstances/BuildingConstruction/BuildingConstructionDifficulties.json
+
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_Levels.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_Levels.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_Levels.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_1.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_2.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_3.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_4.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_5.json
     - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_6.json
+
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_Levels.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_1.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_2.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_3.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_4.json
+
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_Levels.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_1.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_2.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_3.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_4.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_5.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_6.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_7.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_8.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_9.json
+    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_10.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

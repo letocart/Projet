@@ -28,9 +28,6 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
   // overriding the createState method
   @override
   State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty, this.lang);
-
-
-
 }
 
 //the state
@@ -56,7 +53,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   }
 
   Future<String> loadJsonData2() async {
-    print("IAMJSON2");
+    print("IAMJSON2"+difficulty);
     List<String> jsonText = [];
     numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
     List l = [];
@@ -79,7 +76,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
 
   @override
   Widget build(BuildContext context) {
-    loadJsonData2();
+
     numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
     return Stack (
         children : [
@@ -129,10 +126,10 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                               return ElevatedButton(
                                 child: Text('${index+1}'),
                                 style: Style.buttonText,
-                                onPressed: () {
-                                  log("before : "+dataInstances.toString());
-                                  loadJsonData2();
-                                  log("after : "+this.dataInstances.toString());
+                                onPressed: () async {
+                                  //log("before : "+dataInstances.toString());
+                                  await loadJsonData2();
+                                  //log("after : "+this.dataInstances.toString());
                                   List<double> pricesOfFloors = [];
                                   List<double> earningsFromClients = [];
                                   List<int> requestsOfFloorsFromClients = [];
@@ -152,8 +149,6 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
 
                                     for(int i=0;i<dataInstances[index]['requestsOfFloorsFromClients'].length;i++)
                                       requestsOfFloorsFromClients.add(dataInstances[index]['requestsOfFloorsFromClients'][i]);
-                                    log(dataInstances[0].toString());
-                                    log(solutionValue.toString());
                                   }
                                   Navigator.of(context).push( //Navigateur vers widget
                                     MaterialPageRoute(builder: (context)=>

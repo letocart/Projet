@@ -1,0 +1,10 @@
+{
+  "difficulty": "normal",
+  "level":7,
+  "solutionValue":430.0,
+  "numberOfBuildings":2,
+  "maxHeight":12,
+  "pricesOfFloors":[60,60,100,100,120,140,180,220,260,260,260,260],
+  "earningsFromClients":[365,475,255,250,200],
+  "requestsOfFloorsFromClients":[3,4,2,2,1]
+}
