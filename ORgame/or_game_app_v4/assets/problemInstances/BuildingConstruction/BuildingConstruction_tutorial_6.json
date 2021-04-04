@@ -1,0 +1,12 @@
+[
+  {
+    "difficulty": "tutorial",
+    "level":6,
+    "solutionValue":650.0,
+    "numberOfBuildings":1,
+    "maxHeight":6,
+    "pricesOfFloors":[20,40,80,160,320,640],
+    "earningsFromClients":[300, 300, 650],
+    "requestsOfFloorsFromClients":[1, 2, 3]
+  }
+]

@@ -4,15 +4,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'BuildingConstruction/test/BuildingConstructionUnitTests.dart';
 import 'ORgameUI.dart';
 import 'BusLine/test/BusLineUnitTests.dart';
+
 // main async pour flame
 void main() async {
 
   // Unit tests on model, controller and data
   // for Building Construction
-  assertBCM();
-  assertBCD();
-  assertBCC();
-
+  //assertBCM();
+  //assertBCD();
+  //assertBCC();
   // for Bus Line : there is a problem within the assertBLD two list are similar but the test show the opposite
   //assertBLM();
   //assertBLD();
@@ -24,10 +24,10 @@ void main() async {
   SharedPreferences storage = await SharedPreferences.getInstance();
 
   // creation d'un ROgameUI, gameUI un widget d'interface
-  ROgameUI gameUI = ROgameUI();
+  ORgameUI gameUI = ORgameUI();
 
   // affectation du storage et du jeu a l'interface
-  gameUI.state.storage = storage;
+  //gameUI.state.storage = storage;
 
   // execution du widget MaterialApp contenant l'application
   //runApp(game.widget);

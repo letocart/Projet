@@ -1,5 +1,5 @@
-name: or_game_app_v4
-description: OR Game application.
+name: flutter_app_json_test
+description: A new Flutter application.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
@@ -23,13 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: "0.5.12+4"
-  bubble:
-  flutter_svg: ^0.17.1
-  collection: ^1.14.13
-  flutter_staggered_grid_view:
-  sqflite:
-  path_provider:
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -44,37 +38,19 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  assets:
+    - assets/person.json
+    - assets/personone.json
+    - assets/persontwo.json
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/images/John.png
-    - assets/images/Marie.png
-    - assets/images/YouWin.png
-    - assets/images/backgrounds/ciel.png
-    - assets/images/backgrounds/ajoutBgDistributionService.png
-    - assets/images/backgrounds/bgDistributionService.png
-    - assets/images/backgrounds/city3.png
-    - assets/images/icon/fr.png
-    - assets/images/icon/uk.png
-    - assets/images/icon/manual.png
-    - assets/images/icon/ampoule.png
-    - assets/images/icon/check.png
-    #- assets/problemInstances/BuildingConstructionInstances.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstructionDifficulties.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_Levels.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_easy_Levels.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_normal_Levels.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_1.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_2.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_3.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_4.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_5.json
-    - assets/problemInstances/BuildingConstruction/BuildingConstruction_tutorial_5.json
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
