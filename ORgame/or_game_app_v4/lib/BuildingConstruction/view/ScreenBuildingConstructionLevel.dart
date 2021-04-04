@@ -33,7 +33,7 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
 //the state
 class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstructionLevel> {
   List data;
-  List dataInstances = [];
+  List dataInstances;
   int numberOfLevels=0;
   String difficulty;
   ScreenBuildingConstructionLevelState(String diff) {
@@ -44,22 +44,25 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   Future<String> loadJsonData() async {
     var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/BuildingConstruction_'+difficulty+'_Levels.json');
     //setState(() => data = json.decode(jsonText));
-    var jsonText2;
-    dataInstances = [];
-    List l = [];
-    for(int i=0;i<numberOfLevels;i++) {
-      jsonText2 = await rootBundle.loadString(
-          'assets/problemInstances/BuildingConstruction/'
-              'BuildingConstruction_' + difficulty + '_'+(i+1).toString()+'.json');
-      //setState(() => dataInstances.add(json.decode(jsonText2)));
-      l.add(json.decode(jsonText2));
-    }
-    /*jsonText2 = await rootBundle.loadString('assets/problemInstances/BuildingConstructionInstances.json');
-    //setState(() => dataInstances = json.decode(jsonText2));*/
     setState(() {
       data = json.decode(jsonText);
-      dataInstances = l;
     });
+    return 'success';
+  }
+
+  Future<String> loadJsonData2() async {
+    print("IAMJSON2");
+    List<String> jsonText = [];
+    numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
+    List l = [];
+    for(int i=0;i<numberOfLevels;i++) {
+      jsonText.add(await rootBundle.loadString(
+          'assets/problemInstances/BuildingConstruction/'
+              'BuildingConstruction_' + difficulty + '_'+(i+1).toString()+'.json'));
+      l.add(json.decode(jsonText[i]));
+    }
+    setState(() {
+      dataInstances = l;});
     return 'success';
   }
 
@@ -122,8 +125,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                 style: Style.buttonText,
                                 onPressed: () {
                                   log("before : "+dataInstances.toString());
-                                  forceJson();
-                                  log("after : "+dataInstances.toString());
+                                  loadJsonData2();
+                                  log("after : "+this.dataInstances.toString());
                                   List<double> pricesOfFloors = [];
                                   List<double> earningsFromClients = [];
                                   List<int> requestsOfFloorsFromClients = [];
@@ -170,9 +173,4 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
 
     );
   }
-
-  void forceJson(){
-    loadJsonData();
-  }
-
 }
