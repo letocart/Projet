@@ -32,8 +32,8 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
 
 //the state
 class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstructionLevel> {
-  List data;
-  List dataInstances;
+  List levelsInformation;
+  List instancesInformation;
   int numberOfLevels=0;
   String difficulty;
   Language lang;
@@ -43,11 +43,11 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
     print(difficulty);
   }
 
+  //loading Json data
   Future<String> loadJsonData() async {
     var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/BuildingConstruction_'+difficulty+'_Levels.json');
-    //setState(() => data = json.decode(jsonText));
     setState(() {
-      data = json.decode(jsonText);
+      levelsInformation = json.decode(jsonText);
     });
     return 'success';
   }
@@ -55,7 +55,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   Future<String> loadJsonData2() async {
     print("IAMJSON2"+difficulty);
     List<String> jsonText = [];
-    numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
+    numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
     List l = [];
     for(int i=0;i<numberOfLevels;i++) {
       jsonText.add(await rootBundle.loadString(
@@ -64,7 +64,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
       l.add(json.decode(jsonText[i]));
     }
     setState(() {
-      dataInstances = l;});
+      instancesInformation = l;});
     return 'success';
   }
 
@@ -76,8 +76,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
 
   @override
   Widget build(BuildContext context) {
-
-    numberOfLevels = data==null ? 0 : data[0]['numberOfLevels'];
+    numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
     return Stack (
         children : [
           Container(
@@ -136,19 +135,19 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                   double solutionValue = 0;
                                   int numberOfBuildings = 0;
                                   int maxHeight = 0;
-                                  if(!ListEquality().equals(dataInstances, [])) {
-                                    solutionValue = dataInstances[index]["solutionValue"];
-                                    numberOfBuildings = dataInstances[index]["numberOfBuildings"];
-                                    maxHeight = dataInstances[index]["maxHeight"];
+                                  if(!ListEquality().equals(instancesInformation, [])) {
+                                    solutionValue = instancesInformation[index]["solutionValue"];
+                                    numberOfBuildings = instancesInformation[index]["numberOfBuildings"];
+                                    maxHeight = instancesInformation[index]["maxHeight"];
 
-                                    for(int i=0;i<dataInstances[index]['pricesOfFloors'].length;i++)
-                                      pricesOfFloors.add(dataInstances[index]['pricesOfFloors'][i].toDouble());
+                                    for(int i=0;i<instancesInformation[index]['pricesOfFloors'].length;i++)
+                                      pricesOfFloors.add(instancesInformation[index]['pricesOfFloors'][i].toDouble());
 
-                                    for(int i=0;i<dataInstances[index]['earningsFromClients'].length;i++)
-                                      earningsFromClients.add(dataInstances[index]['earningsFromClients'][i].toDouble());
+                                    for(int i=0;i<instancesInformation[index]['earningsFromClients'].length;i++)
+                                      earningsFromClients.add(instancesInformation[index]['earningsFromClients'][i].toDouble());
 
-                                    for(int i=0;i<dataInstances[index]['requestsOfFloorsFromClients'].length;i++)
-                                      requestsOfFloorsFromClients.add(dataInstances[index]['requestsOfFloorsFromClients'][i]);
+                                    for(int i=0;i<instancesInformation[index]['requestsOfFloorsFromClients'].length;i++)
+                                      requestsOfFloorsFromClients.add(instancesInformation[index]['requestsOfFloorsFromClients'][i]);
                                   }
                                   Navigator.of(context).push( //Navigateur vers widget
                                     MaterialPageRoute(builder: (context)=>
