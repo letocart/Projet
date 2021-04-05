@@ -76,6 +76,11 @@ class IconWidgetState extends State<IconWidget>{
                       icon: Image.asset('assets/images/icon/manual.png'),
                       onPressed: () {
                         print("Manual pressed");
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                PopupRule()
+                        );
                       },
                     )
                 ),
@@ -133,6 +138,11 @@ class IconWidgetState extends State<IconWidget>{
                       icon: Image.asset('assets/images/icon/manual.png'),
                       onPressed: () {
                         print("Manual pressed");
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                PopupRule()
+                        );
                       },
                     )
                 ),
@@ -152,4 +162,71 @@ class IconWidgetState extends State<IconWidget>{
       );
     }
   }
+
+}
+
+
+class PopupRule extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => PopupRuleState();
+
+}
+
+class PopupRuleState extends State<PopupRule>{
+
+  int currentPage = 0;
+  int maxPages = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        title : Text("Rule's book"),
+        content: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            IndexedStack(
+              sizing: StackFit.expand,
+              children: <Widget>[
+                Text('text1'),
+                Text('text2'),
+                Text('text3'),
+              ],
+              index: currentPage,
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('return'),
+          ),
+          currentPage > 0 ?
+          new FlatButton(
+            onPressed: () {
+              setState( () =>
+              currentPage = currentPage-1);
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('previous'),
+          ) : Container(),
+          currentPage < maxPages-1 ?
+          new FlatButton(
+            onPressed: () {
+              setState( () =>
+              currentPage = currentPage+1);
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('next'),
+          ): Container(),
+          new Text("${currentPage+1}/${maxPages}"),
+        ]
+    );
+
+  }
+
 }
