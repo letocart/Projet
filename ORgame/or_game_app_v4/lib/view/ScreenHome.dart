@@ -32,18 +32,26 @@ class ScreenHomeState extends State<ScreenHome> {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return Column(
         children : [
           Container(
-            // Principal container
-              decoration: BoxDecoration(  // background
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/backgrounds/city3.png"), // image du background
-                      fit: BoxFit.cover //couvre tout l'ecran
-                  )
-              ),
-              alignment: Alignment.center, // s'alligne au centre
-              child : Row(
+            height: MediaQuery.of(context).padding.top,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.black,
+          ),
+          Container(
+            height:  MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(  // background
+                image: DecorationImage(
+                    image: AssetImage("assets/images/backgrounds/city3.png"), // image du background
+                    fit: BoxFit.cover //couvre tout l'ecran
+                )
+            ),
+            alignment: Alignment.center,
+            child: Stack(
+              children : [
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children : [
                     Column(
@@ -82,10 +90,12 @@ class ScreenHomeState extends State<ScreenHome> {
                       ],
                     )
                   ]
-              )
-          ),
-          IconWidget(Axis.horizontal, this.lang)
-        ]
+                ),
+                IconWidget(Axis.horizontal, this.lang)
+              ]
+            )
+          )
+      ]
     );
   }
 }

@@ -77,16 +77,25 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   @override
   Widget build(BuildContext context) {
     numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
-    return Stack (
+    return Column(
         children : [
           Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/backgrounds/city3.png"),
-                      fit: BoxFit.cover)
-              ),
-              alignment: Alignment.center,
-              child: Column(
+            height: MediaQuery.of(context).padding.top,
+            width : MediaQuery.of(context).size.width,
+            color : Colors.black
+          ),
+          Container(
+            height: MediaQuery.of(context).size.height -  MediaQuery.of(context).padding.top,
+            width : MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/backgrounds/city3.png"),
+                    fit: BoxFit.cover)
+            ),
+            alignment: Alignment.center,
+            child : Stack (
+              children : [
+                Column(
                   children: [
                     Align(
                       alignment: Alignment.centerRight,
@@ -106,72 +115,73 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                       ),
                     ),
                     Text('Choose a level', style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        decoration: TextDecoration.none),
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.none),
                     ),
                     Expanded(
-                        child: GridView.count(
-                            padding: const EdgeInsets.all(30),
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            // Create a grid with 8 columns. If you change the scrollDirection to
-                            // horizontal, this produces 8 rows.
-                            crossAxisCount: 6,
-                            // Generate nombreNiveau widgets that display their index in the List.
-                            children:
-                            List.generate(numberOfLevels, (index) {
-                              return ElevatedButton(
-                                child: Text('${index+1}'),
-                                style: Style.buttonText,
-                                onPressed: () async {
-                                  //log("before : "+dataInstances.toString());
-                                  await loadJsonData2();
-                                  //log("after : "+this.dataInstances.toString());
-                                  List<double> pricesOfFloors = [];
-                                  List<double> earningsFromClients = [];
-                                  List<int> requestsOfFloorsFromClients = [];
-                                  double solutionValue = 0;
-                                  int numberOfBuildings = 0;
-                                  int maxHeight = 0;
-                                  if(!ListEquality().equals(instancesInformation, [])) {
-                                    solutionValue = instancesInformation[index]["solutionValue"];
-                                    numberOfBuildings = instancesInformation[index]["numberOfBuildings"];
-                                    maxHeight = instancesInformation[index]["maxHeight"];
+                      child: GridView.count(
+                        padding: const EdgeInsets.all(30),
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        // Create a grid with 8 columns. If you change the scrollDirection to
+                        // horizontal, this produces 8 rows.
+                        crossAxisCount: 6,
+                        // Generate nombreNiveau widgets that display their index in the List.
+                        children:
+                        List.generate(numberOfLevels, (index) {
+                          return ElevatedButton(
+                            child: Text('${index+1}'),
+                            style: Style.buttonText,
+                            onPressed: () async {
+                              //log("before : "+dataInstances.toString());
+                              await loadJsonData2();
+                              //log("after : "+this.dataInstances.toString());
+                              List<double> pricesOfFloors = [];
+                              List<double> earningsFromClients = [];
+                              List<int> requestsOfFloorsFromClients = [];
+                              double solutionValue = 0;
+                              int numberOfBuildings = 0;
+                              int maxHeight = 0;
+                              if(!ListEquality().equals(instancesInformation, [])) {
+                                solutionValue = instancesInformation[index]["solutionValue"];
+                                numberOfBuildings = instancesInformation[index]["numberOfBuildings"];
+                                maxHeight = instancesInformation[index]["maxHeight"];
 
-                                    for(int i=0;i<instancesInformation[index]['pricesOfFloors'].length;i++)
-                                      pricesOfFloors.add(instancesInformation[index]['pricesOfFloors'][i].toDouble());
+                                for(int i=0;i<instancesInformation[index]['pricesOfFloors'].length;i++)
+                                  pricesOfFloors.add(instancesInformation[index]['pricesOfFloors'][i].toDouble());
 
-                                    for(int i=0;i<instancesInformation[index]['earningsFromClients'].length;i++)
-                                      earningsFromClients.add(instancesInformation[index]['earningsFromClients'][i].toDouble());
+                                for(int i=0;i<instancesInformation[index]['earningsFromClients'].length;i++)
+                                  earningsFromClients.add(instancesInformation[index]['earningsFromClients'][i].toDouble());
 
-                                    for(int i=0;i<instancesInformation[index]['requestsOfFloorsFromClients'].length;i++)
-                                      requestsOfFloorsFromClients.add(instancesInformation[index]['requestsOfFloorsFromClients'][i]);
-                                  }
-                                  Navigator.of(context).push( //Navigateur vers widget
-                                    MaterialPageRoute(builder: (context)=>
-                                        //ScreenBuildingConstructionGame(difficulty, index+1),
-                                      ScreenBuildingConstructionGame(difficulty, index+1,
-                                          BuildingConstructionController.fromBCD(
-                                            BuildingConstructionData(solutionValue, numberOfBuildings, maxHeight, pricesOfFloors, earningsFromClients, requestsOfFloorsFromClients)
-                                          ),
-                                        this.lang
-                                      )
+                                for(int i=0;i<instancesInformation[index]['requestsOfFloorsFromClients'].length;i++)
+                                  requestsOfFloorsFromClients.add(instancesInformation[index]['requestsOfFloorsFromClients'][i]);
+                              }
+                              Navigator.of(context).push( //Navigateur vers widget
+                                MaterialPageRoute(builder: (context)=>
+                                //ScreenBuildingConstructionGame(difficulty, index+1),
+                                ScreenBuildingConstructionGame(difficulty, index+1,
+                                    BuildingConstructionController.fromBCD(
+                                        BuildingConstructionData(solutionValue, numberOfBuildings, maxHeight, pricesOfFloors, earningsFromClients, requestsOfFloorsFromClients)
                                     ),
-                                  );
-                                  print("Start Game ${index+1} pressed");
-                                },
+                                    this.lang
+                                )
+                                ),
                               );
-                            })
-                        )
+                              print("Start Game ${index+1} pressed");
+                            },
+                          );
+                        })
+                      )
                     )
                   ]
-              )
-          ),
-          IconWidget(Axis.horizontal, this.lang)
+                ),
+                IconWidget(Axis.horizontal, this.lang)
+              ]
+            )
+          )
         ]
-
     );
   }
 }

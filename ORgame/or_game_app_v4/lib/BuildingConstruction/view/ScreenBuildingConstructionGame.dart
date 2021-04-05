@@ -79,208 +79,221 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
               earningsFromClients,requestsOfFloorsFromClients));
 
     }*/
-    return Stack(
+    return Column(
         children : [
-          Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Container(
-                  width : MediaQuery.of(context).size.width * 0.65,
-                  height: MediaQuery.of(context).size.height,
-                  //color : Colors.brown,
-                  child: ListView(
-                      reverse: true,
-                      scrollDirection: Axis.vertical,
-                      children : [
-                        Container(
-                            decoration: BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
-                                  fit: BoxFit.cover,
-                                  alignment: Alignment.bottomCenter,
-                                )
-                            ),
-                            height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                            alignment: Alignment.center,
-                            child: Row(
+          Container(
+              height : MediaQuery.of(context).padding.top,
+              width : MediaQuery.of(context).size.width,
+              color : Colors.black
+          ),
+          Container(
+              height : MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
+              width : MediaQuery.of(context).size.width,
+              child : Stack(
+                  children : [
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Container(
+                            width : MediaQuery.of(context).size.width * 0.65,
+                            height: MediaQuery.of(context).size.height,
+                            //color : Colors.brown,
+                            child: ListView(
+                                reverse: true,
+                                scrollDirection: Axis.vertical,
                                 children : [
                                   Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                            image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
+                                            fit: BoxFit.cover,
+                                            alignment: Alignment.bottomCenter,
+                                          )
+                                      ),
                                       height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                                      width : MediaQuery.of(context).size.width * 0.15,
-                                      child : ListView.builder(
-                                          reverse: true,
-                                          shrinkWrap: true,
-                                          scrollDirection: Axis.vertical,
-                                          itemCount: BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
-                                          itemBuilder: (BuildContext context, int index){
-                                            return Container(
-                                                height: 15,
-                                                width: 50,
-                                                alignment: Alignment.centerRight,
-                                                child: Text('${BCC.getBCM.getDescriptionOfBuildings.getPricesOfFloors[index].toInt()}', style: TextStyle(
-                                                    fontSize: 10,
-                                                    color: Colors.black,
-                                                    fontWeight: FontWeight.bold,
-                                                    decoration: TextDecoration.none)
+                                      alignment: Alignment.center,
+                                      child: Row(
+                                          children : [
+                                            Container(
+                                                height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                                                width : MediaQuery.of(context).size.width * 0.15,
+                                                child : ListView.builder(
+                                                    reverse: true,
+                                                    shrinkWrap: true,
+                                                    scrollDirection: Axis.vertical,
+                                                    itemCount: BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
+                                                    itemBuilder: (BuildContext context, int index){
+                                                      return Container(
+                                                          height: 15,
+                                                          width: 50,
+                                                          alignment: Alignment.centerRight,
+                                                          child: Text('${BCC.getBCM.getDescriptionOfBuildings.getPricesOfFloors[index].toInt()}', style: TextStyle(
+                                                              fontSize: 10,
+                                                              color: Colors.black,
+                                                              fontWeight: FontWeight.bold,
+                                                              decoration: TextDecoration.none)
+                                                          )
+                                                      );
+                                                    }
                                                 )
-                                            );
-                                          }
+                                            ),
+                                            Container(
+                                                height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                                                width : MediaQuery.of(context).size.width * 0.5,
+                                                child : ListView.builder(
+                                                  shrinkWrap: true,
+                                                  scrollDirection: Axis.horizontal,
+                                                  itemCount: BCC.getBCM.getDescriptionOfBuildings.getNumberOfBuildings,
+                                                  itemBuilder: (BuildContext context, int index) {
+                                                    return Container(
+                                                      padding: const EdgeInsets.only(right: 20),
+                                                      child: _buildDragTarget(index+1),
+                                                    );
+                                                  },
+                                                )
+                                            ),
+                                          ]
                                       )
-                                  ),
-                                  Container(
-                                      height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                                      width : MediaQuery.of(context).size.width * 0.5,
-                                      child : ListView.builder(
-                                        shrinkWrap: true,
-                                        scrollDirection: Axis.horizontal,
-                                        itemCount: BCC.getBCM.getDescriptionOfBuildings.getNumberOfBuildings,
-                                        itemBuilder: (BuildContext context, int index) {
-                                          return Container(
-                                            padding: const EdgeInsets.only(right: 20),
-                                            child: _buildDragTarget(index+1),
-                                          );
-                                        },
-                                      )
-                                  ),
-                                ]
-                            )
-                        )]
-                  ),
-                ),
-                Container(
-                    width : MediaQuery.of(context).size.width * 0.35,
-                    height: MediaQuery.of(context).size.height,
-                    padding: EdgeInsets.only(top: 50),
-                    color : Colors.white70,
-                    child : DragTarget<Client>(
-                      builder: (BuildContext context, List<Client> incoming, List rejected) {
-                        return StaggeredGridView.countBuilder(
-                          crossAxisCount: 3,
-                          staggeredTileBuilder: (int index) =>
-                          new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
-                          itemCount: BCC.getNumberOfClientsInBuilding(0),
-                          itemBuilder: (BuildContext context, int index) =>
-                              Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]]),
-                        );
-                      },
-                      onWillAccept: (data){
-                        print("OnWillAccept");
-                        return true;
-                      },
-                      onAccept: (data) {
-                        print("Accept $data");
-                        setState(() {
-                          BCC.getBCM.assignClientToBuilding(data.getIndex,0);
-                          BCC.getBCM.updateScore();
-                        });
-                      },
-                      onLeave: (data) {
-                        print("Not accept");
-                      },
-                    ))]),
-          Positioned(
-              bottom : 0,
-              right : 0,
-              child : Container (
-                  width : MediaQuery.of(context).size.width * 0.35,
-                  color: Colors.blueGrey,
-                  alignment : Alignment.center,
-                  child : Text('Score ${BCC.getBCM.getScore.toInt()}',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
-              )
-          ),
-          Positioned(
-              top : 0,
-              right : 0,
-              child : Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                      padding: EdgeInsets.all(5.0),
-                      child: ElevatedButton(
-                        child: Text('Return'),
-                        style: Style.returnButtonText,
-                        onPressed: () {
-                          Navigator.of(context).push( //Navigateur vers widget
-                            MaterialPageRoute(builder: (context)=>
-                                ScreenBuildingConstructionLevel(difficulty, this.lang),
+                                  )]
                             ),
-                          );
-                        },
-                      )
-                  )
-              )
-          ),
-          IconWidget(Axis.vertical, this.lang),
-          Positioned(
-              top : 0,
-              left : MediaQuery.of(context).size.width * 0.65 - 24,
-              child : Material(
-                color : Colors.transparent,
-                child: Ink(
-                    decoration: const ShapeDecoration(
-                        shape: CircleBorder()),
-                    child : IconButton(
-                      padding: EdgeInsets.only(top : 10),
-                      constraints: BoxConstraints(),
-                      icon: Image.asset('assets/images/icon/ampoule.png'),
-                      onPressed: () {
-                        print("Ampoule pressed");
-                      },
-                    )
-                ),
-              )
-          ),
-          Positioned(
-              bottom : 0,
-              left : MediaQuery.of(context).size.width * 0.65 - 48,
-              child : Material(
-                color : Colors.transparent,
-                child: Ink(
-                    decoration: const ShapeDecoration(
-                        shape: CircleBorder(),
-                        color : Colors.blueGrey
+                          ),
+                          Container(
+                              width : MediaQuery.of(context).size.width * 0.35,
+                              height: MediaQuery.of(context).size.height,
+                              padding: EdgeInsets.only(top: 50),
+                              color : Colors.white70,
+                              child : DragTarget<Client>(
+                                builder: (BuildContext context, List<Client> incoming, List rejected) {
+                                  return StaggeredGridView.countBuilder(
+                                    crossAxisCount: 3,
+                                    staggeredTileBuilder: (int index) =>
+                                    new StaggeredTile.count(1, BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]].getRequestOfFloors),
+                                    itemCount: BCC.getNumberOfClientsInBuilding(0),
+                                    itemBuilder: (BuildContext context, int index) =>
+                                        Client_Draggable(BCC.getBCM.getClients[(BCC.getClientsIndexesInBuilding(0))[index]]),
+                                  );
+                                },
+                                onWillAccept: (data){
+                                  print("OnWillAccept");
+                                  return true;
+                                },
+                                onAccept: (data) {
+                                  print("Accept $data");
+                                  setState(() {
+                                    BCC.getBCM.assignClientToBuilding(data.getIndex,0);
+                                    BCC.getBCM.updateScore();
+                                  });
+                                },
+                                onLeave: (data) {
+                                  print("Not accept");
+                                },
+                              ))]),
+                    Positioned(
+                        bottom : 0,
+                        right : 0,
+                        child : Container (
+                            width : MediaQuery.of(context).size.width * 0.35,
+                            color: Colors.blueGrey,
+                            alignment : Alignment.center,
+                            child : Text('Score ${BCC.getBCM.getScore.toInt()}',style : TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none))
+                        )
                     ),
-                    child : IconButton(
-                      constraints: BoxConstraints(),
-                      icon: Image.asset('assets/images/icon/check.png'),
-                      onPressed: () {
-                        print("Check pressed");
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) =>
-                              AlertDialog(
-                                content: new Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png') : Text("You lose"),
-                                    Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
-                                  ],
-                                ),
-                                actions: <Widget>[
-                                  new FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    textColor: Theme.of(context).primaryColor,
-                                    child: const Text('Keep trying'),
-                                  ),
-                                  new FlatButton(
-                                    onPressed: () {
-                                      Navigator.of(context).push( //Navigateur vers widget
-                                        MaterialPageRoute(builder: (context)=>
-                                            ScreenBuildingConstructionLevel(difficulty, this.lang),
-                                        ),
-                                      );
-                                    },
-                                    textColor: Theme.of(context).primaryColor,
-                                    child: const Text('return'),
-                                  ),
-                                ],
+                    Positioned(
+                        top : 0,
+                        right : 0,
+                        child : Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: ElevatedButton(
+                                  child: Text('Return'),
+                                  style: Style.returnButtonText,
+                                  onPressed: () {
+                                    Navigator.of(context).push( //Navigateur vers widget
+                                      MaterialPageRoute(builder: (context)=>
+                                          ScreenBuildingConstructionLevel(difficulty, this.lang),
+                                      ),
+                                    );
+                                  },
+                                )
+                            )
+                        )
+                    ),
+                    IconWidget(Axis.vertical, this.lang),
+                    Positioned(
+                        top : 0,
+                        left : MediaQuery.of(context).size.width * 0.65 - 24,
+                        child : Material(
+                          color : Colors.transparent,
+                          child: Ink(
+                              decoration: const ShapeDecoration(
+                                  shape: CircleBorder()),
+                              child : IconButton(
+                                padding: EdgeInsets.only(top : 10),
+                                constraints: BoxConstraints(),
+                                icon: Image.asset('assets/images/icon/ampoule.png'),
+                                onPressed: () {
+                                  print("Ampoule pressed");
+                                },
+                              )
+                          ),
+                        )
+                    ),
+                    Positioned(
+                        bottom : 0,
+                        left : MediaQuery.of(context).size.width * 0.65 - 48,
+                        child : Material(
+                          color : Colors.transparent,
+                          child: Ink(
+                              decoration: const ShapeDecoration(
+                                  shape: CircleBorder(),
+                                  color : Colors.blueGrey
                               ),
-                        );
-                      },
+                              child : IconButton(
+                                constraints: BoxConstraints(),
+                                icon: Image.asset('assets/images/icon/check.png'),
+                                onPressed: () {
+                                  print("Check pressed");
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                          content: new Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png') : Text("You lose"),
+                                              Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            new FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              textColor: Theme.of(context).primaryColor,
+                                              child: const Text('Keep trying'),
+                                            ),
+                                            new FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).push( //Navigateur vers widget
+                                                  MaterialPageRoute(builder: (context)=>
+                                                      ScreenBuildingConstructionLevel(difficulty, this.lang),
+                                                  ),
+                                                );
+                                              },
+                                              textColor: Theme.of(context).primaryColor,
+                                              child: const Text('return'),
+                                            ),
+                                          ],
+                                        ),
+                                  );
+                                },
+                              )
+                          ),
+                        )
                     )
-                ),
+                  ]
               )
           )
         ]
