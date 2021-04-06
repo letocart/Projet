@@ -89,6 +89,13 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           Container(
               height : MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
               width : MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/backgrounds/ajoutBgDistributionService.png"),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.bottomCenter,
+                  )
+              ),
               child : Stack(
                   children : [
                     Row(
@@ -98,63 +105,15 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                             width : MediaQuery.of(context).size.width * 0.65,
                             height: MediaQuery.of(context).size.height,
                             //color : Colors.brown,
-                            child: ListView(
+                            child:
+                            /*(15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble())<MediaQuery.of(context).size.height ?
+                            _leftScreenPart()
+                            :*/ ListView(
                                 reverse: true,
                                 scrollDirection: Axis.vertical,
                                 children : [
-                                  Container(
-                                      decoration: BoxDecoration(
-                                          image: DecorationImage(
-                                            image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
-                                            fit: BoxFit.cover,
-                                            alignment: Alignment.bottomCenter,
-                                          )
-                                      ),
-                                      height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                                      alignment: Alignment.center,
-                                      child: Row(
-                                          children : [
-                                            Container(
-                                                height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                                                width : MediaQuery.of(context).size.width * 0.15,
-                                                child : ListView.builder(
-                                                    reverse: true,
-                                                    shrinkWrap: true,
-                                                    scrollDirection: Axis.vertical,
-                                                    itemCount: BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
-                                                    itemBuilder: (BuildContext context, int index){
-                                                      return Container(
-                                                          height: 15,
-                                                          width: 50,
-                                                          alignment: Alignment.centerRight,
-                                                          child: Text('${BCC.getBCM.getDescriptionOfBuildings.getPricesOfFloors[index].toInt()}', style: TextStyle(
-                                                              fontSize: 10,
-                                                              color: Colors.black,
-                                                              fontWeight: FontWeight.bold,
-                                                              decoration: TextDecoration.none)
-                                                          )
-                                                      );
-                                                    }
-                                                )
-                                            ),
-                                            Container(
-                                                height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
-                                                width : MediaQuery.of(context).size.width * 0.5,
-                                                child : ListView.builder(
-                                                  shrinkWrap: true,
-                                                  scrollDirection: Axis.horizontal,
-                                                  itemCount: BCC.getBCM.getDescriptionOfBuildings.getNumberOfBuildings,
-                                                  itemBuilder: (BuildContext context, int index) {
-                                                    return Container(
-                                                      padding: const EdgeInsets.only(right: 20),
-                                                      child: _buildDragTarget(index+1),
-                                                    );
-                                                  },
-                                                )
-                                            ),
-                                          ]
-                                      )
-                                  )]
+                                  _leftScreenPart()
+                                ]
                             ),
                           ),
                           Container(
@@ -258,11 +217,30 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                     context: context,
                                     builder: (BuildContext context) =>
                                         AlertDialog(
+                                          /*content : ListView(
+                                              physics: NeverScrollableScrollPhysics(),
+                                            shrinkWrap: true,
+                                            children: <Widget>[
+                                              (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png', fit : BoxFit.fill) : Image.asset('assets/images/GagnePerdu/YouLose.png', fit : BoxFit.cover),
+                                              Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
+                                            ]
+                                          ),*/
+                                          /*content : Stack(
+                                            fit : StackFit.passthrough,
+                                            children : [
+                                              (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png', fit : BoxFit.fill) : FractionallySizedBox(widthFactor: 0.5, heightFactor: 0.5, child : Image.asset('assets/images/GagnePerdu/YouLose.png', /*scale : 12*/)),
+                                              Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %")
+                                            ]
+                                          ),*/
                                           content: new Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png') : Text("You lose"),
+                                              SizedBox(
+                                                height : 100,
+                                                width : 200,
+                                                child : (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png', fit : BoxFit.cover) : Image.asset('assets/images/GagnePerdu/YouLose.png', fit : BoxFit.cover)
+                                              ),
                                               Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
                                             ],
                                           ),
@@ -297,6 +275,62 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
               )
           )
         ]
+    );
+  }
+
+  Widget _leftScreenPart(){
+    return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
+              fit: BoxFit.cover,
+              alignment: Alignment.bottomCenter,
+            )
+        ),
+        height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+        alignment: Alignment.center,
+        child: Row(
+            children : [
+              Container(
+                  height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                  width : MediaQuery.of(context).size.width * 0.15,
+                  child : ListView.builder(
+                      reverse: true,
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: BCC.getBCM.getDescriptionOfBuildings.getMaxHeight,
+                      itemBuilder: (BuildContext context, int index){
+                        return Container(
+                            height: 15,
+                            width: 50,
+                            alignment: Alignment.centerRight,
+                            child: Text('${BCC.getBCM.getDescriptionOfBuildings.getPricesOfFloors[index].toInt()}', style: TextStyle(
+                                fontSize: 10,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.none)
+                            )
+                        );
+                      }
+                  )
+              ),
+              Container(
+                  height: 15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble(),
+                  width : MediaQuery.of(context).size.width * 0.5,
+                  child : ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: BCC.getBCM.getDescriptionOfBuildings.getNumberOfBuildings,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        padding: const EdgeInsets.only(right: 20),
+                        child: _buildDragTarget(index+1),
+                      );
+                    },
+                  )
+              ),
+            ]
+        )
     );
   }
 
