@@ -151,6 +151,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                 constraints: BoxConstraints(),
                                 icon: Image.asset('assets/images/icon/ampoule.png'),
                                 onPressed: () {
+                                  setState(() {});
                                   print("Ampoule pressed");
                                   showDialog(
                                     context: context,
@@ -158,14 +159,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                     (difficulty == 'tutorial') ?
                                         AlertDialog(
                                           title: Text(getText('titlePopUpHint')),
-                                          content: new Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            children: <Widget>[
-
-                                              Text(getText('hint'+difficulty+level.toString())),
-                                            ],
-                                          ),
+                                          content: Text(getText('hint'+difficulty+level.toString())),
                                           actions: <Widget>[
                                             new FlatButton(
                                               onPressed: () {
