@@ -11,9 +11,13 @@
 int get_level(int);
 //fonction qui recupere le niveau
 
-int create_file(int game, int level);
+int create_json(int game, int level);
 //cette fonction cree et ouvre un fichier correspondant au bon jeu et au bon level, 
 //ecrit la premiere ligne (level = x) et renvoie le file descriptor
+
+int create_file(int game, int level);
+//cette fonction cree et ouvre un fichier json correspondant au bon jeu et au bon level, 
+// renvoie le filedescriptor
 
 char *ft_itoa(int);
 // fonction qui recupere un entier et le met dans une chaine de charactere
