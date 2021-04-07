@@ -43,5 +43,55 @@
     "textName": "chooseLevelText",
     "EN": "Choose a level",
     "FR": "Choisissez un niveau"
+  },
+  {
+  "textName": "hinttutorial1",
+  "EN": "A service with the same size but makes you gain more is better.",
+  "FR": "Un service de même taille mais qui rapporte plus est mieux."
+  },
+  {
+    "textName": "hinttutorial2",
+    "EN": "There is no point in putting a service that costs more to build than what it earns otherwise you will lose money.",
+    "FR": "Ca ne sert à rien de mettre un service qui coute plus cher à poser que ce qu'il te rapporte sinon tu perds de l'argent."
+  },
+  {
+    "textName": "hinttutorial3",
+    "EN": "Sometimes there are situations where whatever you do you can not be gainful and you can not satisfy anyone.",
+    "FR": "Parfois il y a des situations où quoique tu fasses tu ne peux pas être rentable et tu ne peux donc satisfaire personne."
+  },
+  {
+    "textName": "hinttutorial4",
+    "EN": "It's getting difficult, this time clients want a different number of floors...",
+    "FR": "Ca se corse, cette fois les clients veulent un nombre d'étages différents..."
+  },
+  {
+    "textName": "hinttutorial5",
+    "EN": "This time is the same. However, it seems that they offer the same amount of money.",
+    "FR": "Cette fois-ci c'est la même chose, par contre ils t'offrent la même somme d'argent on dirait."
+  },
+  {
+    "textName": "hinttutorial6",
+    "EN": "This time, you are on your own ! Show me what you can do.",
+    "FR": "Allez je te laisse te débrouiller pour celle-là! montre moi ce que tu sais faire."
+  },
+  {
+    "textName": "hint1",
+    "EN": "If you put more services you will gain more money from them.\nHowever, you are building higher buildings which makes it more expansive.",
+    "FR": "Si vous mettez plus de services vous gagnez plus d'argent de leur part.\nPar contre vous construisez des immeubles plus haut donc plus cher."
+  },
+  {
+    "textName": "hint2",
+    "EN": "Look, some blocs have different colors...\nMaybe there is a link with their value.",
+    "FR": "Regardez certains blocs ont des couleurs différents...\nPeut-être que cela a un lien avec leur valeur."
+  },
+  {
+    "textName": "hint3",
+    "EN": "At the end, you have to get small buildings which pay out more.\nWhich means, you have to choose small services which makes you gain more money.\nTo do so, we can calculate a ratio gain/size to know which is the best service.",
+    "FR": "Au final ce qu'il faudrait avoir des immeubles petits qui rapportent beaucoup.\nCela veut dire qu'il faut des petits services qui rapportent beaucoup d'argent.\nOn peut peut-être calculer un ratio gain/taille pour voir lequel est le meilleur service."
+  },
+  {
+    "textName": "titlePopUpHint",
+    "EN": "Hint",
+    "FR": "Indice"
   }
 ]

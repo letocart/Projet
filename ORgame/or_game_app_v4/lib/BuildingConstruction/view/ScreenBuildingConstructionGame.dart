@@ -152,8 +152,33 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                 icon: Image.asset('assets/images/icon/ampoule.png'),
                                 onPressed: () {
                                   print("Ampoule pressed");
+                                  showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                    (difficulty == 'tutorial') ?
+                                        AlertDialog(
+                                          title: Text(getText('titlePopUpHint')),
+                                          content: new Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: <Widget>[
+
+                                              Text(getText('hint'+difficulty+level.toString())),
+                                            ],
+                                          ),
+                                          actions: <Widget>[
+                                            new FlatButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              textColor: Theme.of(context).primaryColor,
+                                              child: const Text('return'),
+                                            ),
+                                          ],
+                                        ) : PopupHint() ,
+                                  );
                                 },
-                              )
+                              ),
                           ),
                         )
                     ),
@@ -444,3 +469,70 @@ class Client_Icon extends StatelessWidget {
   }
 
 }
+
+// popup hint
+class PopupHint extends StatefulWidget {
+
+  @override
+  State<StatefulWidget> createState() => PopupHintState();
+
+}
+
+class PopupHintState extends State<PopupHint>{
+
+  int currentPage = 0;
+  int maxPages = 3;
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+        title : Text(getText('titlePopUpHint')),
+        content: new Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            IndexedStack(
+              sizing: StackFit.expand,
+              children: <Widget>[
+                Text(getText('hint1')),
+                Text(getText('hint2')),
+                Text(getText('hint3')),
+              ],
+              index: currentPage,
+            ),
+          ],
+        ),
+        actions: <Widget>[
+          new FlatButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('return'),
+          ),
+          currentPage > 0 ?
+          new FlatButton(
+            onPressed: () {
+              setState( () =>
+              currentPage = currentPage-1);
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('previous'),
+          ) : Container(),
+          currentPage < maxPages-1 ?
+          new FlatButton(
+            onPressed: () {
+              setState( () =>
+              currentPage = currentPage+1);
+            },
+            textColor: Theme.of(context).primaryColor,
+            child: const Text('next'),
+          ): Container(),
+          new Text("${currentPage+1}/${maxPages}"),
+        ]
+    );
+
+  }
+
+}
+
