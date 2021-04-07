@@ -34,13 +34,13 @@
 # define PRI_MIN 50
 
 
-void nb_buildings(int, char**, int fd);
+void nb_buildings(int, char**, int fd1, int fd2);
 //fonction qui choisit et ecrit nombre de batiments
 
-int clients(int c, char **v, int fd);
+int clients(int c, char **v, int fd1, int fd2);
 //fonction qui choisit et ecrit le nombre de clients, leurs nombre d'etage et leur valeur.
 
-void floor_prices(int c, char **v, int fd, int max);
+void floor_prices(int c, char **v, int fd1, int fd2, int max);
 //fonction qui choisit et ecrit le prix des differents etages
 
 #endif

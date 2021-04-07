@@ -17,36 +17,33 @@ int		int_len(int n)
 	return (i);
 }
 
-int get_level(int game)
+int create_json(int game, int level)
 {
-	int		fd = -1;
-	char	buff_get[10];
-	char	*buff_set;
-	int		level;
+	char *name;
+	char *str_level;
+	int len;
+	int fd;
 
 	if (game == 1)
-		fd = open("level1", O_RDWR);
-	if (fd < 0)
-	{
-		printf("Erreur : fichier level %d non trouve\n", game);
+		len = 9 + 5;
+	len += int_len(level);
+	if ((name = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
+		return (-1);
+	if ((str_level = (ft_itoa(level))) == NULL)
 		return -1;
-	}
-	memset(buff_get, 0, 10);
-	read(fd, buff_get, 9);
-	level = atoi(buff_get);
-	buff_set = ft_itoa(level + 1);
-	close(fd);
 	if (game == 1)
-		fd = open("level1", O_RDWR);
-	if (fd < 0)
 	{
-		printf("Erreur : fichier level %d non trouve\n", game);
-		return -1;
+		strncpy(name, "Immeuble_", 9);
+		strncpy(name + 9, str_level, strlen(str_level));
+		strncpy(name + 9 + int_len(level), ".json", 5);
+		name[len] = 0;
 	}
-	write(fd, buff_set, strlen(buff_set));
-	close(fd);
-	free(buff_set);
-	return (level);
+	free(str_level);
+	fd = open(name, O_WRONLY | O_CREAT | O_EXCL, 0666);
+	free(name);
+	if (fd >= 0)
+		write(fd, "{\n", 2);
+	return fd;
 }
 
 int create_file(int game, int level)
