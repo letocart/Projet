@@ -102,8 +102,12 @@ class IconWidgetState extends State<IconWidget>{
                       padding: EdgeInsets.only(top : 10, left : 10),
                       constraints: BoxConstraints(),
                       icon: Image.asset('assets/images/icon/uk.png'),
-                      onPressed: () {
+                      onPressed: () async {
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                         print("UK flag pressed");
+                        await StorageUtil.putString("lang",'EN'); // updating Storage
+                        this.parent.setState(() {});              // refreshing parent widget
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                       },
                     )
                 ),
@@ -118,8 +122,12 @@ class IconWidgetState extends State<IconWidget>{
                       padding: EdgeInsets.only(left : 10),
                       constraints: BoxConstraints(),
                       icon: Image.asset('assets/images/icon/fr.png'),
-                      onPressed: () {
+                      onPressed: () async {
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                         print("French flag pressed");
+                        await StorageUtil.putString("lang",'FR');
+                        this.parent.setState(() {});
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                       },
                     )
                 ),
