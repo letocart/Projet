@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 
+import '../../StorageUtil.dart';
 import '../../style.dart';
 
 class ScreenBuildingConstructionGame extends StatefulWidget {
@@ -123,7 +124,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                             child: Padding(
                                 padding: EdgeInsets.all(5.0),
                                 child: ElevatedButton(
-                                  child: Text('Return'),
+                                  child: Text(getText('returnButtonText')),
                                   style: Style.returnButtonText,
                                   onPressed: () {
                                     Navigator.of(context).push( //Navigateur vers widget
