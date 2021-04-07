@@ -6,25 +6,23 @@ import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 import 'package:or_game_app_v4/view/ScreenMainMenu.dart';
 
-import '../../language.dart';
+import '../../StorageUtil.dart';
 import '../../style.dart';
 import 'ScreenBuildingConstructionLevel.dart';
 
 // stateful widget
 class ScreenBuildingConstructionStage extends StatefulWidget {
-  Language lang;
-  ScreenBuildingConstructionStage(this.lang);
+  ScreenBuildingConstructionStage();
   // overriding the createState method
   @override
-  State<StatefulWidget> createState() => ScreenBuildingConstructionStageState(this.lang);
+  State<StatefulWidget> createState() => ScreenBuildingConstructionStageState();
 
 }
 
 //the state
 class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstructionStage> {
 
-  Language lang;
-  ScreenBuildingConstructionStageState(this.lang);
+  ScreenBuildingConstructionStageState();
   List listOfDifficulties;
 
   // method to load Json data
@@ -69,19 +67,19 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                     child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: ElevatedButton(
-                          child: Text('Return'),
+                          child: Text(getText('returnButtonText')),
                           style: Style.returnButtonText,
                           onPressed: () {
                             Navigator.of(context).push( //Navigateur vers widget
                               MaterialPageRoute(builder: (context)=>
-                                  ScreenMenuPrincipal(this.lang),
+                                  ScreenMainMenu(),
                               ),
                             );
                           },
                         )
                     ),
                   ),
-                  Text('Choose a difficulty',style : TextStyle(
+                  Text(getText('chooseDifficultyText'),style : TextStyle(
                     fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
                   ),
                   Expanded(
@@ -97,7 +95,7 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionLevel(difficulty_textEN, this.lang), // do not change this text, it mus be in english
+                                    ScreenBuildingConstructionLevel(difficulty_textEN), // do not change this text, it mus be in english
                                 ),
                               );
                               print("Start Game $difficulty_textEN pressed");
@@ -109,7 +107,7 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                   )
                 ]
               ),
-              IconWidget(Axis.horizontal, this.lang)
+              IconWidget(Axis.horizontal,this)
             ]
           )
         )

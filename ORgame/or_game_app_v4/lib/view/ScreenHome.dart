@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import '../language.dart';
+import 'package:or_game_app_v4/StorageUtil.dart';
 import '../style.dart';
 import 'package:flutter/services.dart';
 import 'IconWidget.dart';
@@ -12,26 +12,15 @@ class ScreenHome extends StatefulWidget {
 }
 
 class ScreenHomeState extends State<ScreenHome> {
-  Language lang;
 
   @override
   void initState() {
     super.initState();
-    lang = new Language();
-  }
-
-  String title()
-  {
-    if(lang.getLanguage()=="English")
-      return 'Welcome to playing OR';
-    else if(lang.getLanguage()=="French")
-      return 'Jouons à la RO';
-    else
-      return "ERROR";
   }
 
   @override
   Widget build(BuildContext context) {
+    //print("I am the Home Language: "+StorageUtil.getString("lang"));
     return Column(
         children : [
           Container(
@@ -61,26 +50,26 @@ class ScreenHomeState extends State<ScreenHome> {
                         SizedBox( //Sized Box d'ecart
                           height : 50,
                         ),
-                        Text(this.title(),style : TextStyle(
+                        Text(getText('welcomeText'),style : TextStyle(
                             fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold, decoration: TextDecoration.none),
                         ),
                         SizedBox(
                           height : 20,
                         ),
                         ElevatedButton(
-                          child: Text('Start Game'),
+                          child: Text(getText('startGameButtonText')),
                           style: Style.buttonText,
                           onPressed: () {
                             Navigator.of(context).push( //Navigateur vers widget
                             MaterialPageRoute(builder: (context)=>
-                                ScreenMenuPrincipal(this.lang),
+                                ScreenMainMenu(),
                             ),
                           );
                             print("Start Game pressed");
                           },
                         ),
                         ElevatedButton(
-                          child: Text('Exit',style: TextStyle(color:Colors.black),),
+                          child: Text(getText('exitGameButtonText'),style: TextStyle(color:Colors.black),),
                           style: Style.exitButtonText,
                           onPressed: () {
                             SystemNavigator.pop();
@@ -91,7 +80,7 @@ class ScreenHomeState extends State<ScreenHome> {
                     )
                   ]
                 ),
-                IconWidget(Axis.horizontal, this.lang)
+                IconWidget(Axis.horizontal,this)
               ]
             )
           )

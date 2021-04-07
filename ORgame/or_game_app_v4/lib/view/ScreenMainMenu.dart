@@ -1,15 +1,23 @@
 //import 'dart:html';
 import 'package:flutter/material.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionStage.dart';
-import '../language.dart';
+import '../StorageUtil.dart';
 import '../style.dart';
 import 'package:bubble/bubble.dart';
 import 'IconWidget.dart';
 import 'ScreenHome.dart';
 
-class ScreenMenuPrincipal extends StatelessWidget {
-  Language lang;
-  ScreenMenuPrincipal(this.lang);
+class ScreenMainMenu extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => ScreenMainMenuState();
+}
+class ScreenMainMenuState extends State<ScreenMainMenu> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context){
     return Column(
@@ -53,10 +61,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
                         color: Color.fromRGBO(255, 165, 0, 2.0),
                         stick: true,
                         nip: BubbleNip.leftBottom,
-                        child: Text(
-                            'Welcome to the city of OR !'
-                                '\nWe need to manage many thing in order to build the perfect and most optimized city ever!'
-                                '\nSelect which game you want to play by pressing Game1 or Game2',
+                        child: Text(getText('introductionText'),
                           style: TextStyle(
                               color: Colors.white,
                               decoration: TextDecoration.none,
@@ -72,19 +77,19 @@ class ScreenMenuPrincipal extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children : [
                           ElevatedButton(
-                            child: Text('Game 1'),
+                            child: Text(getText('gameName1')),
                             style: Style.buttonText,
                             onPressed: () {
                               print("jeu 1 pressed");
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionStage(this.lang),
+                                    ScreenBuildingConstructionStage(),
                                 ),
                               );
                             },
                           ),
                           ElevatedButton(
-                            child: Text('Game 2'),
+                            child: Text(getText('gameName2')),
                             style: Style.buttonText,
                             onPressed: () {
                               print("Jeu 2 pressed");
@@ -98,7 +103,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
                       child: Padding(
                           padding: EdgeInsets.all(5.0),
                           child: ElevatedButton(
-                            child: Text('Return'),
+                            child: Text(getText('returnButtonText')),
                             style: Style.returnButtonText,
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
@@ -112,7 +117,7 @@ class ScreenMenuPrincipal extends StatelessWidget {
                   ),
                 ],
               ),
-              IconWidget(Axis.horizontal, this.lang)
+              IconWidget(Axis.horizontal,this)
             ]
           )
         )

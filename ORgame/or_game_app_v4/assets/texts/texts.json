@@ -1,22 +1,47 @@
-{
-  "text0_fr" : "Bienvenue dans Playing OR..."
-  "text0_en" : "Welcome to Playing OR..."
-  "text1_fr" : "Construire"
-  "text1_en" : "Building"
-  "text2_fr" : "Choisir difficulté"
-  "text2_en" : "Choose difficulty"
-  "text3_fr" : "Choisir niveau"
-  "text3_en" : "Choose level"
-  "text4_fr" : "Retour"
-  "text4_en" : "Return"
-  "text5_fr" : "Tutoriel"
-  "text5_en" : "Tutorial"
-  "text6_fr" : "Facile"
-  "text6_en" : "Easy"
-  "text7_fr" : "Normal"
-  "text7_en" : "Normal"
-  "text8_fr" : "Difficile"
-  "text8_en" : "Hard"
-  "text9_fr" : "Insane"
-  "text9_en" : "Insane"
-}
+[
+  {
+    "textName": "welcomeText",
+    "EN": "Welcome to Playing OR!",
+    "FR": "Jouons à la RO!"
+  },
+  {
+    "textName": "startGameButtonText",
+    "EN": "Start Game",
+    "FR": "Jouer"
+  },
+  {
+    "textName":"exitGameButtonText",
+    "EN": "Exit",
+    "FR": "Quitter"
+  },
+  {
+    "textName":"introductionText",
+    "EN": "Welcome to the city of OR (Operational Research)!\nWe need to manage many things in order to build the perfect and most optimized city ever !\nSelect which game you want to play by pressing buttons on the right.",
+    "FR": "Bienvenue à la ville de la RO (Recherche Opérationnelle)!\nOn a besoin de gérer beaucoup de choses par ici pour construire la ville parfaite et la plus optimisée possible.\nChoisis le jeu auquel tu veux jouer en appuyant sur les boutons à droite."
+  },
+  {
+    "textName":"gameName1",
+    "EN": "Building",
+    "FR": "Construire"
+  },
+  {
+    "textName":"gameName2",
+    "EN": "Coming Soon",
+    "FR": "Arrive bientôt"
+  },
+  {
+    "textName":"returnButtonText",
+    "EN": "Return",
+    "FR": "Retour"
+  },
+  {
+    "textName":"chooseDifficultyText",
+    "EN": "Choose a difficulty",
+    "FR": "Choisissez une difficulté"
+  },
+  {
+    "textName": "chooseLevelText",
+    "EN": "Choose a level",
+    "FR": "Choisissez un niveau"
+  }
+]

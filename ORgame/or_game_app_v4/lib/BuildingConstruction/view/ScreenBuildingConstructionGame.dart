@@ -1,34 +1,29 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
-import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionLevel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 
-import '../../language.dart';
 import '../../style.dart';
 
 class ScreenBuildingConstructionGame extends StatefulWidget {
   String difficulty;
   int level;
   BuildingConstructionController BCC;
-  Language lang;
   /*ScreenBuildingConstructionGame(String diff, int lvl) {
     difficulty = diff;
     level = lvl;
   }*/
-  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC, this.lang);
+  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC);
   //createState() => BuildingConstructionGameState(difficulty,level);
-  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC, this.lang);
+  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
-  Language lang;
   List data;
   String difficulty;
   int level;
@@ -37,48 +32,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   int score = 0;
 
   //BuildingConstructionGameState(this.difficulty,this.level);
-  BuildingConstructionGameState(this.difficulty, this.level, this.BCC, this.lang);
-/*
-  Future<String> loadJsonData() async {
-    var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/'
-        'BuildingConstruction_'+difficulty+'_'+level.toString()+'.json');
-    setState(() => data = json.decode(jsonText));
-    return 'success';
-  }
+  BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
 
-  @override
-  void initState() {
-    super.initState();
-    this.loadJsonData();
-  }
-*/
   int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
-    /*if(!isInitialized) {
-      isInitialized = true;
-      double solutionValue = data==null ? 0 : data[0]['solutionValue'];
-      int numberOfBuildings = data==null ? 0 : data[0]['numberOfBuildings'];
-      int maxHeight = data==null ? 0 : data[0]['maxHeight'];
-      List<double> pricesOfFloors = [];
-      List<double> earningsFromClients = [];
-      List<int> requestsOfFloorsFromClients = [];
-      if(data!=null) {
-        for(int i=0;i<data[0]['pricesOfFloors'].length;i++)
-          pricesOfFloors.add(data[0]['pricesOfFloors'][i].toDouble());
-
-        for(int i=0;i<data[0]['earningsFromClients'].length;i++)
-          earningsFromClients.add(data[0]['earningsFromClients'][i].toDouble());
-
-        for(int i=0;i<data[0]['requestsOfFloorsFromClients'].length;i++)
-          requestsOfFloorsFromClients.add(data[0]['requestsOfFloorsFromClients'][i]);
-      }
-      BCC=BuildingConstructionController.fromBCD(
-          BuildingConstructionData(solutionValue,
-              numberOfBuildings,maxHeight,pricesOfFloors,
-              earningsFromClients,requestsOfFloorsFromClients));
-
-    }*/
     return Column(
         children : [
           Container(
@@ -170,7 +128,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   onPressed: () {
                                     Navigator.of(context).push( //Navigateur vers widget
                                       MaterialPageRoute(builder: (context)=>
-                                          ScreenBuildingConstructionLevel(difficulty, this.lang),
+                                          ScreenBuildingConstructionLevel(difficulty),
                                       ),
                                     );
                                   },
@@ -178,7 +136,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                             )
                         )
                     ),
-                    IconWidget(Axis.vertical, this.lang),
+                    IconWidget(Axis.vertical,this),
                     Positioned(
                         top : 0,
                         left : MediaQuery.of(context).size.width * 0.65 - 24,
@@ -256,7 +214,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                               onPressed: () {
                                                 Navigator.of(context).push( //Navigateur vers widget
                                                   MaterialPageRoute(builder: (context)=>
-                                                      ScreenBuildingConstructionLevel(difficulty, this.lang),
+                                                      ScreenBuildingConstructionLevel(difficulty),
                                                   ),
                                                 );
                                               },

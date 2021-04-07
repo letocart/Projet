@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,7 +8,7 @@ import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstruc
 import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 
-import '../../language.dart';
+import '../../StorageUtil.dart';
 import '../../style.dart';
 import 'ScreenBuildingConstructionGame.dart';
 import 'ScreenBuildingConstructionStage.dart';
@@ -17,17 +16,15 @@ import 'ScreenBuildingConstructionStage.dart';
 //stateful widget
 class ScreenBuildingConstructionLevel extends StatefulWidget {
   String difficulty;
-  Language lang;
 
-  ScreenBuildingConstructionLevel(String diff, Language lang) {
-    this.lang = lang;
+  ScreenBuildingConstructionLevel(String diff) {
     difficulty = diff;
     print(difficulty);
   }
 
   // overriding the createState method
   @override
-  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty, this.lang);
+  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty);
 }
 
 //the state
@@ -36,9 +33,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   List instancesInformation;
   int numberOfLevels=0;
   String difficulty;
-  Language lang;
-  ScreenBuildingConstructionLevelState(String diff, Language lang) {
-    this.lang = lang;
+  ScreenBuildingConstructionLevelState(String diff) {
     difficulty = diff;
     print(difficulty);
   }
@@ -102,19 +97,19 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                       child: Padding(
                           padding: EdgeInsets.all(5.0),
                           child: ElevatedButton(
-                            child: Text('Return',style: TextStyle(color:Colors.white)),
+                            child: Text(getText('returnButtonText'),style: TextStyle(color:Colors.white)),
                             style: Style.returnButtonText,
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionStage(this.lang),
+                                    ScreenBuildingConstructionStage(),
                                 ),
                               );
                             },
                           )
                       ),
                     ),
-                    Text('Choose a level', style: TextStyle(
+                    Text(getText('chooseLevelText'), style: TextStyle(
                       fontSize: 18,
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -165,7 +160,6 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                     BuildingConstructionController.fromBCD(
                                         BuildingConstructionData(solutionValue, numberOfBuildings, maxHeight, pricesOfFloors, earningsFromClients, requestsOfFloorsFromClients)
                                     ),
-                                    this.lang
                                 )
                                 ),
                               );
@@ -177,7 +171,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                     )
                   ]
                 ),
-                IconWidget(Axis.horizontal, this.lang)
+                IconWidget(Axis.horizontal,this)
               ]
             )
           )

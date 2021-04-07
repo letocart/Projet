@@ -1,24 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:or_game_app_v4/StorageUtil.dart';
 
-import '../language.dart';
 
 class IconWidget extends StatefulWidget {
-  IconWidget(this.direction, this.lang);
 
+  State parent; //the parent State Widget
   final Axis direction;
-  Language lang;
+
+  IconWidget(this.direction,this.parent);
 
   @override
-  State<StatefulWidget> createState() => IconWidgetState(direction, lang);
+  State<StatefulWidget> createState() => IconWidgetState(direction,parent);
 }
 
 class IconWidgetState extends State<IconWidget>{
-  IconWidgetState(this.direction, this.lang);
 
+  State parent;
   final Axis direction;
-  Language lang;
 
+  IconWidgetState(this.direction,this.parent);
   @override
   Widget build(BuildContext context) {
     if(direction==Axis.horizontal) {
@@ -35,14 +36,12 @@ class IconWidgetState extends State<IconWidget>{
                         shape: CircleBorder()),
                     child: IconButton(
                       icon: Image.asset('assets/images/icon/uk.png'),
-                      onPressed: () {
-                        print("Langue actuelle : ${lang.getLanguage()}");
+                      onPressed: () async {
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                         print("UK flag pressed");
-                        setState(() {
-                          this.lang.setLanguage('English');
-
-                        });
-                        print("Langue actuelle : ${lang.getLanguage()}");
+                        await StorageUtil.putString("lang",'EN'); // updating Storage
+                        this.parent.setState(() {});              // refreshing parent widget
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                       },
                     )
                 ),
@@ -55,13 +54,12 @@ class IconWidgetState extends State<IconWidget>{
                         shape: CircleBorder()),
                     child: IconButton(
                       icon: Image.asset('assets/images/icon/fr.png'),
-                      onPressed: () {
-                        print("Langue actuelle : ${lang.getLanguage()}");
+                      onPressed: () async {
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                         print("French flag pressed");
-                        setState(() {
-                          this.lang.setLanguage('French');
-                        });
-                        print("Langue actuelle : ${lang.getLanguage()}");
+                        await StorageUtil.putString("lang",'FR');
+                        this.parent.setState(() {});
+                        print("Langue actuelle : ${StorageUtil.getString("lang")}");
                       },
                     )
                 ),
