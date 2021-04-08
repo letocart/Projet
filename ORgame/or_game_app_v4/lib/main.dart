@@ -15,20 +15,24 @@ void main() async {
 
   // Unit tests on model, controller and data
   // for Building Construction
-  //assertBCM();
-  //assertBCD();
-  //assertBCC();
+  /*
+  assertBCM();
+  assertBCD();
+  assertBCC();
+   */
   // for Bus Line : there is a problem within the assertBLD two list are similar but the test show the opposite
-  //assertBLM();
-  //assertBLD();
-  //assertBLC();
-
+  /*
+  assertBLM();
+  assertBLD();
+  assertBLC();
+  */
   // ensure having data Initialized
   WidgetsFlutterBinding.ensureInitialized();
   // creating StorageUtil's instance with getInstance
   await StorageUtil.getInstance();
   // setting default language to English
   await StorageUtil.putString("lang", "EN");
+  await StorageUtil.putString("isBuildingConstructionTutorialFirstVisited", "false");
   //print("I am the Main Language: "+StorageUtil.getString("lang"));
 
   // loading texts from json file and storing in storage

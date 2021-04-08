@@ -1,3 +1,5 @@
+//inspiration code for popup when first arrived: https://stackoverflow.com/questions/62536438/how-to-show-a-popup-on-app-start-in-flutter
+
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
@@ -32,6 +34,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration.zero, () => showPopUpTutorial(context));
     return Column(
         children : [
           Container(
@@ -367,6 +370,27 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
       },
     );
   }
+
+  showPopUpTutorial(BuildContext context) async {
+    if(this.dataInstances[this.difficultyIndex]["difficultyEN"] == 'tutorial' &&
+        this.levelIndex==0 && StorageUtil.getString('isBuildingConstructionTutorialFirstVisited')=='false') {
+      await StorageUtil.putString(
+          "isBuildingConstructionTutorialFirstVisited", "true");
+      showDialog(
+          context: context,
+          builder: (BuildContext context) =>
+              tutorialPopUpRule()
+      );
+    }
+  }
+  PopUpRule tutorialPopUpRule(){
+    return PopUpRule(getText('titlePopUpBuildingConstruction'),4,
+        [getText('PopUpBuildingConstructionText1'),
+          getText('PopUpBuildingConstructionText2'),
+          getText('PopUpBuildingConstructionText3'),
+          getText('PopUpBuildingConstructionText4')]);
+  }
+
 }
 
 class Client_Draggable extends StatelessWidget {

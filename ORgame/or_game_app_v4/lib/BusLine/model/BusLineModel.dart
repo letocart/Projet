@@ -20,6 +20,27 @@ class BusLineModel
   */
   double _totalDistance=0;
 
+  //overriding the == operator
+  @override
+  bool operator ==(other) {
+    if (!(other is BusLineModel
+        && (other.getSolutionValue == this.getSolutionValue)
+        && (other.getNumberOfStations == this.getNumberOfStations)
+        && (ListEquality().equals(other.getStationsCoordinates,this.getStationsCoordinates))
+        && (ListEquality().equals(other.getTypeOfStations,this.getTypeOfStations))
+        && (other.getAdjacencyMatrix.length==this.getAdjacencyMatrix.length))
+        && (other.getStateOfGame.length==this.getStateOfGame.length))
+      return false;
+    for(int i = 0;i<this.getStateOfGame.length;i++) {
+      if (!(ListEquality().equals(other.getStateOfGame[i], this.getStateOfGame[i])))
+        return false;
+    }
+    for(int i = 0;i<this.getAdjacencyMatrix.length;i++) {
+      if (!(ListEquality().equals(other.getStateOfGame[i], this.getStateOfGame[i])))
+        return false;
+    }
+    return true;
+  }
 
 
   BusLineModel(this._solutionValue, this._numberOfStations,
@@ -29,13 +50,13 @@ class BusLineModel
     // creation and initialization of the matrix stateOfGame
     // everything is false
     this.stateOfGame = new List<List<bool>>();
+    List<bool> list;
     for (int i = 0; i < this.getNumberOfStations; i++)
     {
-      List<bool> list = new List<bool>();
+      list = [];
       for (int j = 0; j < this.getNumberOfStations; j++)
       {
-        if (j == 0)
-          list.add(false);
+        list.add(false);
       }
       this.getStateOfGame.add(list);
     }
@@ -110,7 +131,9 @@ class BusLineModel
   // calculate the percentage of the solution
   int solutionPercentage()
   {
-    return ((this.getSolutionValue/this.getTotalDistance)*100).floor();
+    if(this.getTotalDistance>0)
+      return ((this.getSolutionValue/this.getTotalDistance)*100).floor();
+    return 0;
   }
 
   // getters and setters

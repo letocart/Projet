@@ -51,10 +51,13 @@ assertBLD()
 
   assert(BLD.getSolutionValue==solutionTest);
   assert(BLD.getNumberOfStations==typeStationsTest.length);
-  assert(BLD.getStationsCoordinates==coordTest);
-  assert(BLD.getTypeOfStations==typeStationsTest);
-  assert(BLD.getAdjacencyMatrix==adjacencyMatrixTest);
-
+  assert(ListEquality().equals(BLD.getStationsCoordinates,coordTest));
+  assert(ListEquality().equals(BLD.getTypeOfStations,typeStationsTest));
+  assert(ListEquality().equals(BLD.getAdjacencyMatrix,adjacencyMatrixTest));
+  for(int i = 0; i<BLD.getAdjacencyMatrix.length;i++)
+  {
+    assert(ListEquality().equals(BLD.getAdjacencyMatrix[i],adjacencyMatrixTest[i]));
+  }
   print("assert of BLD terminated successfully");
 }
 
@@ -69,27 +72,45 @@ assertBLM(){
   // creating the game's state based on stations
   for (int i = 0; i < BLM.getNumberOfStations; i++)
   {
-    List<bool> list = new List<bool>();
+    List<bool> list = [];
     for (int j = 0; j < BLM.getNumberOfStations; j++)
     {
-      if (j == 0)
-        list.add(false);
+      list.add(false);
     }
     stateOfGameTest.add(list);
   }
+/*
   print("this is real");
   print(BLM.getStateOfGame);
   print("this is test ");
   print(stateOfGameTest);
-  print(equality(BLM.getStateOfGame, stateOfGameTest));
+
+  print("this is real");
+  print(BLM.getAdjacencyMatrix);
+  print("this is test ");
+  print(adjacencyMatrixTest);
+*/
+  print(BLM.getStateOfGame.length);
+  print(stateOfGameTest.length);
 
   // Test of creation and modification
   assert(BLM.getSolutionValue==solutionTest);
   assert(BLM.getNumberOfStations==typeStationsTest.length);
-  assert(BLM.getStationsCoordinates==coordTest);
-  assert(BLM.getTypeOfStations==typeStationsTest);
-  assert(BLM.getAdjacencyMatrix==adjacencyMatrixTest);
-  assert(BLM.getStateOfGame==stateOfGameTest);
+  assert(ListEquality().equals(BLM.getStationsCoordinates,coordTest));
+  assert(ListEquality().equals(BLM.getTypeOfStations,typeStationsTest));
+  //assert(ListEquality().equals(BLM.getAdjacencyMatrix,adjacencyMatrixTest));
+  for(int i = 0; i<BLM.getAdjacencyMatrix.length;i++)
+  {
+    assert(ListEquality().equals(BLM.getAdjacencyMatrix[i],adjacencyMatrixTest[i]));
+  }
+
+  for(int i = 0; i<BLM.getStateOfGame.length;i++)
+  {
+    assert(ListEquality().equals(BLM.getStateOfGame[i],stateOfGameTest[i]));
+  }
+
+  //assert(ListEquality().equals(BLM.getStateOfGame,stateOfGameTest));
+  // we must not do an ListEquality check on the matrix directly, because it will test == and not List Equality
   assert(BLM.getTotalDistance==0);
 
   // test distance methods
@@ -104,10 +125,12 @@ assertBLM(){
   double distance = BLM.calculateDistance(0,2);
 
   // euclidean distance calculation
-  double distanceTest = sqrt( pow(BLM.getStationsCoordinates[4].getX - BLM.getStationsCoordinates[0].getX,2)
-      +pow(BLM.getStationsCoordinates[4].getY - BLM.getStationsCoordinates[0].getY,2));
+  double distanceTest = sqrt( pow(BLM.getStationsCoordinates[2].getX - BLM.getStationsCoordinates[0].getX,2)
+      +pow(BLM.getStationsCoordinates[2].getY - BLM.getStationsCoordinates[0].getY,2));
 
   // test distance
+  print(distance);
+  print(distanceTest);
   assert(distance == distanceTest);
 
   // calculating total distance
@@ -133,7 +156,13 @@ assertBLM(){
   // calculating solution pourcentage
   int solutionPourcentage = BLM.solutionPercentage();
 
-  int solutionPourcentageTest = ((BLM.getSolutionValue/BLM.getTotalDistance)*100).floor();
+  int solutionPourcentageTest;
+  if(BLM.getTotalDistance>0) {
+    solutionPourcentageTest = ((BLM.getSolutionValue / BLM.getTotalDistance) * 100).floor();
+  } else {
+    solutionPourcentageTest = 0;
+  }
+
 
   // test solution pourcentage
   assert(solutionPourcentage == solutionPourcentageTest);

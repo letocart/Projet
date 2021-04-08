@@ -16,14 +16,21 @@ class BusLineData {
 
   //overriding the == operator
   @override
-  bool operator ==(other) =>
-      other is BusLineData
+  bool operator ==(other) {
+      if (!(other is BusLineData
           && (other.getSolutionValue == this.getSolutionValue)
           && (other.getNumberOfStations == this.getNumberOfStations)
           && (ListEquality().equals(other.getStationsCoordinates,this.getStationsCoordinates))
           && (ListEquality().equals(other.getTypeOfStations,this.getTypeOfStations))
-          && (ListEquality().equals(other.getAdjacencyMatrix,this.getAdjacencyMatrix));
+          && (other.getAdjacencyMatrix.length==this.getAdjacencyMatrix.length)))
+        return false;
 
+      for(int i = 0;i<this.getAdjacencyMatrix.length;i++) {
+        if (!(ListEquality().equals(other.getAdjacencyMatrix[i], this.getAdjacencyMatrix[i])))
+          return false;
+      }
+      return true;
+  }
 
   // getters and setters
   double get getSolutionValue => _solutionValue;
