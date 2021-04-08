@@ -48,13 +48,6 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
           Container(
               height : MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
               width : MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/backgrounds/ajoutBgDistributionService.png"),
-                    fit: BoxFit.cover,
-                    alignment: Alignment.bottomCenter,
-                  )
-              ),
               child : Stack(
                   children : [
                     Row(
@@ -63,6 +56,13 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                           Container(
                             width : MediaQuery.of(context).size.width * 0.65,
                             height: MediaQuery.of(context).size.height,
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                  image: AssetImage("assets/images/backgrounds/bgDistributionService.png"),
+                                  fit: BoxFit.cover,
+                                  alignment: Alignment.bottomCenter,
+                                )
+                            ),
                             //color : Colors.brown,
                             child:
                             /*(15*BCC.getBCM.getDescriptionOfBuildings.getMaxHeight.toDouble())<MediaQuery.of(context).size.height ?
