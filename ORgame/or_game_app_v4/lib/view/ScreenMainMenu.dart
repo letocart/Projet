@@ -44,7 +44,7 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                       child : Container(
                           child :
                             Align(
-                              alignment : Alignment.bottomLeft,
+                              alignment : Alignment.bottomRight,
                               child : Padding (
                                   padding: EdgeInsets.only(left: 16.0),
                                   child : Image.asset('assets/images/John.png', scale : 10.0)
@@ -57,7 +57,7 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                       child : Bubble(
                         alignment: Alignment.centerLeft,
                         radius: Radius.circular(20.0),
-                        margin: BubbleEdges.only(top: 10),
+                        margin: BubbleEdges.only(top: 70),
                         color: Color.fromRGBO(255, 165, 0, 2.0),
                         stick: true,
                         nip: BubbleNip.leftBottom,
@@ -80,7 +80,7 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                             child: Text(getText('gameName1')),
                             style: Style.buttonText,
                             onPressed: () {
-                              print("jeu 1 pressed");
+                              //print("jeu 1 pressed");
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
                                     ScreenBuildingConstructionStage(),
@@ -92,7 +92,7 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                             child: Text(getText('gameName2')),
                             style: Style.buttonText,
                             onPressed: () {
-                              print("Jeu 2 pressed");
+                              //print("Jeu 2 pressed");
                             },
                           ),
                         ],

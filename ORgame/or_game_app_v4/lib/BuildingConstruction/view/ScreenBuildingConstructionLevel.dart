@@ -19,7 +19,7 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
 
   ScreenBuildingConstructionLevel(String diff) {
     difficulty = diff;
-    print(difficulty);
+    //print(difficulty);
   }
 
   // overriding the createState method
@@ -35,7 +35,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   String difficulty;
   ScreenBuildingConstructionLevelState(String diff) {
     difficulty = diff;
-    print(difficulty);
+    //print(difficulty);
   }
 
   //loading Json data
@@ -48,7 +48,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
   }
 
   Future<String> loadJsonData2() async {
-    print("IAMJSON2"+difficulty);
+    //print("IAMJSON2"+difficulty);
     List<String> jsonText = [];
     numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
     List l = [];
@@ -109,11 +109,23 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                           )
                       ),
                     ),
-                    Text(getText('chooseLevelText'), style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      decoration: TextDecoration.none),
+                    Stack(
+                      children: [
+                        Text(getText('chooseLevelText'),style : TextStyle(
+                            fontSize: 18,
+                            foreground: Paint()
+                              ..style = PaintingStyle.stroke
+                              ..strokeWidth = 2.5
+                              ..color = Colors.white,
+                            fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                        ),
+                        Text(getText('chooseLevelText'), style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            decoration: TextDecoration.none),
+                        )
+                      ],
                     ),
                     Expanded(
                       child: GridView.count(
@@ -163,7 +175,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                 )
                                 ),
                               );
-                              print("Start Game ${index+1} pressed");
+                              //print("Start Game ${index+1} pressed");
                             },
                           );
                         })

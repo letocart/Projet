@@ -92,18 +92,18 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   );
                                 },
                                 onWillAccept: (data){
-                                  print("OnWillAccept");
+                                  //print("OnWillAccept");
                                   return true;
                                 },
                                 onAccept: (data) {
-                                  print("Accept $data");
+                                  //print("Accept $data");
                                   setState(() {
                                     BCC.getBCM.assignClientToBuilding(data.getIndex,0);
                                     BCC.getBCM.updateScore();
                                   });
                                 },
                                 onLeave: (data) {
-                                  print("Not accept");
+                                  //print("Not accept");
                                 },
                               ))]),
                     Positioned(
@@ -152,7 +152,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                 icon: Image.asset('assets/images/icon/ampoule.png'),
                                 onPressed: () {
                                   setState(() {});
-                                  print("Ampoule pressed");
+                                  //print("Ampoule pressed");
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -190,7 +190,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                 constraints: BoxConstraints(),
                                 icon: Image.asset('assets/images/icon/check.png'),
                                 onPressed: () {
-                                  print("Check pressed");
+                                  //print("Check pressed");
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
@@ -356,18 +356,18 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
         );
       },
       onWillAccept: (data) {
-        print("OnWillAccept");
+        //print("OnWillAccept");
         return true;
       },
       onAccept: (data) {
-        print("Accept $data");
+        //print("Accept $data");
         setState(() {
           BCC.getBCM.assignClientToBuilding(data.getIndex, index_building);
           BCC.getBCM.updateScore();
         });
       },
       onLeave: (data) {
-        print("Not accept");
+        //print("Not accept");
       },
     );
   }

@@ -16,8 +16,8 @@
   },
   {
     "textName":"introductionText",
-    "EN": "Welcome to the city of OR (Operational Research)!\nWe need to manage many things in order to build the perfect and most optimized city ever !\nSelect which game you want to play by pressing buttons on the right.",
-    "FR": "Bienvenue à la ville de la RO (Recherche Opérationnelle)!\nOn a besoin de gérer beaucoup de choses par ici pour construire la ville parfaite et la plus optimisée possible.\nChoisis le jeu auquel tu veux jouer en appuyant sur les boutons à droite."
+    "EN": "Welcome to the city of OR! The city of Operational Research.\nWe need to manage many things in order to build the perfect and most optimized city ever !\nSelect which game you want to play by pressing the buttons on the right.",
+    "FR": "Bienvenue à la ville de la RO! La ville de la Recherche Opérationnelle.\nOn a besoin de gérer beaucoup de choses par ici pour construire la ville parfaite et la plus optimisée possible.\nChoisis le jeu auquel tu veux jouer en appuyant sur les boutons à droite."
   },
   {
     "textName":"gameName1",
@@ -93,5 +93,65 @@
     "textName": "titlePopUpHint",
     "EN": "Hint",
     "FR": "Indice"
+  },
+  {
+    "textName": "returnText",
+    "EN": "return",
+    "FR": "retour"
+  },
+  {
+    "textName": "previousText",
+    "EN": "previous",
+    "FR": "précédent"
+  },
+  {
+    "textName": "nextText",
+    "EN": "next",
+    "FR": "suivant"
+  },
+  {
+    "textName": "titlePopUpGeneral",
+    "EN": "General Explanations",
+    "FR": "Explications Générales"
+  },
+  {
+    "textName": "PopUpGeneralText1",
+    "EN": "Your goal is to help us make decisions to optimize our city.",
+    "FR": "Ton but est de nous aider à prendre des décisions pour optimiser notre ville."
+  },
+  {
+    "textName": "PopUpGeneralText2",
+    "EN": "Several situations will be exposed to you.\nYou will need logic and reflexion to get the best result.",
+    "FR": "Plusieurs situations te seront exposées.\nTu auras besoin de logique and de réflexion pour obtenir le meilleur résultat."
+  },
+  {
+    "textName": "PopUpGeneralText3",
+    "EN": "We will talk about it more later but theses problems have a link with the Operational Research (OR).\nThe discipline regrouping the techniques and methods to get the best result for a given problem.",
+    "FR": "On le verra plus en détail plus tard mais ces problématiques ont un lien avec la Recherche Opérationnelle (RO)\nL'ensemble des techniques et méthodes pour obtenir le meilleur résultat pour un problem donné."
+  },
+  {
+    "textName": "titlePopUpBuildingConstruction",
+    "EN": "How to Build",
+    "FR": "Comment Construire"
+  },
+  {
+    "textName": "PopUpBuildingConstructionText1",
+    "EN": "Here's the situation:\nSeverals companies want to invest in our new building projet.\nEach of them ask for a certain number of floors in our new building for a certain amount of money.Yet to build this kind of building costs money and generally the higher it is the more expensive it will be.",
+    "FR": "Voici la situation:\nPlusieurs entreprises veulent investir dans notre nouveau projet de construction.\nChacune d'elle veut un certain nombre d'étages dans notre nouveau bâtiment contre une certaine somme d'argent.Cependant construire ce genre de bâtiment coûte de l'argent et généralement plus il est grand plus il est cher."
+  },
+  {
+    "textName": "PopUpBuildingConstructionText2",
+    "EN": "On the right you have several rectangles of different sizes or not, representing the number of floors asked by the companies, with an amount of money that you will earn if you place them. You can place them in the white rectangle on the left, representing the building.\nOn the left of each floor of the building you have a number, it represents the price of a floor.",
+    "FR": "Sur la droite vous avez différents rectangles de différentes tailles ou non, représentant le nombre d'étages demandés par les clients, avec un montant d'argent que vous allez gagner si vous les placez. Vous pouvez les placer dans le rectangle blanc à gauche, représentant le bâtiment.\nSur la gauche de chaque étage du bâtiment vous avez un nombre, il représente le prix d'un étage."
+  },
+  {
+    "textName": "PopUpBuildingConstructionText3",
+    "EN": "So your goal is to maximise the amount of money we will earn by choosing where to place which rectangle.You are not obligated to put every rectangles in the building.",
+    "FR": "Donc votre but est de maximiser l'argent que nous allons gagner en choisissant où placer quel rectangle.Vous n'êtes pas obligés de mettre tous les rectangles dans le bâtiment."
+  },
+  {
+    "textName": "PopUpBuildingConstructionText4",
+    "EN": "When you think you finished you can tap on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one.\nOn the top right, you can tap on bulb icon to get small hints on how to find the optimal solution.",
+    "FR": "Quand vous pensez avoir fini vous pouvez appuyer sur le bouton de validation en bas à droite. Vous obtiendrez un pourcentage comparant votre solution et la solution optimale.\nEn haut à droite, vous pouvez appuyer sur l'icône d'ampoule pour obtenir quelques indices sur comment trouver la solution optimale."
   }
 ]

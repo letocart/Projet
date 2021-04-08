@@ -79,8 +79,20 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                         )
                     ),
                   ),
-                  Text(getText('chooseDifficultyText'),style : TextStyle(
-                    fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                  Stack(
+                    children: [
+                      Text(getText('chooseDifficultyText'),style : TextStyle(
+                          fontSize: 18,
+                          foreground: Paint()
+                            ..style = PaintingStyle.stroke
+                            ..strokeWidth = 2.5
+                            ..color = Colors.white,
+                          fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                      ),
+                      Text(getText('chooseDifficultyText'),style : TextStyle(
+                        fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                      )
+                    ],
                   ),
                   Expanded(
                       child: ListView.separated(
@@ -98,7 +110,7 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                                     ScreenBuildingConstructionLevel(difficulty_textEN), // do not change this text, it mus be in english
                                 ),
                               );
-                              print("Start Game $difficulty_textEN pressed");
+                              //print("Start Game $difficulty_textEN pressed");
                             },
                           );
                         },

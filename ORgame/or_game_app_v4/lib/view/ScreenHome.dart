@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:or_game_app_v4/StorageUtil.dart';
@@ -50,8 +52,20 @@ class ScreenHomeState extends State<ScreenHome> {
                         SizedBox( //Sized Box d'ecart
                           height : 50,
                         ),
-                        Text(getText('welcomeText'),style : TextStyle(
-                            fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                        Stack(
+                          children: [
+                            Text(getText('welcomeText'),style : TextStyle(
+                                fontSize: 18,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 2.5
+                                  ..color = Colors.white,
+                                fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                            ),
+                            Text(getText('welcomeText'),style : TextStyle(
+                                fontSize: 18, color: Colors.black,fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                            )
+                          ],
                         ),
                         SizedBox(
                           height : 20,
@@ -65,7 +79,7 @@ class ScreenHomeState extends State<ScreenHome> {
                                 ScreenMainMenu(),
                             ),
                           );
-                            print("Start Game pressed");
+                            //print("Start Game pressed");
                           },
                         ),
                         ElevatedButton(
@@ -73,7 +87,7 @@ class ScreenHomeState extends State<ScreenHome> {
                           style: Style.exitButtonText,
                           onPressed: () {
                             SystemNavigator.pop();
-                            print("Exit pressed");
+                            //print("Exit pressed");
                           },
                         ),
                       ],
