@@ -1,5 +1,8 @@
 //import 'dart:html';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstructionStage.dart';
 import '../StorageUtil.dart';
 import '../style.dart';
@@ -13,9 +16,19 @@ class ScreenMainMenu extends StatefulWidget {
 }
 class ScreenMainMenuState extends State<ScreenMainMenu> {
 
+  List BuildingConstructionDataInstances;
+  // method to load Json data
+  Future<String> loadJsonData() async {
+    var jsonText = await rootBundle.loadString(
+        'assets/problemInstances/BuildingConstructionInstances.json');
+    setState(() => BuildingConstructionDataInstances = json.decode(jsonText));
+    return 'success';
+  }
+
   @override
   void initState() {
     super.initState();
+    this.loadJsonData();
   }
 
   @override
@@ -61,13 +74,13 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                         color: Color.fromRGBO(255, 165, 0, 2.0),
                         stick: true,
                         nip: BubbleNip.leftBottom,
-                        child: Text(getText('introductionText'),
+                        child: Text(getText('introductionText'), textAlign: TextAlign.justify,
                           style: TextStyle(
                               color: Colors.white,
                               decoration: TextDecoration.none,
                               height: 2,
                               fontSize: 10
-                          ),
+                          )
                         ),
                       ),
                   ),
@@ -79,11 +92,12 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
                           ElevatedButton(
                             child: Text(getText('gameName1')),
                             style: Style.buttonText,
-                            onPressed: () {
+                            onPressed: () async {
                               //print("jeu 1 pressed");
+                              await loadJsonData();
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionStage(),
+                                    ScreenBuildingConstructionStage(BuildingConstructionDataInstances),
                                 ),
                               );
                             },

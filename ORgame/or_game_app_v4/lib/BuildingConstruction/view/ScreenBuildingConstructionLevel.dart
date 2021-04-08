@@ -15,63 +15,31 @@ import 'ScreenBuildingConstructionStage.dart';
 
 //stateful widget
 class ScreenBuildingConstructionLevel extends StatefulWidget {
-  String difficulty;
+  List dataInstances;
+  int difficultyIndex;
 
-  ScreenBuildingConstructionLevel(String diff) {
-    difficulty = diff;
-    //print(difficulty);
-  }
+  ScreenBuildingConstructionLevel(this.dataInstances,this.difficultyIndex);
 
   // overriding the createState method
   @override
-  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(difficulty);
+  State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(this.dataInstances,this.difficultyIndex);
 }
 
 //the state
 class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstructionLevel> {
-  List levelsInformation;
-  List instancesInformation;
+  List dataInstances;
+  int difficultyIndex;
   int numberOfLevels=0;
-  String difficulty;
-  ScreenBuildingConstructionLevelState(String diff) {
-    difficulty = diff;
-    //print(difficulty);
-  }
-
-  //loading Json data
-  Future<String> loadJsonData() async {
-    var jsonText = await rootBundle.loadString('assets/problemInstances/BuildingConstruction/BuildingConstruction_'+difficulty+'_Levels.json');
-    setState(() {
-      levelsInformation = json.decode(jsonText);
-    });
-    return 'success';
-  }
-
-  Future<String> loadJsonData2() async {
-    //print("IAMJSON2"+difficulty);
-    List<String> jsonText = [];
-    numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
-    List l = [];
-    for(int i=0;i<numberOfLevels;i++) {
-      jsonText.add(await rootBundle.loadString(
-          'assets/problemInstances/BuildingConstruction/'
-              'BuildingConstruction_' + difficulty + '_'+(i+1).toString()+'.json'));
-      l.add(json.decode(jsonText[i]));
-    }
-    setState(() {
-      instancesInformation = l;});
-    return 'success';
-  }
+  ScreenBuildingConstructionLevelState(this.dataInstances,this.difficultyIndex);
 
   @override
   void initState() {
     super.initState();
-    this.loadJsonData();
   }
 
   @override
   Widget build(BuildContext context) {
-    numberOfLevels = levelsInformation==null ? 0 : levelsInformation[0]['numberOfLevels'];
+    this.numberOfLevels = this.dataInstances[this.difficultyIndex]["instances"].length;
     return Column(
         children : [
           Container(
@@ -102,7 +70,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionStage(),
+                                    ScreenBuildingConstructionStage(this.dataInstances),
                                 ),
                               );
                             },
@@ -137,38 +105,35 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                         crossAxisCount: 6,
                         // Generate nombreNiveau widgets that display their index in the List.
                         children:
-                        List.generate(numberOfLevels, (index) {
+                        List.generate(numberOfLevels, (levelIndex) {
                           return ElevatedButton(
-                            child: Text('${index+1}'),
+                            child: Text('${levelIndex+1}'),
                             style: Style.buttonText,
-                            onPressed: () async {
-                              //log("before : "+dataInstances.toString());
-                              await loadJsonData2();
-                              //log("after : "+this.dataInstances.toString());
+                            onPressed: () {
                               List<double> pricesOfFloors = [];
                               List<double> earningsFromClients = [];
                               List<int> requestsOfFloorsFromClients = [];
                               double solutionValue = 0;
                               int numberOfBuildings = 0;
                               int maxHeight = 0;
-                              if(!ListEquality().equals(instancesInformation, [])) {
-                                solutionValue = instancesInformation[index]["solutionValue"];
-                                numberOfBuildings = instancesInformation[index]["numberOfBuildings"];
-                                maxHeight = instancesInformation[index]["maxHeight"];
+                              if(!ListEquality().equals(dataInstances, [])) {
+                                solutionValue = dataInstances[this.difficultyIndex]["instances"][levelIndex]["solutionValue"];
+                                numberOfBuildings = dataInstances[this.difficultyIndex]["instances"][levelIndex]["numberOfBuildings"];
+                                maxHeight = dataInstances[this.difficultyIndex]["instances"][levelIndex]["maxHeight"];
 
-                                for(int i=0;i<instancesInformation[index]['pricesOfFloors'].length;i++)
-                                  pricesOfFloors.add(instancesInformation[index]['pricesOfFloors'][i].toDouble());
+                                for(int i=0;i<dataInstances[this.difficultyIndex]["instances"][levelIndex]['pricesOfFloors'].length;i++)
+                                  pricesOfFloors.add(dataInstances[this.difficultyIndex]["instances"][levelIndex]['pricesOfFloors'][i].toDouble());
 
-                                for(int i=0;i<instancesInformation[index]['earningsFromClients'].length;i++)
-                                  earningsFromClients.add(instancesInformation[index]['earningsFromClients'][i].toDouble());
+                                for(int i=0;i<dataInstances[this.difficultyIndex]["instances"][levelIndex]['earningsFromClients'].length;i++)
+                                  earningsFromClients.add(dataInstances[this.difficultyIndex]["instances"][levelIndex]['earningsFromClients'][i].toDouble());
 
-                                for(int i=0;i<instancesInformation[index]['requestsOfFloorsFromClients'].length;i++)
-                                  requestsOfFloorsFromClients.add(instancesInformation[index]['requestsOfFloorsFromClients'][i]);
+                                for(int i=0;i<dataInstances[this.difficultyIndex]["instances"][levelIndex]['requestsOfFloorsFromClients'].length;i++)
+                                  requestsOfFloorsFromClients.add(dataInstances[this.difficultyIndex]["instances"][levelIndex]['requestsOfFloorsFromClients'][i]);
                               }
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
                                 //ScreenBuildingConstructionGame(difficulty, index+1),
-                                ScreenBuildingConstructionGame(difficulty, index+1,
+                                ScreenBuildingConstructionGame(this.dataInstances, this.difficultyIndex, levelIndex,
                                     BuildingConstructionController.fromBCD(
                                         BuildingConstructionData(solutionValue, numberOfBuildings, maxHeight, pricesOfFloors, earningsFromClients, requestsOfFloorsFromClients)
                                     ),

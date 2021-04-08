@@ -16,8 +16,8 @@
   },
   {
     "textName":"introductionText",
-    "EN": "Welcome to the city of OR! The city of Operational Research.\nWe need to manage many things in order to build the perfect and most optimized city ever !\nSelect which game you want to play by pressing the buttons on the right.",
-    "FR": "Bienvenue à la ville de la RO! La ville de la Recherche Opérationnelle.\nOn a besoin de gérer beaucoup de choses par ici pour construire la ville parfaite et la plus optimisée possible.\nChoisis le jeu auquel tu veux jouer en appuyant sur les boutons à droite."
+    "EN": "Welcome to the city of OR! The city of Operational Research.\nWe need to manage many things in order to build the perfect and most optimized city ever !\n\nSelect which game you want to play by pressing the buttons on the right.",
+    "FR": "Bienvenue à la ville de la RO! La ville de la Recherche Opérationnelle.\nOn a besoin de gérer beaucoup de choses par ici pour construire la ville parfaite et la plus optimisée possible.\n\nChoisis le jeu auquel tu veux jouer en appuyant sur les boutons à droite."
   },
   {
     "textName":"gameName1",
@@ -71,8 +71,8 @@
   },
   {
     "textName": "hinttutorial6",
-    "EN": "This time, you are on your own ! Show me what you can do.",
-    "FR": "Allez je te laisse te débrouiller pour celle-là! montre moi ce que tu sais faire."
+    "EN": "This time, you are on your own ! Show me your moves!",
+    "FR": "Allez je te laisse te débrouiller pour celle-là! Montre moi ce que tu sais faire."
   },
   {
     "textName": "hint1",
@@ -153,5 +153,15 @@
     "textName": "PopUpBuildingConstructionText4",
     "EN": "When you think you finished you can tap on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one.\nOn the top right, you can tap on bulb icon to get small hints on how to find the optimal solution.",
     "FR": "Quand vous pensez avoir fini vous pouvez appuyer sur le bouton de validation en bas à droite. Vous obtiendrez un pourcentage comparant votre solution et la solution optimale.\nEn haut à droite, vous pouvez appuyer sur l'icône d'ampoule pour obtenir quelques indices sur comment trouver la solution optimale."
+  },
+  {
+    "textName": "winningPercentageText",
+    "EN": "Winning percentage",
+    "FR": "Pourcentage de réussite"
+  },
+  {
+    "textName": "retryText",
+    "EN": "Keep Trying",
+    "FR": "Réessayer"
   }
 ]

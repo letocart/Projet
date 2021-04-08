@@ -12,30 +12,24 @@ import '../../StorageUtil.dart';
 import '../../style.dart';
 
 class ScreenBuildingConstructionGame extends StatefulWidget {
-  String difficulty;
-  int level;
+  List dataInstances;
+  int difficultyIndex;
+  int levelIndex;
   BuildingConstructionController BCC;
-  /*ScreenBuildingConstructionGame(String diff, int lvl) {
-    difficulty = diff;
-    level = lvl;
-  }*/
-  ScreenBuildingConstructionGame(this.difficulty, this.level, this.BCC);
-  //createState() => BuildingConstructionGameState(difficulty,level);
-  createState() => BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
+  ScreenBuildingConstructionGame(this.dataInstances,this.difficultyIndex,this.levelIndex,this.BCC);
+  createState() => BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 }
 
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
-  List data;
-  String difficulty;
-  int level;
-  //bool isInitialized = false;
+  List dataInstances;
+  int difficultyIndex;
+  int levelIndex;
   BuildingConstructionController BCC;
   int score = 0;
 
   //BuildingConstructionGameState(this.difficulty,this.level);
-  BuildingConstructionGameState(this.difficulty, this.level, this.BCC);
+  BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 
-  int acceptedData = 0;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -129,7 +123,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   onPressed: () {
                                     Navigator.of(context).push( //Navigateur vers widget
                                       MaterialPageRoute(builder: (context)=>
-                                          ScreenBuildingConstructionLevel(difficulty),
+                                          ScreenBuildingConstructionLevel(this.dataInstances,this.difficultyIndex),
                                       ),
                                     );
                                   },
@@ -156,17 +150,19 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                   showDialog(
                                     context: context,
                                     builder: (BuildContext context) =>
-                                    (difficulty == 'tutorial') ?
+                                    (this.dataInstances[this.difficultyIndex]["difficultyEN"] == 'tutorial') ?
                                         AlertDialog(
                                           title: Text(getText('titlePopUpHint')),
-                                          content: Text(getText('hint'+difficulty+level.toString())),
+                                          content: Text(getText('hint'
+                                              +this.dataInstances[this.difficultyIndex]["difficultyEN"]
+                                              +this.levelIndex.toString())),
                                           actions: <Widget>[
                                             new FlatButton(
                                               onPressed: () {
                                                 Navigator.of(context).pop();
                                               },
                                               textColor: Theme.of(context).primaryColor,
-                                              child: const Text('return'),
+                                              child: Text(getText('returnText')),
                                             ),
                                           ],
                                         ) : PopupHint() ,
@@ -217,9 +213,9 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                               SizedBox(
                                                 height : 100,
                                                 width : 200,
-                                                child : (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin.png', fit : BoxFit.cover) : Image.asset('assets/images/GagnePerdu/YouLose.png', fit : BoxFit.cover)
+                                                child : (BCC.getBCM.solutionPercentage()==100) ? Image.asset('assets/images/GagnePerdu/YouWin${StorageUtil.getString('lang')}.png', fit : BoxFit.cover) : Image.asset('assets/images/GagnePerdu/YouLose${StorageUtil.getString('lang')}.png', fit : BoxFit.cover)
                                               ),
-                                              Text("Winning percentage : ${BCC.getBCM.solutionPercentage()} %"),
+                                              Text("${getText("winningPercentageText")}: ${BCC.getBCM.solutionPercentage()} %"),
                                             ],
                                           ),
                                           actions: <Widget>[
@@ -228,18 +224,18 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                                 Navigator.of(context).pop();
                                               },
                                               textColor: Theme.of(context).primaryColor,
-                                              child: const Text('Keep trying'),
+                                              child: Text(getText("retryText")),
                                             ),
                                             new FlatButton(
                                               onPressed: () {
                                                 Navigator.of(context).push( //Navigateur vers widget
                                                   MaterialPageRoute(builder: (context)=>
-                                                      ScreenBuildingConstructionLevel(difficulty),
+                                                      ScreenBuildingConstructionLevel(this.dataInstances,this.difficultyIndex),
                                                   ),
                                                 );
                                               },
                                               textColor: Theme.of(context).primaryColor,
-                                              child: const Text('return'),
+                                              child: Text(getText("returnText")),
                                             ),
                                           ],
                                         ),

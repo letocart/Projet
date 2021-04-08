@@ -12,32 +12,18 @@ import 'ScreenBuildingConstructionLevel.dart';
 
 // stateful widget
 class ScreenBuildingConstructionStage extends StatefulWidget {
-  ScreenBuildingConstructionStage();
+  List dataInstances;
+  ScreenBuildingConstructionStage(this.dataInstances);
   // overriding the createState method
   @override
-  State<StatefulWidget> createState() => ScreenBuildingConstructionStageState();
+  State<StatefulWidget> createState() => ScreenBuildingConstructionStageState(this.dataInstances);
 
 }
 
 //the state
 class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstructionStage> {
-
-  ScreenBuildingConstructionStageState();
-  List listOfDifficulties;
-
-  // method to load Json data
-  Future<String> loadJsonData() async {
-    var jsonText = await rootBundle.loadString(
-        'assets/problemInstances/BuildingConstruction/BuildingConstructionDifficulties.json');
-    setState(() => listOfDifficulties = json.decode(jsonText));
-    return 'success';
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.loadJsonData();
-  }
+  List dataInstances;
+  ScreenBuildingConstructionStageState(this.dataInstances);
 
   //the build method
   @override
@@ -97,17 +83,16 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
                   Expanded(
                       child: ListView.separated(
                         padding: const EdgeInsets.all(8),
-                        itemCount: listOfDifficulties==null ? 0 : listOfDifficulties.length, //checking if entries is null or not
-                        itemBuilder: (BuildContext context, int index) {
-                          var difficulty_textEN = listOfDifficulties[index]['difficultyEN'];
-                          var difficulty_textFR = listOfDifficulties[index]['difficultyFR'];
+                        itemCount: dataInstances==null ? 0 : dataInstances.length, //checking if entries is null or not
+                        itemBuilder: (BuildContext context, int difficultyIndex) {
+                          var difficultyText = dataInstances[difficultyIndex]['difficulty'+StorageUtil.getString('lang')];
                           return ElevatedButton(
-                            child: Text('$difficulty_textEN'),
+                            child: Text('$difficultyText'),
                             style: Style.buttonText,
                             onPressed: () {
                               Navigator.of(context).push( //Navigateur vers widget
                                 MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionLevel(difficulty_textEN), // do not change this text, it mus be in english
+                                    ScreenBuildingConstructionLevel(dataInstances,difficultyIndex), // do not change this text, it mus be in english
                                 ),
                               );
                               //print("Start Game $difficulty_textEN pressed");
