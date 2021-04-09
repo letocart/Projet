@@ -1,5 +1,7 @@
-//inspiration code for popup when first arrived: https://stackoverflow.com/questions/62536438/how-to-show-a-popup-on-app-start-in-flutter
+// inspiration code for PopUp when first arrived:
+// https://stackoverflow.com/questions/62536438/how-to-show-a-popup-on-app-start-in-flutter
 
+// imports
 import 'package:flutter/cupertino.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
@@ -8,30 +10,42 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 import 'package:or_game_app_v4/view/PopUp.dart';
-
 import '../../StorageUtil.dart';
 import '../../style.dart';
 
+// View Widget to display the game
+// ignore: must_be_immutable
 class ScreenBuildingConstructionGame extends StatefulWidget {
-  List dataInstances;
-  int difficultyIndex;
-  int levelIndex;
-  BuildingConstructionController BCC;
+
+  List dataInstances;   // contains all the instances of the game
+  int difficultyIndex;  // the index of the difficulty
+  int levelIndex;       // the index of the level
+  // ignore: non_constant_identifier_names
+  BuildingConstructionController BCC;  // the Controller of the game
+
+  // Basic Constructor of the class
   ScreenBuildingConstructionGame(this.dataInstances,this.difficultyIndex,this.levelIndex,this.BCC);
+
+  // create a state for the StatefulWidget
   createState() => BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 }
 
+// state class of the ScreenBuildingConstructionGame
 class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
-  List dataInstances;
-  int difficultyIndex;
-  int levelIndex;
-  BuildingConstructionController BCC;
 
-  //BuildingConstructionGameState(this.difficulty,this.level);
+  List dataInstances;   // contains all the instances of the game
+  int difficultyIndex;  // the index of the difficulty
+  int levelIndex;       // the index of the level
+  // ignore: non_constant_identifier_names
+  BuildingConstructionController BCC;   // the Controller of the game
+
+  // Basic Constructor of the class
   BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 
+  // overriding the build method
   @override
   Widget build(BuildContext context) {
+    // showing PopUpTutorial if it is the first time you get on the tutorial level 1 window
     Future.delayed(Duration.zero, () => showPopUpTutorial(context));
     return Column(
         children : [

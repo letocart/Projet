@@ -1,23 +1,8 @@
 // state of PopupRule
 import 'package:flutter/material.dart';
-
 import '../StorageUtil.dart';
-import 'IconWidget.dart';
 
-// generic Popup listing rules
-class PopUp extends StatefulWidget {
-  final String title;
-  int maxPages;
-  final List<String> listOfTexts;
 
-  PopUp(this.title,this.listOfTexts)
-  {
-    assert(listOfTexts.length>0);
-    this.maxPages = listOfTexts.length;
-  }
-  @override
-  State<StatefulWidget> createState() => PopUpState(this.title,this.maxPages,this.listOfTexts);
-}
 
 PopUp BuildingConstructionRulePopUp(){
   return PopUp(getText('titlePopUpBuildingConstruction'),
@@ -45,6 +30,22 @@ PopUp HintPopUp(){
         getText('hint2'),
         getText('hint3')]);
 }
+
+// generic Popup listing rules
+class PopUp extends StatefulWidget {
+  final String title;
+  int maxPages;
+  final List<String> listOfTexts;
+
+  PopUp(this.title,this.listOfTexts)
+  {
+    assert(listOfTexts.length>0);
+    this.maxPages = listOfTexts.length;
+  }
+  @override
+  State<StatefulWidget> createState() => PopUpState(this.title,this.maxPages,this.listOfTexts);
+}
+
 class PopUpState extends State<PopUp>{
   String title;
   int currentPage = 0;
