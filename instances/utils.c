@@ -24,9 +24,10 @@ int create_json(int game, int level)
 	int len;
 	int fd;
 
-	/*creation du nom de fichier*/
+	/*creation of the name of the file*/
 	if (game == 1)
-		len = 9 + 5;
+		len = 10 + 5;
+	//else if game = 2 ...
 	len += int_len(level);
 	if ((name = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
 		return (-1);
@@ -34,14 +35,15 @@ int create_json(int game, int level)
 		return -1;
 	if (game == 1)
 	{
-		strncpy(name, "Immeuble_", 9);
-		strncpy(name + 9, str_level, strlen(str_level));
-		strncpy(name + 9 + int_len(level), ".json", 5);
+		strncpy(name, "Buildings_", 10);
+		strncpy(name + 10, str_level, strlen(str_level));
+		strncpy(name + 10 + int_len(level), ".json", 5);
 		name[len] = 0;
 	}
+	//else if game == 2 ...
 	free(str_level);
 	
-	/*création du fichier*/
+	/*creation of the file*/
 	fd = open(name, O_WRONLY | O_CREAT | O_EXCL, 0666);
 	free(name);
 	if (fd >= 0)
@@ -56,9 +58,10 @@ int create_file(int game, int level)
 	int len;
 	int fd;
 
-	/*creation du nom du fichier*/
+	/*creation of the name of the file*/
 	if (game == 1)
-		len = 9;
+		len = 10;
+	//else if game = 2 ...
 	len += int_len(level);
 	if ((name = (char*)malloc(sizeof(char) * (len + 1))) == NULL)
 		return (-1);
@@ -66,21 +69,16 @@ int create_file(int game, int level)
 		return -1;
 	if (game == 1)
 	{
-		strncpy(name, "Immeuble_", 9);
-		strncpy(name + 9, str_level, strlen(str_level));
+		strncpy(name, "Buildings_", 10);
+		strncpy(name + 10, str_level, strlen(str_level));
 		name[len] = 0;
 	}
+	//else if game == 2 ...
 	free(str_level);
 	
-	/*creation du fichier*/
+	/*creation of the file*/
 	fd = open(name, O_WRONLY | O_CREAT | O_EXCL, 0666);
 	free(name);
-	if (fd >= 0)
-	{
-		write(fd, "level = ", 8);
-		putnbr_fd(level, fd);
-		write(fd, "\n", 1);
-	}
 	return fd;
 }
 
