@@ -61,13 +61,13 @@
   },
   {
     "textName": "hinttutorial4",
-    "EN": "It's getting difficult, this time clients want a different number of floors...",
-    "FR": "Ça se corse, cette fois les clients veulent un nombre d'étages différents..."
+    "EN": "It's getting harder ! This time clients want a different number of floors...",
+    "FR": "Ça se corse ! Cette fois les clients veulent un nombre d'étages différents..."
   },
   {
     "textName": "hinttutorial5",
-    "EN": "This time is the same. However, it seems that they offer the same amount of money.",
-    "FR": "Cette fois-ci c'est la même chose, par contre ils t'offrent la même somme d'argent on dirait."
+    "EN": "This is the same situation then the precedent level. However, it seems that they offer the same amount of money.",
+    "FR": "C'est la même situation que la niveau précéent, par contre ils t'offrent la même somme d'argent on dirait."
   },
   {
     "textName": "hinttutorial6",
@@ -86,8 +86,8 @@
   },
   {
     "textName": "hint3",
-    "EN": "At the end, you have to get small buildings which pay out more.\nWhich means, you have to choose small services which makes you gain more money.\nTo do so, we can calculate a ratio gain/size to know which is the best service.",
-    "FR": "Au final ce qu'il faudrait avoir des immeubles petits qui rapportent beaucoup.\nCela veut dire qu'il faut des petits services qui rapportent beaucoup d'argent.\nOn peut peut-être calculer un ratio gain/taille pour voir lequel est le meilleur service."
+    "EN": "The best is to have the smaller building that makes you gain the most.\nA way is to take the smaller service.\nBut a well-known strategy is to calculate the ratio gain/size and to take the greater",
+    "FR": "Le meilleur est d'avoir le plus petit immeuble qui fait gagner le plus.\nUne manière est de prendre le service le plus petit\nMais une stratégie connue est de calculer le rato gain/taille et de prendre le plus grand"
   },
   {
     "textName": "titlePopUpHint",
@@ -122,12 +122,12 @@
   {
     "textName": "PopUpGeneralText2",
     "EN": "Several situations will be exposed to you.\nYou will need logic and reflexion to get the best result.",
-    "FR": "Plusieurs situations te seront exposées.\nTu auras besoin de logique and de réflexion pour obtenir le meilleur résultat."
+    "FR": "Plusieurs situations te seront exposées.\nTu auras besoin de logique et de réflexion pour obtenir le meilleur résultat."
   },
   {
     "textName": "PopUpGeneralText3",
-    "EN": "We will talk about it more later but theses problems have a link with the Operational Research (OR).\nThe discipline regrouping the techniques and methods to get the best result for a given problem.",
-    "FR": "On le verra plus en détail plus tard mais ces problématiques ont un lien avec la Recherche Opérationnelle (RO)\nL'ensemble des techniques et méthodes pour obtenir le meilleur résultat pour un problem donné."
+    "EN": "We will talk about it later but these problems have a link with the Operational Research (OR).\nOR is the discipline regrouping the techniques and methods to get the best result for a given problem.",
+    "FR": "On le verra en détail plus tard mais ces problématiques ont un lien avec la Recherche Opérationnelle (RO)\nLa RO est l'ensemble des techniques et méthodes pour obtenir le meilleur résultat pour un problem donné."
   },
   {
     "textName": "titlePopUpBuildingConstruction",
@@ -136,22 +136,22 @@
   },
   {
     "textName": "PopUpBuildingConstructionText1",
-    "EN": "Here's the situation:\nSeverals companies want to invest in our new building projet.\nEach of them ask for a certain number of floors in our new building for a certain amount of money.Yet to build this kind of building costs money and generally the higher it is the more expensive it will be.",
-    "FR": "Voici la situation:\nPlusieurs entreprises veulent investir dans notre nouveau projet de construction.\nChacune d'elle veut un certain nombre d'étages dans notre nouveau bâtiment contre une certaine somme d'argent.Cependant construire ce genre de bâtiment coûte de l'argent et généralement plus il est grand plus il est cher."
+    "EN": "Here's the situation:\nSeverals companies want to invest in our new building projet.\nEach of them ask for a certain number of floors in our new building for a certain amount of money.Yet to build this kind of building costs money and generally the higher it is the more expensive it will be.\n(You can open this manual whenever you'll need it by pressing the manual icon)",
+    "FR": "Voici la situation:\nPlusieurs entreprises veulent investir dans notre nouveau projet de construction.\nChacune d'elle veut un certain nombre d'étages dans notre nouveau bâtiment contre une certaine somme d'argent.Cependant construire ce genre de bâtiment coûte de l'argent et généralement plus il est grand plus il est cher.\n(Vous pouvez ouvrir ce manuel à n'importe quel moment en cliquant sur l'icône de manuel)"
   },
   {
     "textName": "PopUpBuildingConstructionText2",
-    "EN": "On the right you have several rectangles of different sizes or not, representing the number of floors asked by the companies, with an amount of money that you will earn if you place them. You can place them in the white rectangle on the left, representing the building.\nOn the left of each floor of the building you have a number, it represents the price of a floor.",
-    "FR": "Sur la droite vous avez différents rectangles de différentes tailles ou non, représentant le nombre d'étages demandés par les clients, avec un montant d'argent que vous allez gagner si vous les placez. Vous pouvez les placer dans le rectangle blanc à gauche, représentant le bâtiment.\nSur la gauche de chaque étage du bâtiment vous avez un nombre, il représente le prix d'un étage."
+    "EN": "On the right you have several rectangles of different sizes (or not), representing the number of floors asked by the companies, with an amount of money that you will earn if you place them. You can place them in the white rectangle on the left, representing the building.\nOn the left of each floor of the building you have a number, it represents the price of a floor.",
+    "FR": "Sur la droite vous avez différents rectangles de différentes tailles (ou non), représentant le nombre d'étages demandés par les clients, avec un montant d'argent que vous allez gagner si vous les placez. Vous pouvez les placer dans le rectangle blanc à gauche, représentant le bâtiment.\nSur la gauche de chaque étage du bâtiment vous avez un nombre, il représente le prix d'un étage."
   },
   {
     "textName": "PopUpBuildingConstructionText3",
-    "EN": "So your goal is to maximise the amount of money we will earn by choosing where to place which rectangle.You are not obligated to put every rectangles in the building.",
-    "FR": "Donc votre but est de maximiser l'argent que nous allons gagner en choisissant où placer quel rectangle.Vous n'êtes pas obligés de mettre tous les rectangles dans le bâtiment."
+    "EN": "Your goal is to maximise the amount of money we will earn by choosing where you put each rectangle.You don't have to put every rectangles into the building.",
+    "FR": "Votre but est de maximiser l'argent que nous allons gagner en choisissant où placer chaque rectangle.Vous n'êtes pas obligés de mettre tous les rectangles dans le bâtiment."
   },
   {
     "textName": "PopUpBuildingConstructionText4",
-    "EN": "When you think you finished you can tap on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one.\nOn the top right, you can tap on bulb icon to get small hints on how to find the optimal solution.",
+    "EN": "When you think you've finished you can clic on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one.\nOn the top right, you can clic on bulb icon to get small hints on how to find the optimal solution.",
     "FR": "Quand vous pensez avoir fini vous pouvez appuyer sur le bouton de validation en bas à droite. Vous obtiendrez un pourcentage comparant votre solution et la solution optimale.\nEn haut à droite, vous pouvez appuyer sur l'icône d'ampoule pour obtenir quelques indices sur comment trouver la solution optimale."
   },
   {

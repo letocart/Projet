@@ -22,6 +22,7 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
 
   /// Method to load Json data
   Future<String> loadJsonData() async {
+    print("test_load_Json_Data");
     var jsonText = await rootBundle.loadString(
         'assets/problemInstances/BuildingConstructionInstances.json');
     setState(() => BuildingConstructionDataInstances = json.decode(jsonText));
