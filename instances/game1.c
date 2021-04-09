@@ -44,10 +44,13 @@ void nb_buildings(int c, char **v, int fd1, int fd2)
 {
 	int nb_bd;
 
+	//this part is choosing the number of buildings for this instance.
+	//you can chnage the min and max number in the header or you can choose the number with the 2nd argument during execution
+	// /!\  you can't choose a number that is not between the max and min
 	nb_bd = -1;
 	if (c > 2)
 		nb_bd = atoi(v[2]);
-	if (nb_bd < 1 || nb_bd > BD_MAX)
+	if (nb_bd < BD_MIN || nb_bd > BD_MAX)
 		nb_bd = rand() % BD_MAX + 1;
 
 	write(fd1, "buildings_number = ", 19);
@@ -103,17 +106,10 @@ int clients(int c, char **v, int fd1, int fd2)
 	write(fd2, "],\n", 3);
 
 	//this part takes care of the benefits created by each client
-	//you can choose the average and deviance by using the 4th and 5th arguments, or by editing the header
-	mid = -1;
-	var = -1;
-	if (c > 4)
-		mid = atoi(v[4]);
-	if (c > 5)
-		var = atoi(v[5]);
-	if (mid <= 0)
-		mid = DEFAULT_MID;
-	if (var < 0)
-		var = DEFAULT_VAR;
+	//you can choose the average and deviance by editing the header or using flags
+
+	mid = DEFAULT_MID;
+	var = DEFAULT_VAR;
 	write(fd1, "clients_gains = [", 17);
 	write(fd2, "\t\"earningsFromClients\":[", 24);
 	for (i = 0; i < nb_cli; i++)

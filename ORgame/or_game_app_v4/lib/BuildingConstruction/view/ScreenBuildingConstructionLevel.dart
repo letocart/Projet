@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:collection/collection.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +12,18 @@ import '../../style.dart';
 import 'ScreenBuildingConstructionGame.dart';
 import 'ScreenBuildingConstructionStage.dart';
 
-//stateful widget
+// Stateful Widgets which represent the levels Menu view
+
+// The Screen Building Construction Level Class
 class ScreenBuildingConstructionLevel extends StatefulWidget {
+
+  // Data instances list in order to render the right informations from the database
   List dataInstances;
+
+  // a reference to the difficulty which the levels belongs to
   int difficultyIndex;
 
+  // Constructor
   ScreenBuildingConstructionLevel(this.dataInstances,this.difficultyIndex);
 
   // overriding the createState method
