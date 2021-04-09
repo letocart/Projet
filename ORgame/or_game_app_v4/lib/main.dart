@@ -1,88 +1,61 @@
-// imports
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/StorageUtil.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'ORgameUI.dart';
 import 'StorageUtil.dart';
-import 'BusLine/test/BusLineUnitTests.dart';
-import 'BuildingConstruction/test/BuildingConstructionUnitTests.dart';
 
-// main async pour flame
+/// ____________________________________________________________________
+/// *         This is the first method called by the program
+/// * It initiates values that will be needed during the whole app
+/// ____________________________________________________________________
+
 void main() async {
-
-  // Unit tests on model, controller and data
-  // for Building Construction
-  /*
-  assertBCM();
-  assertBCD();
-  assertBCC();
-   */
-  // for Bus Line : there is a problem within the assertBLD two list are similar but the test show the opposite
-  /*
-  assertBLM();
-  assertBLD();
-  assertBLC();
-  */
-  // ensure having data Initialized
-  WidgetsFlutterBinding.ensureInitialized();
-  // creating StorageUtil's instance with getInstance
-  await StorageUtil.getInstance();
-  // setting default language to English
-  await StorageUtil.putString("lang", "EN");
+  WidgetsFlutterBinding.ensureInitialized();   // ensure having data Initialized
+  await StorageUtil.getInstance();             // creating StorageUtil's instance with getInstance
+  await StorageUtil.putString("lang", "EN");   // setting default language to English
   await StorageUtil.putString("isBuildingConstructionTutorialFirstVisited", "false");
-  //print("I am the Main Language: "+StorageUtil.getString("lang"));
-
-  // loading texts from json file and storing in storage
-  await StorageUtil.storeAllTexts();
-  //print("I am a test Text: "+StorageUtil.getString("welcomeTextEN"));
-
-  // creation d'un ROgameUI, gameUI un widget d'interface
-  ORgameUI gameUI = ORgameUI();
-
-  // affectation du storage et du jeu a l'interface
-  //gameUI.state.storage = storage;
-
-  // execution du widget MaterialApp contenant l'application
-
-  runApp(SharedPreference(gameUI));
-
+  await StorageUtil.storeAllTexts();           // loading texts from json file and storing in storage
+  ORgameUI gameUI = ORgameUI();                // creation d'un ROgameUI, gameUI un widget d'interface
+  runApp(SharedPreference(gameUI));            // execution du widget MaterialApp contenant l'application
 }
 
-class SharedPreference extends StatefulWidget {
+/// ___________________________________________________________________________________________
+/// * This is the Widget that contains a state which choose the name and the color of  the app
+/// ___________________________________________________________________________________________
 
+class SharedPreference extends StatefulWidget {
   final ORgameUI gameUI;
-  SharedPreference(this.gameUI);
+  SharedPreference(this.gameUI); // Constructor
 
   @override
   _SharedPreferenceState createState() => _SharedPreferenceState(gameUI);
 }
 
-
+/// ______________________________________________________________
+/// *   This is the state linked to the SharedPreference class
+/// * The purpose of this class is to define the name of the app,
+///       the default color and the default font of the app
+/// ______________________________________________________________
 
 class _SharedPreferenceState extends State<SharedPreference> {
-  //String savedString = "Here will Preference Value";
   ORgameUI gameUI;
-
   _SharedPreferenceState(this.gameUI);
 
+  // Building user interface
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
-      title: 'Playing OR',
+      title: 'Playing OR', // Name of the app
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'HVD',
+        primarySwatch: Colors.blue, // Default color
+        fontFamily: 'HVD', // Default font
       ),
-      home: Scaffold( //home: ce qui va s'afficher
+      // This Scaffold is the first Widget of the app that will appear onto the phone screen
+      home: Scaffold(
         body: Stack(
-          fit: StackFit.expand,
+          fit: StackFit.expand, // Take the size of his parent, here the size of the whole screen
           children: <Widget>[
             Positioned.fill(
-              child: gameUI,
+              child: gameUI, // Calling the rest of the app which is into ORgameUI.dart
             ),
           ],
         ),

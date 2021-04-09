@@ -31,12 +31,12 @@ int main(int c, char **v)
 	}
 	nb_buildings(c, v, fd1, fd2);
 	max = clients(c, v, fd1, fd2);
-	floor_prices(c, v, fd1, fd2, max);
+	floor_prices(fd1, fd2, max);
 	write(fd1, "optimum = ???\n", 14);
 	close(fd1);
-	write(fd2, "\t\"solutionValue\":???\n}\n", 23);
+	write(fd2, "\t\"solutionValue\":???,\n}\n", 24);
 	close(fd2);
-	printf("Building_%d and Building_%d.json generated !\n", level);
+	printf("Building_%d and Building_%d.json generated !\n", level, level);
 	return 0;
 }
 
@@ -139,15 +139,13 @@ int clients(int c, char **v, int fd1, int fd2)
 	return max;
 }
 
-void floor_prices(int c, char **v, int fd1, int fd2, int max)
+void floor_prices(int fd1, int fd2, int max)
 {
 	int price;			//starting price, price of the 1s floor
-	int range;			//the each floor cost will be calculated with : price of the floor under him + MIN_UPDATE + random number between 0 and range
 	int i;
 
-	//you can change the min and max of the price of the 1st floor with the header, the default range and minimum update of each cost with the header
+	//you can change the min and max of the price of the 1st floor with the header, and the min and max of incrementation of each cost with the header
 	price = rand() % (PRI_MAX - PRI_MIN + 1) + PRI_MIN;
-	range = DEFAULT_RANGE;
 	write(fd1, "floor_prices = [", 16);
 	write(fd2, "\t\"pricesOfFloors\":[", 19);
 	for (i = 0; i < max; i++)
@@ -157,7 +155,7 @@ void floor_prices(int c, char **v, int fd1, int fd2, int max)
 			write(fd1, " ", 1);
 			write(fd2, ", ", 2);
 		}
-		price += (rand() % range) + MIN_UPDATE;
+		price += rand() % (INC_MAX - INC_MIN + 1) + INC_MIN;
 		putnbr_fd(price, fd1);
 		putnbr_fd(price, fd2);
 	}

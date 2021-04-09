@@ -8,22 +8,17 @@
 # include <string.h>
 # include "utils.h"
 
-int get_level(int);
-//fonction qui recupere le niveau
-
 int create_json(int game, int level);
-//cette fonction cree et ouvre un fichier correspondant au bon jeu et au bon level, 
-//ecrit la premiere ligne (level = x) et renvoie le file descriptor
+//this function create the json file and returns it's file descriptor
 
 int create_file(int game, int level);
-//cette fonction cree et ouvre un fichier json correspondant au bon jeu et au bon level, 
-// renvoie le filedescriptor
+//this function create the solvable file and returns it's file descriptor
 
 char *ft_itoa(int);
-// fonction qui recupere un entier et le met dans une chaine de charactere
-// 					/!\ alloue de la memoire
+//this function takes an integer and returns the same integer but in a string
+// 					/!\ use dynamical allocation
 
 void	putnbr_fd(int n, int fd);
-//fonction qui ecrit un entier n dans le fichier fd
+//this function write a number in the file fd
 
 #endif
