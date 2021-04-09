@@ -1,26 +1,32 @@
 #include "game1.h"
 
+// arguments taked by the executable explained in the header (game1.h)
+
 int main(int c, char **v)
 {
+	/*fd1 : file descriptor of the file used to fill the solver
+	  fd2 : file descriptor of the json file
+	  level : number of the level generated, used to provide different names to file created
+	  max : the number of max floor of buildings in the instance created*/
 	int fd1, fd2, level, max;
 
 	srand(time(NULL));
 	if (c <= 1)
 	{
-		printf("Erreur : il faut entrer un num2ro de niveau en 1er argument\n");
+		printf("Error : fill first agrument as the number of the level\n");
 		return 1;
 	}
 	level = atoi(v[1]);
 	fd1 = create_file(1, level);
 	if (fd1 < 0)
 	{
-		printf("Erreur lors de la creation du fichier Immeuble_%d\n", level);
+		printf("Error : creation of Building_%d failed\n", level);
 		return 1;
 	}
 	fd2 = create_json(1, level);
 	if (fd2 < 0)
 	{
-		printf("Erreur lors de la creation du fichier Immeuble_%d.json\n", level);
+		printf("Error : creation of Building_%d.json failed\n", level);
 		return 1;
 	}
 	nb_buildings(c, v, fd1, fd2);
@@ -30,7 +36,7 @@ int main(int c, char **v)
 	close(fd1);
 	write(fd2, "\t\"solutionValue\":???\n}\n", 23);
 	close(fd2);
-	printf("Niveau Immeuble_%d genere !\n", level);
+	printf("Building_%d and Building_%d.json generated !\n", level);
 	return 0;
 }
 
@@ -38,10 +44,13 @@ void nb_buildings(int c, char **v, int fd1, int fd2)
 {
 	int nb_bd;
 
+	//this part is choosing the number of buildings for this instance.
+	//you can chnage the min and max number in the header or you can choose the number with the 2nd argument during execution
+	// /!\  you can't choose a number that is not between the max and min
 	nb_bd = -1;
 	if (c > 2)
 		nb_bd = atoi(v[2]);
-	if (nb_bd < 1 || nb_bd > BD_MAX)
+	if (nb_bd < BD_MIN || nb_bd > BD_MAX)
 		nb_bd = rand() % BD_MAX + 1;
 
 	write(fd1, "buildings_number = ", 19);
@@ -55,16 +64,17 @@ void nb_buildings(int c, char **v, int fd1, int fd2)
 
 int clients(int c, char **v, int fd1, int fd2)
 {
-	int nb_cli;							//nombre de clients
-	int fl_cli[CLI_MAX - CLI_MIN + 1];	//etages de chaque client
-	int mid;							//le gain de chaque client varira
-	int var;							//dans une porte de var autour de mid
-	int max;							//nombre max d'etage de chaque immeuble
+	int nb_cli;							//number of clients
+	int fl_cli[CLI_MAX - CLI_MIN + 1];				//floors taken by each client
+	int mid;							//average of clients gains
+	int var;							//range of deviance of client gains around mid
+	int max;							//number max floors of buildings 
 	int gain;
 	int i;
 
 
-	//partie qui s'occupe du nombre de clients
+	//this part takes care of the number of clients. if you want to choose them, enter the number as the 3rd argument
+	//be aware that you can change the number min and max of client by editing the header or by compiling with -d flags
 	nb_cli = -1;
 	if (c > 3)
 		nb_cli = atoi(v[3]);
@@ -75,7 +85,8 @@ int clients(int c, char **v, int fd1, int fd2)
 	putnbr_fd(nb_cli, fd1);
 	write(fd1, "\n", 1);
 
-	//partie qui s'occupe de la taille des clients (et calcule la taille max de chaque immeuble)
+	//this part takes care about the number of floors taken by clients (and the number max)
+	//the numbers min and max of the size that can be taken by client can be modified with the header or -d flags during compilation
 	max = 0;
 	write(fd1, "clients_floors = [", 18);
 	write(fd2, "\t\"requestsOfFloorsFromClients\":[", 32);
@@ -94,17 +105,11 @@ int clients(int c, char **v, int fd1, int fd2)
 	write(fd1, "]\n", 2);
 	write(fd2, "],\n", 3);
 
-	//partie qui s'occupe des gains des clients
-	mid = -1;
-	var = -1;
-	if (c > 4)
-		mid = atoi(v[4]);
-	if (c > 5)
-		var = atoi(v[5]);
-	if (mid <= 0)
-		mid = DEFAULT_MID;
-	if (var < 0)
-		var = DEFAULT_VAR;
+	//this part takes care of the benefits created by each client
+	//you can choose the average and deviance by editing the header or using flags
+
+	mid = DEFAULT_MID;
+	var = DEFAULT_VAR;
 	write(fd1, "clients_gains = [", 17);
 	write(fd2, "\t\"earningsFromClients\":[", 24);
 	for (i = 0; i < nb_cli; i++)
@@ -123,7 +128,7 @@ int clients(int c, char **v, int fd1, int fd2)
 	write(fd1, "]\n", 2);
 	write(fd2, "],\n", 3);
 
-	//affiche le max d'etages
+	//printing the max size of buildings in files
 	write(fd1, "building_max_size = ", 20);
 	putnbr_fd(max, fd1);
 	write(fd1, "\n", 1);
@@ -136,20 +141,13 @@ int clients(int c, char **v, int fd1, int fd2)
 
 void floor_prices(int c, char **v, int fd1, int fd2, int max)
 {
-	int price;
-	int range;
+	int price;			//starting price, price of the 1s floor
+	int range;			//the each floor cost will be calculated with : price of the floor under him + MIN_UPDATE + random number between 0 and range
 	int i;
 
-	price = -1;
-	range = -1;
-	if (c > 6)
-		price = atoi(v[6]);
-	if (c > 7)
-		range = atoi(v[7]);
-	if (price < 0)
-		price = rand() % (PRI_MAX - PRI_MIN + 1) + PRI_MIN;
-	if (range < 0)
-		range = DEFAULT_RANGE;
+	//you can change the min and max of the price of the 1st floor with the header, the default range and minimum update of each cost with the header
+	price = rand() % (PRI_MAX - PRI_MIN + 1) + PRI_MIN;
+	range = DEFAULT_RANGE;
 	write(fd1, "floor_prices = [", 16);
 	write(fd2, "\t\"pricesOfFloors\":[", 19);
 	for (i = 0; i < max; i++)
@@ -159,7 +157,7 @@ void floor_prices(int c, char **v, int fd1, int fd2, int max)
 			write(fd1, " ", 1);
 			write(fd2, ", ", 2);
 		}
-		price += rand() % range;
+		price += (rand() % range) + MIN_UPDATE;
 		putnbr_fd(price, fd1);
 		putnbr_fd(price, fd2);
 	}
