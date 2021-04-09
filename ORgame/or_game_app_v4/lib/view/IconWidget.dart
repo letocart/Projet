@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:or_game_app_v4/StorageUtil.dart';
 
+import 'PopUp.dart';
+
 
 class IconWidget extends StatefulWidget {
 
@@ -110,7 +112,6 @@ class IconWidgetState extends State<IconWidget>{
         )
     );
   }
-
   Widget buildVerticalIcons(){
     return Positioned(
         top: 0.0,
@@ -173,6 +174,7 @@ class IconWidgetState extends State<IconWidget>{
                           builder: (BuildContext context) =>
                               buildPopUpRule()
                       );
+                      this.parent.setState(() {});
                     },
                   )
               ),
@@ -185,97 +187,15 @@ class IconWidgetState extends State<IconWidget>{
   // Build the Popup according to which widget we are in
   // it implies that a certain format to name the views is respected
   Widget buildPopUpRule(){
-
     String title;
-    int maxPages;
     List<String> listOfTexts;
 
     if(this.parent.runtimeType.toString().contains("BuildingConstruction")) { // if we are in a BuildingConstruction game's view
-      title  = getText('titlePopUpBuildingConstruction');
-      maxPages = 4;
-      listOfTexts = [
-        getText('PopUpBuildingConstructionText1'),
-        getText('PopUpBuildingConstructionText2'),
-        getText('PopUpBuildingConstructionText3'),
-        getText('PopUpBuildingConstructionText4')];
+      return BuildingConstructionRulePopUp();
     }else{  // otherwise
-      title = getText('titlePopUpGeneral');
-      maxPages = 3;
-      listOfTexts = [
-        getText('PopUpGeneralText1'),
-        getText('PopUpGeneralText2'),
-        getText('PopUpGeneralText3')];
+      return GeneralRulePopUp();
     }
-    return PopUpRule(title, maxPages, listOfTexts);
   }
 }
 
-// generic Popup listing rules
-class PopUpRule extends StatefulWidget {
-  final String title;
-  final int maxPages;
-  final List<String> listOfTexts;
 
-  PopUpRule(this.title,this.maxPages,this.listOfTexts);
-  @override
-  State<StatefulWidget> createState() => PopUpRuleState(this.title,this.maxPages,this.listOfTexts);
-}
-// state of PopupRule
-class PopUpRuleState extends State<PopUpRule>{
-  String title;
-  int currentPage = 0;
-  int maxPages;
-  List<String> listOfTexts;
-
-  PopUpRuleState(this.title,this.maxPages,this.listOfTexts)
-  {
-    assert(this.maxPages==this.listOfTexts.length);
-  }
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-        title : Text(this.title),
-        content: new Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            IndexedStack(
-              sizing: StackFit.expand,
-              children: <Widget>[
-                for ( var i in listOfTexts ) Text(i.toString(), textAlign: TextAlign.justify,)
-              ],
-              index: currentPage,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: Text(getText("returnText")),
-          ),
-          currentPage > 0 ?
-          new FlatButton(
-            onPressed: () {
-              setState( () =>
-              currentPage = currentPage-1);
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: Text(getText("previousText")),
-          ) : Container(),
-          currentPage < maxPages-1 ?
-          new FlatButton(
-            onPressed: () {
-              setState( () =>
-              currentPage = currentPage+1);
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: Text(getText("nextText")),
-          ): Container(),
-          new Text("${currentPage+1}/$maxPages"),
-        ]
-    );
-  }
-}
