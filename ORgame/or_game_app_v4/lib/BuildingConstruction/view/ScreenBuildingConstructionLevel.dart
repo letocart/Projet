@@ -12,7 +12,6 @@ import '../../style.dart';
 import 'ScreenBuildingConstructionGame.dart';
 import 'ScreenBuildingConstructionStage.dart';
 
-// Stateful Widgets which represent the levels Menu view
 
 // The Screen Building Construction Level Class
 class ScreenBuildingConstructionLevel extends StatefulWidget {
@@ -31,32 +30,40 @@ class ScreenBuildingConstructionLevel extends StatefulWidget {
   State<StatefulWidget> createState() => ScreenBuildingConstructionLevelState(this.dataInstances,this.difficultyIndex);
 }
 
-//the state
+//the Screen Building Construction Level State
 class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstructionLevel> {
   List dataInstances;
   int difficultyIndex;
   int numberOfLevels=0;
+
+  // Constructor
   ScreenBuildingConstructionLevelState(this.dataInstances,this.difficultyIndex);
 
+  // Initiating state
   @override
   void initState() {
     super.initState();
   }
 
+  // Building UI
   @override
   Widget build(BuildContext context) {
+    // get number of levels from dataInstance using difficultyIndex
     this.numberOfLevels = this.dataInstances[this.difficultyIndex]["instances"].length;
     return Column(
         children : [
+          // Container to add a padding at the top of the screen for the phone's status bar
           Container(
-            height: MediaQuery.of(context).padding.top,
-            width : MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).padding.top, // Height of the status bar
+            width : MediaQuery.of(context).size.width, // Width of the screen
             color : Colors.black
           ),
+          // Main container with a background
           Container(
-            height: MediaQuery.of(context).size.height -  MediaQuery.of(context).padding.top,
-            width : MediaQuery.of(context).size.width,
-            decoration: BoxDecoration(
+            height: MediaQuery.of(context).size.height -  MediaQuery.of(context).padding.top, // height of the screen minus the height of the status bar
+            width : MediaQuery.of(context).size.width, // Width of the screen
+              // Decoration to add a background
+              decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage("assets/images/backgrounds/city3.png"),
                     fit: BoxFit.cover)
@@ -66,6 +73,7 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
               children : [
                 Column(
                   children: [
+                    // Return to previous screen button at the top right of the screen
                     Align(
                       alignment: Alignment.centerRight,
                       child: Padding(
@@ -85,6 +93,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                     ),
                     Stack(
                       children: [
+                        // Choose Level Title
+                        // Styling the title with a shadow text
                         Text(getText('chooseLevelText'),style : TextStyle(
                             fontSize: 18,
                             foreground: Paint()
@@ -102,14 +112,14 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                       ],
                     ),
                     Expanded(
+                      // Create a grid with 8 columns. If you change the scrollDirection to
+                      // horizontal, this produces 8 rows.
                       child: GridView.count(
                         padding: const EdgeInsets.all(30),
                         crossAxisSpacing: 20,
                         mainAxisSpacing: 20,
-                        // Create a grid with 8 columns. If you change the scrollDirection to
-                        // horizontal, this produces 8 rows.
                         crossAxisCount: 6,
-                        // Generate nombreNiveau widgets that display their index in the List.
+                        // Generate numberOfLevels widgets that display their indexes in the List.
                         children:
                         List.generate(numberOfLevels, (levelIndex) {
                           return ElevatedButton(
@@ -122,6 +132,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                               double solutionValue = 0;
                               int numberOfBuildings = 0;
                               int maxHeight = 0;
+                              // In function of the player's choice, an instance is retrieved from the database and rendered afterward in the game view
+                              // These lines of code get all the information related to the instance
                               if(!ListEquality().equals(dataInstances, [])) {
                                 solutionValue = dataInstances[this.difficultyIndex]["instances"][levelIndex]["solutionValue"];
                                 numberOfBuildings = dataInstances[this.difficultyIndex]["instances"][levelIndex]["numberOfBuildings"];
@@ -136,7 +148,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                 for(int i=0;i<dataInstances[this.difficultyIndex]["instances"][levelIndex]['requestsOfFloorsFromClients'].length;i++)
                                   requestsOfFloorsFromClients.add(dataInstances[this.difficultyIndex]["instances"][levelIndex]['requestsOfFloorsFromClients'][i]);
                               }
-                              Navigator.of(context).push( //Navigateur vers widget
+                              Navigator.of(context).push( // Navigator to widget
+                                // Redirecting to the Screen Building Construction Game view after choosing a level
                                 MaterialPageRoute(builder: (context)=>
                                 //ScreenBuildingConstructionGame(difficulty, index+1),
                                 ScreenBuildingConstructionGame(this.dataInstances, this.difficultyIndex, levelIndex,
@@ -146,7 +159,6 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
                                 )
                                 ),
                               );
-                              //print("Start Game ${index+1} pressed");
                             },
                           );
                         })
