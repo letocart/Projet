@@ -7,7 +7,7 @@ import '../../StorageUtil.dart';
 import '../../style.dart';
 import 'ScreenBuildingConstructionLevel.dart';
 
-// stateful widget
+/// View widget to display the difficulty selection screen of the Building Construction game
 class ScreenBuildingConstructionStage extends StatefulWidget {
   List dataInstances;
   ScreenBuildingConstructionStage(this.dataInstances);
@@ -17,12 +17,12 @@ class ScreenBuildingConstructionStage extends StatefulWidget {
   State<StatefulWidget> createState() => ScreenBuildingConstructionStageState(this.dataInstances);
 }
 
-//the state
+/// State class of ScreenBuildingConstructionStage widget
 class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstructionStage> {
   List dataInstances;
   ScreenBuildingConstructionStageState(this.dataInstances);
 
-  //the build method
+  /// The build method of ScreenBuildingConstructionStage
   @override
   Widget build(BuildContext context) {
     return Column(
