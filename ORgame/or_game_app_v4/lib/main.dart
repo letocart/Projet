@@ -55,7 +55,7 @@ class _SharedPreferenceState extends State<SharedPreference> {
           fit: StackFit.expand, // Take the size of his parent, here the size of the whole screen
           children: <Widget>[
             Positioned.fill(
-              child: gameUI, // Calling the rest of the app which is into ORgameUI.dart 
+              child: gameUI, // Calling the rest of the app which is into ORgameUI.dart
             ),
           ],
         ),
