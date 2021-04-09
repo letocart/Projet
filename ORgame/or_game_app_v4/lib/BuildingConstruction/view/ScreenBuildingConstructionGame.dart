@@ -27,11 +27,11 @@ class ScreenBuildingConstructionGame extends StatefulWidget {
   ScreenBuildingConstructionGame(this.dataInstances,this.difficultyIndex,this.levelIndex,this.BCC);
 
   // create a state for the StatefulWidget
-  createState() => BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
+  createState() => ScreenBuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 }
 
 // state class of the ScreenBuildingConstructionGame
-class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
+class ScreenBuildingConstructionGameState extends State<ScreenBuildingConstructionGame> {
 
   List dataInstances;   // contains all the instances of the game
   int difficultyIndex;  // the index of the difficulty
@@ -40,7 +40,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   BuildingConstructionController BCC;   // the Controller of the game
 
   // Basic Constructor of the class
-  BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
+  ScreenBuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
 
   // overriding the build method
   @override
