@@ -76,7 +76,7 @@ class PopUpState extends State<PopUp>{
             IndexedStack(
               sizing: StackFit.expand,
               children: <Widget>[
-                for ( var i in listOfTexts ) Text(i.toString(), textAlign: TextAlign.justify,)
+                for ( var i in listOfTexts ) Text(i.toString(),overflow: TextOverflow.ellipsis,  textAlign: TextAlign.justify,)
               ],
               index: currentPage,
             ),
