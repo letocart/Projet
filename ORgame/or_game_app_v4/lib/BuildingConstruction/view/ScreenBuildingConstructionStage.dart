@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
 import 'package:or_game_app_v4/view/ScreenMainMenu.dart';
 
@@ -14,10 +11,10 @@ import 'ScreenBuildingConstructionLevel.dart';
 class ScreenBuildingConstructionStage extends StatefulWidget {
   List dataInstances;
   ScreenBuildingConstructionStage(this.dataInstances);
+
   // overriding the createState method
   @override
   State<StatefulWidget> createState() => ScreenBuildingConstructionStageState(this.dataInstances);
-
 }
 
 //the state
@@ -30,14 +27,17 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
   Widget build(BuildContext context) {
     return Column(
       children : [
+        // Container to add a padding at the top of the screen for the phone's status bar
         Container(
-            height : MediaQuery.of(context).padding.top,
-            width : MediaQuery.of(context).size.width,
-            color : Colors.black
+          height : MediaQuery.of(context).padding.top, // Height of the status bar
+          width : MediaQuery.of(context).size.width, // Width of the screen
+          color : Colors.black
         ),
+        // Main container with a background
         Container(
-          height : MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,
-          width : MediaQuery.of(context).size.width,
+          height : MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top, // height of the screen minus the height of the status bar
+          width : MediaQuery.of(context).size.width, // Width of the screen
+          // Decoration to add a background
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("assets/images/backgrounds/city3.png"),
@@ -48,62 +48,74 @@ class ScreenBuildingConstructionStageState extends State<ScreenBuildingConstruct
             children : [
               Column(
                 children: [
+                  // Return to previous screen button at the top right of the screen
                   Align(
                   alignment: Alignment.centerRight,
                     child: Padding(
-                        padding: EdgeInsets.all(5.0),
-                        child: ElevatedButton(
-                          child: Text(getText('returnButtonText')),
-                          style: Style.returnButtonText,
-                          onPressed: () {
-                            Navigator.of(context).push( //Navigateur vers widget
-                              MaterialPageRoute(builder: (context)=>
-                                  ScreenMainMenu(),
-                              ),
-                            );
-                          },
-                        )
+                      padding: EdgeInsets.all(5.0),
+                      child: ElevatedButton(
+                        child: Text(getText('returnButtonText')),
+                        style: Style.returnButtonText,
+                        onPressed: () {
+                          Navigator.of(context).push( //Navigator to ScreenMainMenu widget
+                            MaterialPageRoute(builder: (context)=>
+                                ScreenMainMenu(),
+                            ),
+                          );
+                        },
+                      )
                     ),
                   ),
+                  // Screen's title
                   Stack(
                     children: [
-                      Text(getText('chooseDifficultyText'),style : TextStyle(
+                      // Text's white outline
+                      Text(
+                        getText('chooseDifficultyText'),
+                        style : TextStyle(
                           fontSize: 18,
                           foreground: Paint()
                             ..style = PaintingStyle.stroke
                             ..strokeWidth = 2.5
                             ..color = Colors.white,
-                          fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                          fontWeight: FontWeight.bold, decoration: TextDecoration.none
+                        ),
                       ),
-                      Text(getText('chooseDifficultyText'),style : TextStyle(
-                        fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none),
+                      // Title text
+                      Text(
+                        getText('chooseDifficultyText'),
+                        style : TextStyle(
+                          fontSize: 18, color: Colors.black, fontWeight: FontWeight.bold, decoration: TextDecoration.none
+                        ),
                       )
                     ],
                   ),
+                  // List of difficulties
                   Expanded(
-                      child: ListView.separated(
-                        padding: const EdgeInsets.all(8),
-                        itemCount: dataInstances==null ? 0 : dataInstances.length, //checking if entries is null or not
-                        itemBuilder: (BuildContext context, int difficultyIndex) {
-                          var difficultyText = dataInstances[difficultyIndex]['difficulty'+StorageUtil.getString('lang')];
-                          return ElevatedButton(
-                            child: Text('$difficultyText'),
-                            style: Style.buttonText,
-                            onPressed: () {
-                              Navigator.of(context).push( //Navigateur vers widget
-                                MaterialPageRoute(builder: (context)=>
-                                    ScreenBuildingConstructionLevel(dataInstances,difficultyIndex), // do not change this text, it mus be in english
-                                ),
-                              );
-                              //print("Start Game $difficulty_textEN pressed");
-                            },
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) => const Divider(),
-                      )
+                    child: ListView.separated(
+                      padding: const EdgeInsets.all(8),
+                      itemCount: dataInstances==null ? 0 : dataInstances.length, //checking if entries is null or not
+                      itemBuilder: (BuildContext context, int difficultyIndex) {
+                        var difficultyText = dataInstances[difficultyIndex]['difficulty'+StorageUtil.getString('lang')];
+                        // Creation of each difficulty button
+                        return ElevatedButton(
+                          child: Text('$difficultyText'),
+                          style: Style.buttonText,
+                          onPressed: () {
+                            Navigator.of(context).push( //Navigator to ScreenBuildingConstructionLevel widget
+                              MaterialPageRoute(builder: (context)=>
+                                  ScreenBuildingConstructionLevel(dataInstances,difficultyIndex), // do not change this text, it must be in english
+                              ),
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) => const Divider(),
+                    )
                   )
                 ]
               ),
+              // Languages and manual icons at the top left of the screen
               IconWidget(Axis.horizontal,this)
             ]
           )
