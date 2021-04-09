@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
 import 'package:or_game_app_v4/BuildingConstruction/data/BuildingConstructionData.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
+import 'package:or_game_app_v4/view/StatusBar.dart';
 
 import '../../StorageUtil.dart';
 import '../../style.dart';
@@ -52,12 +53,8 @@ class ScreenBuildingConstructionLevelState extends State<ScreenBuildingConstruct
     this.numberOfLevels = this.dataInstances[this.difficultyIndex]["instances"].length;
     return Column(
         children : [
-          // Container to add a padding at the top of the screen for the phone's status bar
-          Container(
-            height: MediaQuery.of(context).padding.top, // Height of the status bar
-            width : MediaQuery.of(context).size.width, // Width of the screen
-            color : Colors.black
-          ),
+          // StatusBar
+          StatusBar(),
           // Main container with a background
           Container(
             height: MediaQuery.of(context).size.height -  MediaQuery.of(context).padding.top, // height of the screen minus the height of the status bar

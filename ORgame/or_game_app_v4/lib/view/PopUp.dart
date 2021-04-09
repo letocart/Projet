@@ -1,4 +1,7 @@
-// state of PopupRule
+// inspiration sources
+// https://www.geeksforgeeks.org/flutter-scrollable-text/
+
+//imports
 import 'package:flutter/material.dart';
 import '../StorageUtil.dart';
 
@@ -76,7 +79,7 @@ class PopUpState extends State<PopUp>{
             IndexedStack(
               sizing: StackFit.expand,
               children: <Widget>[
-                for ( var i in listOfTexts ) Text(i.toString(),overflow: TextOverflow.ellipsis,  textAlign: TextAlign.justify,)
+                for ( var i in listOfTexts ) ScrollableText(Text(i.toString(),  textAlign: TextAlign.justify))
               ],
               index: currentPage,
             ),
@@ -118,5 +121,18 @@ class PopUpState extends State<PopUp>{
           ),
         ]
     );
+  }
+
+  // ScrollableText
+  Widget ScrollableText(Text text)
+  {
+    return Container(
+      // fixed height in 1/3 of the phone height
+      height:MediaQuery.of(context).size.height/3,
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: text,
+        ),
+      );
   }
 }

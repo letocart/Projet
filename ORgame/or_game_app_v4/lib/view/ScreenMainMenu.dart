@@ -8,6 +8,7 @@ import '../style.dart';
 import 'package:bubble/bubble.dart';
 import 'IconWidget.dart';
 import 'ScreenHome.dart';
+import 'StatusBar.dart';
 
 /// View widget to display the main menu
 class ScreenMainMenu extends StatefulWidget {
@@ -41,12 +42,8 @@ class ScreenMainMenuState extends State<ScreenMainMenu> {
   Widget build(BuildContext context){
     return Column(
       children : [
-        // Container to add a padding at the top of the screen for the phone's status bar
-        Container(
-          height: MediaQuery.of(context).padding.top, // Height of the status bar
-          width: MediaQuery.of(context).size.width, // Width of the screen
-          color: Colors.black,
-        ),
+        // StatusBar
+        StatusBar(),
         // Main container
         Container(
           height: MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,

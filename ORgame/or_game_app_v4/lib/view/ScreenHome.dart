@@ -5,6 +5,7 @@ import '../style.dart';
 import 'package:flutter/services.dart';
 import 'IconWidget.dart';
 import 'ScreenMainMenu.dart';
+import 'StatusBar.dart';
 
 /// View widget to display the home screen
 class ScreenHome extends StatefulWidget {
@@ -26,12 +27,8 @@ class ScreenHomeState extends State<ScreenHome> {
   Widget build(BuildContext context) {
     return Column(
       children : [
-        // Container to add a padding at the top of the screen for the phone's status bar
-        Container(
-          height: MediaQuery.of(context).padding.top, // Height of the status bar
-          width: MediaQuery.of(context).size.width, // Width of the screen
-          color: Colors.black,
-        ),
+        // StatusBar
+        StatusBar(),
         // Main Container
         Container(
           height:  MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top,

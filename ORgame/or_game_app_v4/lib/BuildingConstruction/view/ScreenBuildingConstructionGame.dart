@@ -49,7 +49,6 @@ class ScreenBuildingConstructionGameState extends State<ScreenBuildingConstructi
     Future.delayed(Duration.zero, () => showPopUpTutorial(context));
     return Column(
         children : [
-
           StatusBar(),  // StatusBar
           // Container with all the Widgets displayed
           Container(
