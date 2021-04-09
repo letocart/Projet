@@ -1,7 +1,5 @@
 //inspiration code for popup when first arrived: https://stackoverflow.com/questions/62536438/how-to-show-a-popup-on-app-start-in-flutter
 
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:or_game_app_v4/BuildingConstruction/controller/BuildingsConstructionController.dart';
 import 'package:or_game_app_v4/BuildingConstruction/model/BuildingConstructionModel.dart';
@@ -9,6 +7,7 @@ import 'package:or_game_app_v4/BuildingConstruction/view/ScreenBuildingConstruct
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:or_game_app_v4/view/IconWidget.dart';
+import 'package:or_game_app_v4/view/PopUp.dart';
 
 import '../../StorageUtil.dart';
 import '../../style.dart';
@@ -27,7 +26,6 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
   int difficultyIndex;
   int levelIndex;
   BuildingConstructionController BCC;
-  int score = 0;
 
   //BuildingConstructionGameState(this.difficulty,this.level);
   BuildingConstructionGameState(this.dataInstances,this.difficultyIndex, this.levelIndex, this.BCC);
@@ -154,21 +152,7 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
                                     context: context,
                                     builder: (BuildContext context) =>
                                     (this.dataInstances[this.difficultyIndex]["difficultyEN"] == 'tutorial') ?
-                                        AlertDialog(
-                                          title: Text(getText('titlePopUpHint')),
-                                          content: Text(getText('hint'
-                                              +this.dataInstances[this.difficultyIndex]["difficultyEN"]
-                                              +this.levelIndex.toString())),
-                                          actions: <Widget>[
-                                            new FlatButton(
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                              textColor: Theme.of(context).primaryColor,
-                                              child: Text(getText('returnText')),
-                                            ),
-                                          ],
-                                        ) : PopupHint() ,
+                                        TutorialHintPopUp(this.levelIndex+1) : HintPopUp() ,
                                   );
                                 },
                               ),
@@ -379,17 +363,11 @@ class BuildingConstructionGameState extends State<ScreenBuildingConstructionGame
       showDialog(
           context: context,
           builder: (BuildContext context) =>
-              tutorialPopUpRule()
+              BuildingConstructionRulePopUp()
       );
     }
   }
-  PopUpRule tutorialPopUpRule(){
-    return PopUpRule(getText('titlePopUpBuildingConstruction'),4,
-        [getText('PopUpBuildingConstructionText1'),
-          getText('PopUpBuildingConstructionText2'),
-          getText('PopUpBuildingConstructionText3'),
-          getText('PopUpBuildingConstructionText4')]);
-  }
+
 
 }
 
@@ -480,72 +458,6 @@ class Client_Icon extends StatelessWidget {
     }
 
     return Color.fromARGB(255, red, green, 0);
-  }
-
-}
-
-// popup hint
-class PopupHint extends StatefulWidget {
-
-  @override
-  State<StatefulWidget> createState() => PopupHintState();
-
-}
-
-class PopupHintState extends State<PopupHint>{
-
-  int currentPage = 0;
-  int maxPages = 3;
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-        title : Text(getText('titlePopUpHint')),
-        content: new Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            IndexedStack(
-              sizing: StackFit.expand,
-              children: <Widget>[
-                Text(getText('hint1')),
-                Text(getText('hint2')),
-                Text(getText('hint3')),
-              ],
-              index: currentPage,
-            ),
-          ],
-        ),
-        actions: <Widget>[
-          new FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: const Text('return'),
-          ),
-          currentPage > 0 ?
-          new FlatButton(
-            onPressed: () {
-              setState( () =>
-              currentPage = currentPage-1);
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: const Text('previous'),
-          ) : Container(),
-          currentPage < maxPages-1 ?
-          new FlatButton(
-            onPressed: () {
-              setState( () =>
-              currentPage = currentPage+1);
-            },
-            textColor: Theme.of(context).primaryColor,
-            child: const Text('next'),
-          ): Container(),
-          new Text("${currentPage+1}/${maxPages}"),
-        ]
-    );
-
   }
 
 }

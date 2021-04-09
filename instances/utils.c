@@ -24,6 +24,7 @@ int create_json(int game, int level)
 	int len;
 	int fd;
 
+	/*creation du nom de fichier*/
 	if (game == 1)
 		len = 9 + 5;
 	len += int_len(level);
@@ -39,6 +40,8 @@ int create_json(int game, int level)
 		name[len] = 0;
 	}
 	free(str_level);
+	
+	/*création du fichier*/
 	fd = open(name, O_WRONLY | O_CREAT | O_EXCL, 0666);
 	free(name);
 	if (fd >= 0)
@@ -53,6 +56,7 @@ int create_file(int game, int level)
 	int len;
 	int fd;
 
+	/*creation du nom du fichier*/
 	if (game == 1)
 		len = 9;
 	len += int_len(level);
@@ -67,6 +71,8 @@ int create_file(int game, int level)
 		name[len] = 0;
 	}
 	free(str_level);
+	
+	/*creation du fichier*/
 	fd = open(name, O_WRONLY | O_CREAT | O_EXCL, 0666);
 	free(name);
 	if (fd >= 0)
