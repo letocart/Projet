@@ -9,13 +9,13 @@ import 'package:bubble/bubble.dart';
 import 'IconWidget.dart';
 import 'ScreenHome.dart';
 
-/// View widget to display the level selection screen of the Building Construction game
+/// View widget to display the main menu
 class ScreenMainMenu extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => ScreenMainMenuState();
 }
 
-/// State class of ScreenMainMenuState widget
+/// State class of ScreenMainMenu widget
 class ScreenMainMenuState extends State<ScreenMainMenu> {
 
   List BuildingConstructionDataInstances;

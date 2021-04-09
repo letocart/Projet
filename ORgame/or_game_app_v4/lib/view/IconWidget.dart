@@ -4,29 +4,42 @@ import 'package:or_game_app_v4/StorageUtil.dart';
 
 import 'PopUp.dart';
 
+/// __________________________________________________________________
+/// This class contains several Icon that appear on every screen :
+/// * The UK flag icon
+/// * The French flag icon
+/// * The manual icon
+///
+/// This class manage the actions linked to those icon
+/// (change the language or make a dialog box appear)
+/// __________________________________________________________________
 
 class IconWidget extends StatefulWidget {
 
   State parent; //the parent State Widget
   final Axis direction;
 
-  IconWidget(this.direction,this.parent);
+  IconWidget(this.direction,this.parent); // constructor
 
   @override
   State<StatefulWidget> createState() => IconWidgetState(direction,parent);
 }
 
+/// ____________________________________________________________
+///    This the state linked to the class IconWidget
+/// ____________________________________________________________
+
 class IconWidgetState extends State<IconWidget>{
 
-  State parent;
+  State parent; //the parent State Widget
   final Axis direction;
 
-  IconWidgetState(this.direction,this.parent);
+  IconWidgetState(this.direction,this.parent); // Constructor
 
   // overriding build method
   @override
   Widget build(BuildContext context) {
-    // if the axis is horizontal or vertical there are some subtil differences
+    // if the axis is horizontal or vertical there are some display differences
     // which implies a bit of code duplication below
     if(direction==Axis.horizontal) {
       return buildHorizontalIcons();
@@ -34,9 +47,8 @@ class IconWidgetState extends State<IconWidget>{
     else if(direction==Axis.vertical) {
       return buildVerticalIcons();
     }
-    else
+    else // this case is not supposed to happen
     {
-      //print("Direction not supported");
       return Container(
           width: 50,
           height: 50,
@@ -47,62 +59,59 @@ class IconWidgetState extends State<IconWidget>{
   }
 
 
-  Widget buildHorizontalIcons(){
+    Widget buildHorizontalIcons(){
     return Positioned(
         top: 0.0,
         left: 0.0,
         child: Row(
           children: [
+            // UK flag
             Material(
-              color: Colors.transparent,
+              color: Colors.transparent, // The color of rectangle around the icon
               child: Ink(
                   decoration: const ShapeDecoration(
-                      color: Colors.transparent,
+                      color: Colors.transparent, // The color of the circle around the icon
                       shape: CircleBorder()),
                   child: IconButton(
                     icon: Image.asset('assets/images/icon/uk.png'),
                     onPressed: () async {
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
-                      //print("UK flag pressed");
-                      await StorageUtil.putString("lang",'EN'); // updating Storage
+                      await StorageUtil.putString("lang",'EN'); // updating Language Storage
                       this.parent.setState(() {});              // refreshing parent widget
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
                     },
                   )
               ),
             ),
+            // French flag
             Material(
-              color: Colors.transparent,
+              color: Colors.transparent, // The color of rectangle around the icon
               child: Ink(
                   decoration: const ShapeDecoration(
-                      color: Colors.transparent,
+                      color: Colors.transparent, // The color of the circle around the icon
                       shape: CircleBorder()),
                   child: IconButton(
                     icon: Image.asset('assets/images/icon/fr.png'),
                     onPressed: () async {
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
-                      //print("French flag pressed");
-                      await StorageUtil.putString("lang",'FR');
+                      await StorageUtil.putString("lang",'FR'); // updating Language Storage
                       this.parent.setState(() {});
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
                     },
                   )
               ),
             ),
+              // manual icon
               Material(
-              color: Colors.transparent,
+              color: Colors.transparent, // The color of rectangle around the icon
               child: Ink(
                   decoration: const ShapeDecoration(
-                      color: Colors.transparent,
+                      color: Colors.transparent, // The color of the circle around the icon
                       shape: CircleBorder()),
                   child: IconButton(
                     icon: Image.asset('assets/images/icon/manual.png'),
                     onPressed: () {
-                      //print("Manual pressed");
+                      // This is the pop up that appears when we pressed the manual icon
                       showDialog(
                           context: context,
                           builder: (BuildContext context) =>
-                              buildPopUpRule()
+                              buildPopUpRule() // This is defined lower
                       );
                     },
                   )
@@ -119,24 +128,24 @@ class IconWidgetState extends State<IconWidget>{
         child: Column(
           children: [
             Material(
-              color : Colors.transparent,
+              color : Colors.transparent, // The color of rectangle around the icon
               child: Ink(
                   decoration: const ShapeDecoration(
-                      shape: CircleBorder()),
+                      shape: CircleBorder()
+                  ),
+                  // UK flag
                   child : IconButton(
                     padding: EdgeInsets.only(top : 10, left : 10),
                     constraints: BoxConstraints(),
                     icon: Image.asset('assets/images/icon/uk.png'),
                     onPressed: () async {
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
-                      //print("UK flag pressed");
                       await StorageUtil.putString("lang",'EN'); // updating Storage
                       this.parent.setState(() {});              // refreshing parent widget
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
                     },
                   )
               ),
             ),
+            // French flag
             Material(
               color : Colors.transparent,
               child: Ink(
@@ -148,15 +157,13 @@ class IconWidgetState extends State<IconWidget>{
                     constraints: BoxConstraints(),
                     icon: Image.asset('assets/images/icon/fr.png'),
                     onPressed: () async {
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
-                      //print("French flag pressed");
-                      await StorageUtil.putString("lang",'FR');
-                      this.parent.setState(() {});
-                      //print("Langue actuelle : ${StorageUtil.getString("lang")}");
+                      await StorageUtil.putString("lang",'FR'); // updating language Storage
+                      this.parent.setState(() {}); // Refreshing display
                     },
                   )
               ),
             ),
+            // Manual icon
             Material(
               color : Colors.transparent,
               child: Ink(
@@ -168,7 +175,6 @@ class IconWidgetState extends State<IconWidget>{
                     constraints: BoxConstraints(),
                     icon: Image.asset('assets/images/icon/manual.png'),
                     onPressed: () {
-                      //print("Manual pressed");
                       showDialog(
                           context: context,
                           builder: (BuildContext context) =>
