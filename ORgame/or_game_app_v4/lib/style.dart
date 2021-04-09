@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-// styles predifinies d'affichage
-class Style{
+/// _____________________________________________________________________
+/// This class define some styles (colors, fonts, ...) useful for button
+/// There is three button styles :
+/// * buttonText which is used for the buttons into menus
+/// * returnButtonText which is used for the return buttons
+/// * exitButtonText which is used into the welcome menu
+/// _____________________________________________________________________
 
-  static final ThemeData themePrincipal = ThemeData(
-    primarySwatch: Colors.teal,
-    scaffoldBackgroundColor: Colors.white70,
-    visualDensity: VisualDensity.adaptivePlatformDensity,
-  );
+class Style{
 
   static final ButtonStyle buttonText = TextButton.styleFrom(
     textStyle : TextStyle(color:Colors.white),
