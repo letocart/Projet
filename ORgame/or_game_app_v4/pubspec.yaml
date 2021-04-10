@@ -58,14 +58,13 @@ flutter:
     - assets/images/GagnePerdu/YouLoseEN.png
     - assets/images/GagnePerdu/YouWinFR.png
     - assets/images/GagnePerdu/YouLoseFR.png
-    - assets/images/backgrounds/ciel.png
     - assets/images/backgrounds/ajoutBgDistributionService.png
     - assets/images/backgrounds/bgDistributionService.png
     - assets/images/backgrounds/city3.png
     - assets/images/icon/fr.png
     - assets/images/icon/uk.png
     - assets/images/icon/manual.png
-    - assets/images/icon/ampoule.png
+    - assets/images/icon/lightbulb.png
     - assets/images/icon/check.png
     - assets/texts/texts.json
     - assets/problemInstances/BuildingConstructionInstances.json

@@ -67,7 +67,7 @@
   {
     "textName": "hinttutorial5",
     "EN": "This is the same situation then the precedent level. However, it seems that they offer the same amount of money.",
-    "FR": "C'est la même situation que la niveau précéent, par contre ils t'offrent la même somme d'argent on dirait."
+    "FR": "C'est la même situation que la niveau précédent, par contre ils t'offrent la même somme d'argent on dirait."
   },
   {
     "textName": "hinttutorial6",
@@ -87,7 +87,7 @@
   {
     "textName": "hint3",
     "EN": "The best is to have the smaller building that makes you gain the most.\nA way is to take the smaller service.\nBut a well-known strategy is to calculate the ratio gain/size and to take the greater",
-    "FR": "Le meilleur est d'avoir le plus petit immeuble qui fait gagner le plus.\nUne manière est de prendre le service le plus petit\nMais une stratégie connue est de calculer le rato gain/taille et de prendre le plus grand"
+    "FR": "Le meilleur est d'avoir le plus petit immeuble qui fait gagner le plus.\nUne manière est de prendre le service le plus petit\nMais une stratégie connue est de calculer le ratio gain/taille et de prendre le plus grand"
   },
   {
     "textName": "titlePopUpHint",
@@ -116,7 +116,7 @@
   },
   {
     "textName": "PopUpGeneralText1",
-    "EN": "Your goal is to help us make decisions to optimize our city.",
+    "EN": "IAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nIAMTEST\nYour goal is to help us make decisions to optimize our city.",
     "FR": "Ton but est de nous aider à prendre des décisions pour optimiser notre ville."
   },
   {
@@ -127,7 +127,7 @@
   {
     "textName": "PopUpGeneralText3",
     "EN": "We will talk about it later but these problems have a link with the Operational Research (OR).\nOR is the discipline regrouping the techniques and methods to get the best result for a given problem.",
-    "FR": "On le verra en détail plus tard mais ces problématiques ont un lien avec la Recherche Opérationnelle (RO)\nLa RO est l'ensemble des techniques et méthodes pour obtenir le meilleur résultat pour un problem donné."
+    "FR": "On le verra en détail plus tard mais ces problématiques ont un lien avec la Recherche Opérationnelle (RO)\nLa RO est l'ensemble des techniques et méthodes pour obtenir le meilleur résultat pour un problème donné."
   },
   {
     "textName": "titlePopUpBuildingConstruction",
@@ -136,23 +136,23 @@
   },
   {
     "textName": "PopUpBuildingConstructionText1",
-    "EN": "Here's the situation:\nSeverals companies want to invest in our new building projet.\nEach of them ask for a certain number of floors in our new building for a certain amount of money.Yet to build this kind of building costs money and generally the higher it is the more expensive it will be.\n(You can open this manual whenever you'll need it by pressing the manual icon)",
-    "FR": "Voici la situation:\nPlusieurs entreprises veulent investir dans notre nouveau projet de construction.\nChacune d'elle veut un certain nombre d'étages dans notre nouveau bâtiment contre une certaine somme d'argent.Cependant construire ce genre de bâtiment coûte de l'argent et généralement plus il est grand plus il est cher.\n(Vous pouvez ouvrir ce manuel à n'importe quel moment en cliquant sur l'icône de manuel)"
+    "EN": "(You can open this manual whenever you'll need it by pressing the manual icon)\nHere's the situation:\nSeverals companies want to invest in our new building projet.",
+    "FR": "(Vous pouvez ouvrir ce manuel à n'importe quel moment en cliquant sur l'icône de manuel)\nVoici la situation:\nPlusieurs entreprises veulent investir dans notre nouveau projet de construction."
   },
   {
     "textName": "PopUpBuildingConstructionText2",
+    "EN": "Each of them ask for a certain number of floors in our new building for a certain amount of money. Yet, to build this kind of building costs money and generally the higher it is the more expensive it will be.",
+    "FR": "Chacune d'elle veut un certain nombre d'étages dans notre nouveau bâtiment contre une certaine somme d'argent. Cependant construire ce genre de bâtiment coûte de l'argent et généralement plus il est grand plus il est cher."
+  },
+  {
+    "textName": "PopUpBuildingConstructionText3",
     "EN": "On the right you have several rectangles of different sizes (or not), representing the number of floors asked by the companies, with an amount of money that you will earn if you place them. You can place them in the white rectangle on the left, representing the building.\nOn the left of each floor of the building you have a number, it represents the price of a floor.",
     "FR": "Sur la droite vous avez différents rectangles de différentes tailles (ou non), représentant le nombre d'étages demandés par les clients, avec un montant d'argent que vous allez gagner si vous les placez. Vous pouvez les placer dans le rectangle blanc à gauche, représentant le bâtiment.\nSur la gauche de chaque étage du bâtiment vous avez un nombre, il représente le prix d'un étage."
   },
   {
-    "textName": "PopUpBuildingConstructionText3",
-    "EN": "Your goal is to maximise the amount of money we will earn by choosing where you put each rectangle.You don't have to put every rectangles into the building.",
-    "FR": "Votre but est de maximiser l'argent que nous allons gagner en choisissant où placer chaque rectangle.Vous n'êtes pas obligés de mettre tous les rectangles dans le bâtiment."
-  },
-  {
     "textName": "PopUpBuildingConstructionText4",
-    "EN": "When you think you've finished you can clic on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one.\nOn the top right, you can clic on bulb icon to get small hints on how to find the optimal solution.",
-    "FR": "Quand vous pensez avoir fini vous pouvez appuyer sur le bouton de validation en bas à droite. Vous obtiendrez un pourcentage comparant votre solution et la solution optimale.\nEn haut à droite, vous pouvez appuyer sur l'icône d'ampoule pour obtenir quelques indices sur comment trouver la solution optimale."
+    "EN": "Your goal is to maximise the amount of money we will earn by choosing where you put each rectangle. You don't have to put every rectangles into the building. When you think you've finished you can clic on the validate button on the bottom right. You will get a percentage comparing your solution and the optimal one. On the top right, you can clic on bulb icon to get small hints on how to find the optimal solution.",
+    "FR": "Votre but est de maximiser l'argent que nous allons gagner en choisissant où placer chaque rectangle. Vous n'êtes pas obligés de mettre tous les rectangles dans le bâtiment.\nQuand vous pensez avoir fini vous pouvez appuyer sur le bouton de validation en bas à droite. Vous obtiendrez un pourcentage comparant votre solution et la solution optimale.\nEn haut à droite, vous pouvez appuyer sur l'icône d'ampoule pour obtenir quelques indices sur comment trouver la solution optimale."
   },
   {
     "textName": "winningPercentageText",
