@@ -7,8 +7,6 @@ class BuildingConstructionController {
   BuildingConstructionModel _BCM;
   BuildingConstructionData _BCD;
 
-
-
   // basic constructor
   BuildingConstructionController(this._BCM, this._BCD);
 
@@ -18,21 +16,7 @@ class BuildingConstructionController {
     this.BCM = BuildingConstructionModel.fromBCD(BCD);
     this.BCD = BCD;
   }
-
-  // constructor from 2 indexes/keys given by the difficulty and the level
-  // must be better defined/is for testing purpose as of now
-  BuildingConstructionController.fromIndex(String difficulty, int level)
-  {
-    //create DSD and DSM from DatabaseManager
-
-    //has to be replaced
-    this.BCD = new BuildingConstructionData(2990
-        , 2, 35,
-        [0, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 1700, 1800, 1900, 2000, 2100, 2200, 2300, 2400, 2500, 2600, 2700, 2800, 2900, 3000, 3100, 3200, 3300, 3400]
-        , [1020, 1530, 2040, 2000, 1530, 700, 1], [2, 3, 4, 5, 6, 7, 8]);
-    this.BCM = BuildingConstructionModel.fromBCD(this.getBCD);
-  }
-
+  
   // getters and setters
   BuildingConstructionData get getBCD => _BCD;
   set BCD(BuildingConstructionData value) {
