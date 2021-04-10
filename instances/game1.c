@@ -65,7 +65,7 @@ void nb_buildings(int c, char **v, int fd1, int fd2)
 int clients(int c, char **v, int fd1, int fd2)
 {
 	int nb_cli;							//number of clients
-	int fl_cli[CLI_MAX - CLI_MIN + 1];				//floors taken by each client
+	int fl_cli[CLI_MAX];				//floors taken by each client
 	int mid;							//average of clients gains
 	int var;							//range of deviance of client gains around mid
 	int max;							//number max floors of buildings 
