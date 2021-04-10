@@ -1,6 +1,5 @@
 //Unit Tests for BuildingConstruction Classes
 
-
 import 'package:collection/collection.dart';
 import 'package:playing_or/BuildingConstruction/controller/BuildingsConstructionController.dart';
 import 'package:playing_or/BuildingConstruction/data/BuildingConstructionData.dart';

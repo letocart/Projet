@@ -16,7 +16,7 @@ class BuildingConstructionController {
     this.BCM = BuildingConstructionModel.fromBCD(BCD);
     this.BCD = BCD;
   }
-  
+
   // getters and setters
   BuildingConstructionData get getBCD => _BCD;
   set BCD(BuildingConstructionData value) {
