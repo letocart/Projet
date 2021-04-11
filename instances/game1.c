@@ -36,7 +36,7 @@ int main(int c, char **v)
 	close(fd1);
 	write(fd2, "\t\"solutionValue\":???,\n}\n", 24);
 	close(fd2);
-	printf("Building_%d and Building_%d.json generated !\n", level, level);
+	printf("Buildings_%d and Buildings_%d.json generated !\n", level, level);
 	return 0;
 }
 
