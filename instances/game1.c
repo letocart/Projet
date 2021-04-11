@@ -34,7 +34,7 @@ int main(int c, char **v)
 	floor_prices(fd1, fd2, max);
 	write(fd1, "optimum = ???\n", 14);
 	close(fd1);
-	write(fd2, "\t\"solutionValue\":???,\n}\n", 24);
+	write(fd2, "\t\"solutionValue\":???\n}\n", 23);
 	close(fd2);
 	printf("Buildings_%d and Buildings_%d.json generated !\n", level, level);
 	return 0;
@@ -57,7 +57,7 @@ void nb_buildings(int c, char **v, int fd1, int fd2)
 	putnbr_fd(nb_bd, fd1);
 	write(fd1, "\n", 1);
 
-	write(fd2, "\t\"NumberOfBuildings\":", 21);
+	write(fd2, "\t\"numberOfBuildings\":", 21);
 	putnbr_fd(nb_bd, fd2);
 	write(fd2, ",\n", 2);
 }
