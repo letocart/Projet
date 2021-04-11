@@ -282,7 +282,6 @@ class ScreenBuildingConstructionGameState extends State<ScreenBuildingConstructi
                 constraints: BoxConstraints(),
                 icon: Image.asset('assets/images/icon/check.png'),
                 onPressed: () {
-                  //print("Check pressed");
                   showDialog(
                     context: context,
                     builder: (BuildContext context) =>
@@ -383,18 +382,15 @@ class ScreenBuildingConstructionGameState extends State<ScreenBuildingConstructi
         );
       },
       onWillAccept: (data) {
-        //print("OnWillAccept");
         return true;
       },
       onAccept: (data) {
-        //print("Accept $data");
         setState(() {
           BCC.getBCM.assignClientToBuilding(data.getIndex, buildingIndex);
           BCC.getBCM.updateScore();
         });
       },
       onLeave: (data) {
-        //print("Not accept");
       },
     );
   }

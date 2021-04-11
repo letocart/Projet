@@ -118,9 +118,6 @@ class BuildingConstructionModel {
   int solutionPercentage()
   {
 
-    print("score is: "+this.getScore.toString());
-    print("solution value is: "+this.getSolutionValue.toString());
-    print("score is: "+this.getSolutionValue.toString());
     if(this.getSolutionValue<=0) {
       //special case the solution value is equal to 0
       // (it cannot be negative but just in case we test <=)
@@ -162,16 +159,6 @@ class BuildingConstructionModel {
   set score(double value) {
     _score = value;
   }
-/* print of test
-  void print_clients(int immeuble)
-  {
-    print("Liste des clients dans l'immeuble $immeuble");
-    for(int i in get_clients_indexes_in_immeuble(immeuble)) {
-      Client c = getClients[i];
-      print("Client $i : (gain = ${c.getEarning}, etages = ${c.getRequestOfFloors})");
-    }
-  }
-*/
 }
 
 // class containing information about the buildings' slot
