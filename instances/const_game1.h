@@ -13,7 +13,7 @@
 
 //number min of clients
 # ifndef CLI_MIN
-#  define CLI_MIN 2
+#  define CLI_MIN 3
 # endif
 
 //number max of clients
@@ -48,17 +48,17 @@
 
 //starting price max (1st floor)
 # ifndef PRI_MIN 
-#  define PRI_MIN 50
+#  define PRI_MIN 20
 # endif
 
 //incrementation of price minimum between each floor
 # ifndef INC_MIN 
-#  define INC_MIN  10
+#  define INC_MIN 5
 # endif
 
 //incrementation of price maximum between each floor
 # ifndef INC_MAX 
-#  define INC_MAX  25
+#  define INC_MAX 15
 # endif
 
 #endif
