@@ -90,6 +90,54 @@
         "pricesOfFloors":[150,150,160,170,180,190,200,210,220,230,240,250],
         "earningsFromClients":[835,625,385,212,415],
         "requestsOfFloorsFromClients":[4,3,2,1,2]
+      },
+      {
+      	"NumberOfBuildings":1,
+      	"requestsOfFloorsFromClients":[4, 4, 2],
+      	"earningsFromClients":[384, 400, 183],
+      	"maxHeight":10,
+      	"pricesOfFloors":[35, 40, 45, 50, 55, 60, 65, 70, 75, 80],
+      	"solutionValue":392.0,
+      },
+      {
+      	"NumberOfBuildings":1,
+      	"requestsOfFloorsFromClients":[4, 5, 2, 4],
+      	"earningsFromClients":[423, 506, 192, 407],
+      	"maxHeight":15,
+      	"pricesOfFloors":[35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105],
+      	"solutionValue":491.0,
+      },
+      {
+      	"NumberOfBuildings":1,
+      	"requestsOfFloorsFromClients":[3, 2, 4, 5],
+      	"earningsFromClients":[312, 194, 411, 521],
+      	"maxHeight":14,
+      	"pricesOfFloors":[47, 59, 72, 84, 96, 109, 116, 131, 136, 150, 156, 164, 174, 185],
+      	"solutionValue":163.0,
+      },
+      {
+      	"NumberOfBuildings":1,
+      	"requestsOfFloorsFromClients":[4, 5, 2, 4, 2, 3, 3, 4],
+      	"earningsFromClients":[424, 476, 176, 419, 212, 324, 284, 385],
+      	"maxHeight":27,
+      	"pricesOfFloors":[36, 46, 57, 72, 80, 92, 99, 114, 129, 138, 144, 155, 167, 179, 193, 204, 211, 224, 238, 244, 252, 262, 276, 283, 293, 305, 315],
+      	"solutionValue":266.0,
+      },
+      {
+      	"NumberOfBuildings":1,
+      	"requestsOfFloorsFromClients":[5, 3, 3, 2, 4, 2, 2],
+      	"earningsFromClients":[524, 289, 284, 206, 391, 210, 182],
+      	"maxHeight":21,
+      	"pricesOfFloors":[29, 41, 49, 58, 73, 83, 92, 107, 120, 135, 143, 151, 164, 170, 175, 186, 200, 215, 227, 239, 252],
+      	"solutionValue":309.0,
+      },
+      {
+      	"NumberOfBuildings":2,
+      	"requestsOfFloorsFromClients":[2, 4, 3],
+      	"earningsFromClients":[200, 390, 320],
+      	"maxHeight":8,
+      	"pricesOfFloors":[70, 80, 90, 100, 110, 120, 130, 140],
+      	"solutionValue":130.0,
       }
     ]
   },
@@ -178,6 +226,68 @@
         "pricesOfFloors":[80,80,100,100,120,120,140,140,160,160,180,180,200],
         "earningsFromClients":[350,300,325,225,225],
         "requestsOfFloorsFromClients":[3,3,3,2,2]
+      }
+    ]
+  },
+  {
+    "difficultyEN": "hard",
+    "difficultyFR": "difficile",
+    "instances":
+    [
+      {
+      	"NumberOfBuildings":3,
+      	"requestsOfFloorsFromClients":[2, 4, 2, 2, 4, 4, 4, 3],
+      	"earningsFromClients":[450, 785, 367, 353, 769, 805, 836, 629],
+      	"maxHeight":25,
+      	"pricesOfFloors":[160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390, 400],
+      	"solutionValue":420.0,
+      },
+      {
+      	"NumberOfBuildings":3,
+      	"requestsOfFloorsFromClients":[2, 3, 3, 2, 3, 3, 4, 2, 2],
+      	"earningsFromClients":[347, 641, 662, 447, 627, 564, 829, 347, 439],
+      	"maxHeight":24,
+      	"pricesOfFloors":[160, 170, 180, 190, 200, 210, 220, 230, 240, 250, 260, 270, 280, 290, 300, 310, 320, 330, 340, 350, 360, 370, 380, 390],
+      	"solutionValue":525.0,
+      },
+      {
+      	"NumberOfBuildings":3,
+      	"requestsOfFloorsFromClients":[2, 3, 4, 2, 3, 2, 3, 2, 2],
+      	"earningsFromClients":[448, 618, 736, 335, 610, 378, 629, 420, 379],
+      	"maxHeight":23,
+      	"pricesOfFloors":[173, 187, 198, 213, 227, 239, 254, 266, 279, 290, 304, 315, 330, 340, 352, 365, 376, 389, 400, 413, 428, 438, 448],
+      	"solutionValue":228.0,
+      },
+      {
+      	"NumberOfBuildings":3,
+      	"requestsOfFloorsFromClients":[2, 2, 3, 4, 2],
+      	"earningsFromClients":[464, 446, 562, 786, 370],
+      	"maxHeight":13,
+      	"pricesOfFloors":[162, 169, 178, 183, 191, 197, 202, 211, 218, 224, 232, 237, 244],
+      	"solutionValue":365.0,
+      },
+      {
+      	"NumberOfBuildings":3,
+      	"requestsOfFloorsFromClients":[2, 2, 3, 3, 4, 4, 2, 2, 3],
+      	"earningsFromClients":[437, 419, 623, 543, 853, 749, 445, 373, 635],
+      	"maxHeight":25,
+      	"pricesOfFloors":[170, 180, 186, 193, 200, 208, 215, 225, 230, 239, 248, 257, 267, 273, 278, 287, 293, 300, 305, 310, 320, 330, 336, 342, 352],
+      	"solutionValue":417.0,
+      },
+    ]
+  },
+  {
+    "difficultyEN": "12",
+    "difficultyFR": "12",
+    "instances":
+    [
+      {
+      	"NumberOfBuildings":10,
+      	"requestsOfFloorsFromClients":[4, 4, 5, 5, 5, 2, 4, 4, 4, 4, 3, 5, 5, 5, 5, 5, 2, 5, 4, 4, 3, 2, 4, 3, 5, 5, 3, 5, 3, 4, 2, 5, 2, 2, 4, 2, 2, 3, 4, 5, 5, 2, 4, 5, 5, 3, 4, 5, 2, 2],
+      	"earningsFromClients":[1915, 1911, 2503, 2559, 2452, 1016, 2094, 2021, 1925, 1992, 1503, 2526, 2402, 2418, 2468, 2482, 993, 2520, 1999, 2071, 1438, 1034, 2025, 1493, 2483, 2484, 1514, 2464, 1519, 1909, 1022, 2484, 920, 924, 2094, 923, 990, 1587, 2044, 2515, 2479, 946, 2092, 2481, 2414, 1409, 2013, 2508, 1029, 912],
+      	"maxHeight":189,
+      	"pricesOfFloors":[79, 89, 99, 109, 119, 129, 139, 149, 159, 169, 179, 189, 199, 209, 219, 229, 239, 249, 259, 269, 279, 289, 299, 309, 319, 329, 339, 349, 359, 369, 379, 389, 399, 409, 419, 429, 439, 449, 459, 469, 479, 489, 499, 509, 519, 529, 539, 549, 559, 569, 579, 589, 599, 609, 619, 629, 639, 649, 659, 669, 679, 689, 699, 709, 719, 729, 739, 749, 759, 769, 779, 789, 799, 809, 819, 829, 839, 849, 859, 869, 879, 889, 899, 909, 919, 929, 939, 949, 959, 969, 979, 989, 999, 1009, 1019, 1029, 1039, 1049, 1059, 1069, 1079, 1089, 1099, 1109, 1119, 1129, 1139, 1149, 1159, 1169, 1179, 1189, 1199, 1209, 1219, 1229, 1239, 1249, 1259, 1269, 1279, 1289, 1299, 1309, 1319, 1329, 1339, 1349, 1359, 1369, 1379, 1389, 1399, 1409, 1419, 1429, 1439, 1449, 1459, 1469, 1479, 1489, 1499, 1509, 1519, 1529, 1539, 1549, 1559, 1569, 1579, 1589, 1599, 1609, 1619, 1629, 1639, 1649, 1659, 1669, 1679, 1689, 1699, 1709, 1719, 1729, 1739, 1749, 1759, 1769, 1779, 1789, 1799, 1809, 1819, 1829, 1839, 1849, 1859, 1869, 1879, 1889, 1899, 1909, 1919, 1929, 1939, 1949, 1959],
+      	"solutionValue":62068.0,
       }
     ]
   }
